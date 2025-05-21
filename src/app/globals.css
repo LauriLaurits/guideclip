@@ -1,26 +1,270 @@
 @import "tailwindcss";
+@import "tw-animate-css";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+@custom-variant dark (&:is(.dark *));
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+  --color-ring: var(--ring);
+  --color-input: var(--input);
+  --color-border: var(--border);
+  --color-destructive: var(--destructive);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-accent: var(--accent);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-muted: var(--muted);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-secondary: var(--secondary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary: var(--primary);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-popover: var(--popover);
+  --color-card-foreground: var(--card-foreground);
+  --color-card: var(--card);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
 }
 
-@media (prefers-color-scheme: dark) {
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    /* Pure black background */
+    --background: 0 0% 0%;
+    --foreground: 0 0% 100%;
+    
+    /* Multiple accent colors */
+    --primary: 270 100% 60%; /* Purple */
+    --primary-foreground: 0 0% 100%;
+    
+    /* Secondary accent - dark gray */
+    --secondary: 0 0% 10%;
+    --secondary-foreground: 0 0% 100%;
+    
+    /* Additional accent colors */
+    --accent-orange: 30, 100%, 60%;
+    --accent-pink: 330, 100%, 65%;
+    --accent-blue: 210, 100%, 60%;
+    --accent-red: 0, 100%, 60%;
+    
+    /* Card backgrounds - pure black */
+    --card: 0 0% 0%;
+    --card-foreground: 0 0% 100%;
+    
+    /* Popover colors */
+    --popover: 0 0% 0%;
+    --popover-foreground: 0 0% 100%;
+    
+    /* Muted colors - dark gray */
+    --muted: 0 0% 10%;
+    --muted-foreground: 0 0% 70%;
+    
+    /* Destructive */
+    --destructive: 0 100% 60%;
+    --destructive-foreground: 0 0% 100%;
+    
+    /* Border colors - dark gray */
+    --border: 0 0% 20%;
+    --input: 0 0% 20%;
+    --ring: 270 100% 60%;
+    
+    --radius: 0.5rem;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+/* Force dark mode */
+html {
+  color-scheme: dark;
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+/* Direct color declarations */
+.text-accent-orange {
+  color: hsl(30, 100%, 60%);
+}
+
+.text-accent-pink {
+  color: hsl(330, 100%, 65%);
+}
+
+.text-accent-blue {
+  color: hsl(210, 100%, 60%);
+}
+
+.text-accent-red {
+  color: hsl(0, 100%, 60%);
+}
+
+.bg-accent-orange {
+  background-color: hsl(30, 100%, 60%);
+}
+
+.bg-accent-pink {
+  background-color: hsl(330, 100%, 65%);
+}
+
+.bg-accent-blue {
+  background-color: hsl(210, 100%, 60%);
+}
+
+.bg-accent-red {
+  background-color: hsl(0, 100%, 60%);
+}
+
+.border-accent-orange {
+  border-color: hsl(30, 100%, 60%);
+}
+
+.border-accent-pink {
+  border-color: hsl(330, 100%, 65%);
+}
+
+.border-accent-blue {
+  border-color: hsl(210, 100%, 60%);
+}
+
+.border-accent-red {
+  border-color: hsl(0, 100%, 60%);
+}
+
+/* Hover classes */
+.hover\:text-accent-orange:hover {
+  color: hsl(30, 100%, 60%);
+}
+
+.hover\:text-accent-pink:hover {
+  color: hsl(330, 100%, 65%);
+}
+
+.hover\:text-accent-blue:hover {
+  color: hsl(210, 100%, 60%);
+}
+
+.hover\:text-accent-red:hover {
+  color: hsl(0, 100%, 60%);
+}
+
+.hover\:border-accent-orange:hover {
+  border-color: hsl(30, 100%, 60%);
+}
+
+.hover\:border-accent-pink:hover {
+  border-color: hsl(330, 100%, 65%);
+}
+
+.hover\:border-accent-blue:hover {
+  border-color: hsl(210, 100%, 60%);
+}
+
+.hover\:border-accent-red:hover {
+  border-color: hsl(0, 100%, 60%);
+}
+
+/* Transparent variations */
+.bg-accent-orange\/10 {
+  background-color: hsla(30, 100%, 60%, 0.1);
+}
+
+.bg-accent-orange\/20 {
+  background-color: hsla(30, 100%, 60%, 0.2);
+}
+
+.bg-accent-pink\/10 {
+  background-color: hsla(330, 100%, 65%, 0.1);
+}
+
+.bg-accent-pink\/20 {
+  background-color: hsla(330, 100%, 65%, 0.2);
+}
+
+.bg-accent-blue\/10 {
+  background-color: hsla(210, 100%, 60%, 0.1);
+}
+
+.bg-accent-blue\/20 {
+  background-color: hsla(210, 100%, 60%, 0.2);
+}
+
+.bg-accent-red\/10 {
+  background-color: hsla(0, 100%, 60%, 0.1);
+}
+
+.bg-accent-red\/20 {
+  background-color: hsla(0, 100%, 60%, 0.2);
+}
+
+/* Card hover effects with colored borders */
+.card-with-border-hover {
+  border: 1px solid #333;
+  transition: all 0.3s ease;
+}
+
+.card-with-border-hover.orange-border:hover {
+  border-color: hsl(30, 100%, 60%);
+  box-shadow: 0 0 8px rgba(255, 165, 0, 0.2);
+}
+
+.card-with-border-hover.pink-border:hover {
+  border-color: hsl(330, 100%, 65%);
+  box-shadow: 0 0 8px rgba(255, 105, 180, 0.2);
+}
+
+.card-with-border-hover.blue-border:hover {
+  border-color: hsl(210, 100%, 60%);
+  box-shadow: 0 0 8px rgba(30, 144, 255, 0.2);
+}
+
+.card-with-border-hover.red-border:hover {
+  border-color: hsl(0, 100%, 60%);
+  box-shadow: 0 0 8px rgba(255, 0, 0, 0.2);
+}
+
+.card-with-border-hover.purple-border:hover {
+  border-color: hsl(270, 100%, 60%);
+  box-shadow: 0 0 8px rgba(138, 43, 226, 0.2);
+}
+
+/* Subtle glow effects */
+.glow-effect {
+  transition: all 0.3s ease;
+}
+
+.glow-orange:hover {
+  box-shadow: 0 0 15px rgba(255, 165, 0, 0.3);
+  transform: translateY(-2px);
+}
+
+.glow-pink:hover {
+  box-shadow: 0 0 15px rgba(255, 105, 180, 0.3);
+  transform: translateY(-2px);
+}
+
+.glow-blue:hover {
+  box-shadow: 0 0 15px rgba(30, 144, 255, 0.3);
+  transform: translateY(-2px);
+}
+
+.glow-red:hover {
+  box-shadow: 0 0 15px rgba(255, 0, 0, 0.3);
+  transform: translateY(-2px);
+}
+
+.glow-purple:hover {
+  box-shadow: 0 0 15px rgba(138, 43, 226, 0.3);
+  transform: translateY(-2px);
 }
