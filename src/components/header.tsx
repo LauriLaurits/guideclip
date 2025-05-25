@@ -60,7 +60,7 @@ export function Header({ showSearch = false }: HeaderProps) {
       <header className="w-full border-b border-gray-900 bg-black sticky top-0 z-50">
         <div className="max-w-7xl mx-auto flex h-16 items-center justify-between px-4 md:px-8 lg:px-16 xl:px-24">
           {/* Logo */}
-          <Link href="/" className="flex items-center">
+          <Link href="/" className="flex items-center cursor-pointer">
             <span className="text-3xl font-bold tracking-tight">
               <span className="text-white">Guide</span>
               <span className="text-white">Clip</span>
@@ -74,7 +74,7 @@ export function Header({ showSearch = false }: HeaderProps) {
               <Link
                 key={href}
                 href={href}
-                className={`text-sm font-medium text-gray-400 transition-colors duration-200 ${hoverColor}`}
+                className={`text-sm font-medium text-gray-400 transition-colors duration-200 cursor-pointer ${hoverColor}`}
               >
                 {label}
               </Link>
@@ -102,13 +102,6 @@ export function Header({ showSearch = false }: HeaderProps) {
             >
               <Search className="h-4 w-4 mr-2" />
               AI Tool Finder
-            </Button>
-            
-            <Button 
-              className="bg-purple-600 text-white hover:bg-purple-700 transition-colors" 
-              size="sm"
-            >
-              Get Started
             </Button>
           </div>
 
@@ -141,20 +134,12 @@ export function Header({ showSearch = false }: HeaderProps) {
                 <Link
                   key={href}
                   href={href}
-                  className="text-sm font-medium text-gray-400 hover:text-purple-400 transition-colors py-2"
+                  className="text-sm font-medium text-gray-400 hover:text-purple-400 transition-colors py-2 cursor-pointer"
                   onClick={() => setIsMobileMenuOpen(false)}
                 >
                   {label}
                 </Link>
               ))}
-              <div className="pt-4 border-t border-gray-800 mt-4">
-                <Button 
-                  className="w-full bg-purple-600 text-white hover:bg-purple-700" 
-                  size="sm"
-                >
-                  Get Started
-                </Button>
-              </div>
             </nav>
           </div>
         )}

@@ -9,6 +9,7 @@ import { Button } from "@/components/ui/button";
 import { ChevronRight, Play, Sparkles } from "lucide-react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import { useState } from "react";
 
 // Import the ToolSuggestion type from the multi-stage-input component
 interface ToolSuggestion {
@@ -46,6 +47,54 @@ const ADDITIONAL_CATEGORIES = [
     name: "Research Assistants",
     description: "AI tools that help with literature review and research",
     icon: "search"
+  },
+  {
+    id: "automation",
+    name: "Automation Tools",
+    description: "AI-powered workflow and task automation solutions",
+    icon: "zap"
+  },
+  {
+    id: "translation",
+    name: "Translation & Language",
+    description: "AI tools for translation and language processing",
+    icon: "languages"
+  },
+  {
+    id: "finance",
+    name: "Finance & Analytics",
+    description: "AI tools for financial analysis and market insights",
+    icon: "trending-up"
+  },
+  {
+    id: "healthcare",
+    name: "Healthcare AI",
+    description: "AI applications for healthcare and medical analysis",
+    icon: "heart-pulse"
+  },
+  {
+    id: "education",
+    name: "Education & Learning",
+    description: "AI-powered educational tools and learning platforms",
+    icon: "graduation-cap"
+  },
+  {
+    id: "marketing",
+    name: "Marketing & SEO",
+    description: "AI tools for marketing automation and SEO optimization",
+    icon: "megaphone"
+  },
+  {
+    id: "security",
+    name: "Security & Privacy",
+    description: "AI-powered security and privacy protection tools",
+    icon: "shield-check"
+  },
+  {
+    id: "gaming",
+    name: "Gaming & Entertainment",
+    description: "AI tools for game development and entertainment",
+    icon: "gamepad-2"
   }
 ] as const;
 
@@ -135,9 +184,32 @@ const POPULAR_VIDEOS = [
   }
 ] as const;
 
+// Deterministic stats for categories to avoid hydration mismatch
+const CATEGORY_STATS = {
+  "chatbots": "8 tools • 24 videos",
+  "image-generators": "12 tools • 36 videos", 
+  "productivity": "15 tools • 42 videos",
+  "code-assistants": "6 tools • 18 videos",
+  "writing": "10 tools • 28 videos",
+  "audio-processing": "7 tools • 21 videos",
+  "video-editing": "9 tools • 27 videos",
+  "data-analysis": "11 tools • 33 videos",
+  "research": "5 tools • 15 videos",
+  "automation": "13 tools • 39 videos",
+  "translation": "8 tools • 24 videos",
+  "finance": "6 tools • 18 videos",
+  "healthcare": "4 tools • 12 videos",
+  "education": "9 tools • 27 videos",
+  "marketing": "14 tools • 42 videos",
+  "security": "5 tools • 15 videos",
+  "gaming": "7 tools • 21 videos"
+} as const;
+
 export default function Home() {
   const router = useRouter();
   const allCategories = [...categories, ...ADDITIONAL_CATEGORIES];
+  const [showAllCategories, setShowAllCategories] = useState(false);
+  const displayedCategories = showAllCategories ? allCategories : allCategories.slice(0, 8);
   
   const handleToolSelect = (tool: ToolSuggestion) => {
     // Navigate to the tool page
@@ -154,38 +226,45 @@ export default function Home() {
           <div className="max-w-7xl mx-auto">
             <div className="grid gap-8 lg:grid-cols-2 lg:gap-12 items-center">
               <div className="flex flex-col justify-center space-y-6">
-                <div className="inline-block bg-purple-600/20 border border-purple-500/30 px-4 py-2 text-sm rounded-full mb-2 w-fit">
-                  <Sparkles className="inline h-4 w-4 mr-2 text-purple-400" />
-                  <span className="text-purple-400">Quick & Easy AI Learning</span>
+                <div className="inline-block bg-gradient-to-r from-blue-600/20 to-cyan-600/20 border border-blue-500/30 px-4 py-2 text-sm rounded-full mb-2 w-fit">
+                  <Sparkles className="inline h-4 w-4 mr-2 text-cyan-400" />
+                  <span className="text-cyan-400">Quick & Easy AI Learning</span>
                 </div>
                 <h1 className="text-4xl font-bold tracking-tight sm:text-5xl md:text-6xl">
                   Master AI Tools <br />
-                  <span className="text-purple-400">in 90 Seconds</span>
+                  <span className="bg-gradient-to-r from-blue-400 via-cyan-400 to-teal-400 bg-clip-text text-transparent">in 90 Seconds</span>
                 </h1>
                 <p className="text-lg text-gray-400 leading-relaxed">
                   Concise video tutorials to help you master powerful AI tools and get productive instantly.
                 </p>
                 <div className="flex flex-col sm:flex-row gap-4 pt-4">
-                  <Button className="bg-purple-600 text-white hover:bg-purple-700 transition-colors">
-                    Start Learning
+                  <Button variant="outline" className="border-blue-500/50 text-blue-400 hover:bg-blue-500/10 hover:border-blue-400 hover:text-blue-400 transition-all duration-300">
+                    Get Started
                     <ChevronRight className="ml-2 h-4 w-4" />
                   </Button>
-                  <Button variant="outline" className="border-gray-700 text-gray-300 hover:bg-gray-800">
+                  <Button variant="outline" className="border-cyan-500/50 text-cyan-400 hover:bg-cyan-500/10 hover:border-cyan-400 hover:text-cyan-400 transition-all duration-300">
                     <Play className="mr-2 h-4 w-4" /> 
-                    Watch Demo
+                    Start Learning
                   </Button>
                 </div>
               </div>
               
               <div className="relative mx-auto w-full max-w-[500px]">
-                <div className="aspect-video overflow-hidden rounded-lg bg-black border border-gray-800 relative">
+                <div className="aspect-video overflow-hidden rounded-lg bg-gradient-to-br from-gray-900 to-black border border-gray-800 relative">
+                  {/* Gradient overlay for visual interest */}
+                  <div className="absolute inset-0 bg-gradient-to-br from-blue-600/10 via-transparent to-cyan-600/10"></div>
                   <div className="absolute inset-0 flex items-center justify-center">
-                    <div className="rounded-full bg-purple-600/20 p-4">
-                      <Play className="h-10 w-10 text-purple-400" />
+                    <div className="rounded-full bg-gradient-to-r from-blue-600/30 to-cyan-600/30 p-6 backdrop-blur-sm">
+                      <Play className="h-10 w-10 text-cyan-400" />
                     </div>
                   </div>
-                  <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black p-4">
-                    <p className="text-sm font-medium">Learn ChatGPT in 2 minutes</p>
+                  <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black via-black/80 to-transparent p-4">
+                    <p className="text-sm font-medium text-white">Learn ChatGPT in 2 minutes</p>
+                    <div className="flex items-center mt-1 text-xs text-gray-400">
+                      <span>2:15</span>
+                      <span className="mx-2">•</span>
+                      <span className="text-cyan-400">12.4k views</span>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -194,20 +273,20 @@ export default function Home() {
         </section>
 
         {/* AI Tool Finder Section */}
-        <section className="w-full py-20 bg-gradient-to-br from-gray-900/50 via-purple-900/20 to-blue-900/30 border-y border-gray-800 relative overflow-hidden">
+        <section className="w-full py-20 bg-black border-y border-gray-800 relative overflow-hidden">
           {/* Background decoration */}
-          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-purple-900/20 via-transparent to-transparent"></div>
-          <div className="absolute top-0 left-1/4 w-96 h-96 bg-purple-500/10 rounded-full blur-3xl"></div>
-          <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-blue-500/10 rounded-full blur-3xl"></div>
+          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-blue-900/10 via-transparent to-cyan-900/10"></div>
+          <div className="absolute top-0 left-1/4 w-96 h-96 bg-blue-500/5 rounded-full blur-3xl"></div>
+          <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-cyan-500/5 rounded-full blur-3xl"></div>
           
           <div className="max-w-7xl mx-auto px-4 md:px-8 lg:px-16 xl:px-24 relative z-10">
             <div className="text-center mb-12">
-              <div className="inline-flex items-center gap-2 bg-gradient-to-r from-purple-600/20 to-blue-600/20 border border-purple-500/30 px-6 py-3 rounded-full mb-6">
-                <Sparkles className="h-5 w-5 text-purple-400" />
-                <span className="text-purple-400 font-medium">AI-Powered Tool Discovery</span>
+              <div className="inline-flex items-center gap-2 bg-gradient-to-r from-blue-600/20 to-cyan-600/20 border border-blue-500/30 px-6 py-3 rounded-full mb-6">
+                <Sparkles className="h-5 w-5 text-cyan-400" />
+                <span className="text-cyan-400 font-medium">AI-Powered Tool Discovery</span>
               </div>
               
-              <h2 className="text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-white via-purple-200 to-blue-200 bg-clip-text text-transparent">
+              <h2 className="text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-white via-blue-200 to-cyan-200 bg-clip-text text-transparent">
                 Find Your Perfect AI Tool
               </h2>
               
@@ -217,17 +296,17 @@ export default function Home() {
               </p>
               
               <div className="flex flex-wrap justify-center gap-4 mb-8">
-                <div className="flex items-center gap-2 bg-green-500/20 border border-green-500/30 px-4 py-2 rounded-full">
-                  <div className="w-2 h-2 bg-green-400 rounded-full"></div>
-                  <span className="text-green-400 text-sm font-medium">Free Tools Available</span>
+                <div className="flex items-center gap-2 bg-emerald-500/20 border border-emerald-500/30 px-4 py-2 rounded-full">
+                  <div className="w-2 h-2 bg-emerald-400 rounded-full"></div>
+                  <span className="text-emerald-400 text-sm font-medium">Free Tools Available</span>
                 </div>
-                <div className="flex items-center gap-2 bg-orange-500/20 border border-orange-500/30 px-4 py-2 rounded-full">
-                  <div className="w-2 h-2 bg-orange-400 rounded-full"></div>
-                  <span className="text-orange-400 text-sm font-medium">Cost Transparency</span>
+                <div className="flex items-center gap-2 bg-amber-500/20 border border-amber-500/30 px-4 py-2 rounded-full">
+                  <div className="w-2 h-2 bg-amber-400 rounded-full"></div>
+                  <span className="text-amber-400 text-sm font-medium">Cost Transparency</span>
                 </div>
-                <div className="flex items-center gap-2 bg-cyan-500/20 border border-cyan-500/30 px-4 py-2 rounded-full">
-                  <div className="w-2 h-2 bg-cyan-400 rounded-full"></div>
-                  <span className="text-cyan-400 text-sm font-medium">Smart Matching</span>
+                <div className="flex items-center gap-2 bg-blue-500/20 border border-blue-500/30 px-4 py-2 rounded-full">
+                  <div className="w-2 h-2 bg-blue-400 rounded-full"></div>
+                  <span className="text-blue-400 text-sm font-medium">Smart Matching</span>
                 </div>
               </div>
             </div>
@@ -249,9 +328,10 @@ export default function Home() {
             </div>
             
             <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-              {allCategories.map((category, index) => {
+              {displayedCategories.map((category, index) => {
                 const colorIndex = index % ACCENT_COLORS.length;
                 const currentColor = ACCENT_COLORS[colorIndex];
+                const stats = CATEGORY_STATS[category.id as keyof typeof CATEGORY_STATS] || "3 tools • 9 videos";
                 
                 return (
                   <CategoryCard 
@@ -259,11 +339,36 @@ export default function Home() {
                     category={category} 
                     borderColor={currentColor}
                     customColor={COLOR_MAP[currentColor]}
-                    stats={`${Math.floor(Math.random() * 12) + 2} tools • ${Math.floor(Math.random() * 20) + 5} videos`}
+                    stats={stats}
                   />
                 );
               })}
             </div>
+            
+            {!showAllCategories && allCategories.length > 8 && (
+              <div className="text-center mt-8">
+                <Button
+                  onClick={() => setShowAllCategories(true)}
+                  variant="outline"
+                  className="border-gray-700 text-gray-300 hover:bg-gray-800 px-8"
+                >
+                  See All Categories ({allCategories.length - 8} more)
+                  <ChevronRight className="ml-2 h-4 w-4" />
+                </Button>
+              </div>
+            )}
+            
+            {showAllCategories && (
+              <div className="text-center mt-8">
+                <Button
+                  onClick={() => setShowAllCategories(false)}
+                  variant="outline"
+                  className="border-gray-700 text-gray-300 hover:bg-gray-800 px-8"
+                >
+                  Show Less
+                </Button>
+              </div>
+            )}
           </div>
         </section>
 
