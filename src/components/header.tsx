@@ -1,48 +1,185 @@
+"use client";
+
+import React, { useState } from "react";
 import Link from "next/link";
-import { Search } from "lucide-react";
+import { Search, Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { MultiStageInput } from "@/components/multi-stage-input";
+import { useRouter } from "next/navigation";
 
-export function Header() {
+interface HeaderProps {
+  showSearch?: boolean;
+}
+
+// ToolSuggestion type for proper typing
+interface ToolSuggestion {
+  id: string;
+  name: string;
+  description: string;
+  category: string;
+  estimatedCost: "free" | "freemium" | "paid";
+  costRange?: string;
+  matchScore: number;
+}
+
+const NAVIGATION_LINKS = [
+  { href: "/", label: "Home", hoverColor: "hover:text-purple-400" },
+  { href: "/categories", label: "Categories", hoverColor: "hover:text-purple-400" },
+  { href: "/popular", label: "Popular", hoverColor: "hover:text-purple-400" },
+  { href: "/about", label: "About", hoverColor: "hover:text-purple-400" },
+] as const;
+
+export function Header({ showSearch = false }: HeaderProps) {
+  const router = useRouter();
+  const [isSearchOpen, setIsSearchOpen] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
+  const toggleSearch = () => {
+    setIsSearchOpen(!isSearchOpen);
+    if (!isSearchOpen) {
+      setIsMobileMenuOpen(false);
+    }
+  };
+
+  const toggleMobileMenu = () => {
+    setIsMobileMenuOpen(!isMobileMenuOpen);
+    if (!isMobileMenuOpen) {
+      setIsSearchOpen(false);
+    }
+  };
+
+  const handleToolSelect = (tool: ToolSuggestion) => {
+    // Close the search modal
+    setIsSearchOpen(false);
+    // Navigate to the tool page
+    router.push(`/tool/${tool.id}`);
+  };
+
   return (
-    <header className="w-full border-b border-gray-900 bg-black">
-      <div className="max-w-7xl mx-auto flex h-16 items-center justify-between px-4 md:px-8 lg:px-16 xl:px-24">
-        <Link href="/" className="flex items-center space-x-2">
-          <span className="text-2xl font-bold tracking-tight">
-            <span className="text-gray-100">Guide</span>
-            <span className="text-gray-100">Clip</span>
-            <span className="text-[#fd79a8]">.</span>
-          </span>
-        </Link>
+    <>
+      <header className="w-full border-b border-gray-900 bg-black sticky top-0 z-50">
+        <div className="max-w-7xl mx-auto flex h-16 items-center justify-between px-4 md:px-8 lg:px-16 xl:px-24">
+          {/* Logo */}
+          <Link href="/" className="flex items-center">
+            <span className="text-3xl font-bold tracking-tight">
+              <span className="text-white">Guide</span>
+              <span className="text-white">Clip</span>
+              <span className="text-pink-400 text-3xl leading-none">.</span>
+            </span>
+          </Link>
 
-        <nav className="hidden md:flex items-center space-x-6">
-          <Link href="#" className="text-sm font-medium text-gray-400 transition-colors duration-200 hover:text-[#8be9fd]">
-            Home
-          </Link>
-          <Link href="#" className="text-sm font-medium text-gray-400 transition-colors duration-200 hover:text-[#fd79a8]">
-            Categories
-          </Link>
-          <Link href="#" className="text-sm font-medium text-gray-400 transition-colors duration-200 hover:text-[#6c5ce7]">
-            Popular
-          </Link>
-          <Link href="#" className="text-sm font-medium text-gray-400 transition-colors duration-200 hover:text-[#00cec9]">
-            About
-          </Link>
-        </nav>
+          {/* Desktop Navigation */}
+          <nav className="hidden md:flex items-center space-x-8">
+            {NAVIGATION_LINKS.map(({ href, label, hoverColor }) => (
+              <Link
+                key={href}
+                href={href}
+                className={`text-sm font-medium text-gray-400 transition-colors duration-200 ${hoverColor}`}
+              >
+                {label}
+              </Link>
+            ))}
+          </nav>
 
-        <div className="flex items-center space-x-4">
-          <div className="relative">
-            <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-500" />
-            <input
-              type="search"
-              placeholder="Search for AI tools..."
-              className="w-full h-9 bg-black rounded-full border border-gray-800 py-2 pl-9 pr-4 text-sm focus:outline-none focus:ring-2 focus:ring-[#6c5ce7]"
-            />
+          {/* Desktop Actions */}
+          <div className="hidden md:flex items-center space-x-4">
+            {showSearch && (
+              <div className="relative">
+                <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-500" />
+                <input
+                  type="search"
+                  placeholder="Quick search..."
+                  className="w-64 h-9 bg-black rounded-full border border-gray-800 py-2 pl-9 pr-4 text-sm focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+                />
+              </div>
+            )}
+            
+            <Button
+              onClick={toggleSearch}
+              variant="outline"
+              size="sm"
+              className="border-purple-600 text-purple-400 hover:bg-purple-600 hover:text-white transition-colors"
+            >
+              <Search className="h-4 w-4 mr-2" />
+              AI Tool Finder
+            </Button>
+            
+            <Button 
+              className="bg-purple-600 text-white hover:bg-purple-700 transition-colors" 
+              size="sm"
+            >
+              Get Started
+            </Button>
           </div>
-          <Button className="bg-[#1a1a40] text-[#8be9fd] hover:bg-[#2d2d67]" size="sm">
-            Get Started
-          </Button>
+
+          {/* Mobile Menu Button */}
+          <div className="md:hidden flex items-center space-x-2">
+            <Button
+              onClick={toggleSearch}
+              variant="ghost"
+              size="sm"
+              className="text-gray-400 hover:text-white"
+            >
+              <Search className="h-4 w-4" />
+            </Button>
+            <Button
+              onClick={toggleMobileMenu}
+              variant="ghost"
+              size="sm"
+              className="text-gray-400 hover:text-white"
+            >
+              {isMobileMenuOpen ? <X className="h-4 w-4" /> : <Menu className="h-4 w-4" />}
+            </Button>
+          </div>
         </div>
-      </div>
-    </header>
+
+        {/* Mobile Navigation */}
+        {isMobileMenuOpen && (
+          <div className="md:hidden border-t border-gray-900 bg-black">
+            <nav className="flex flex-col space-y-1 px-4 py-4">
+              {NAVIGATION_LINKS.map(({ href, label }) => (
+                <Link
+                  key={href}
+                  href={href}
+                  className="text-sm font-medium text-gray-400 hover:text-purple-400 transition-colors py-2"
+                  onClick={() => setIsMobileMenuOpen(false)}
+                >
+                  {label}
+                </Link>
+              ))}
+              <div className="pt-4 border-t border-gray-800 mt-4">
+                <Button 
+                  className="w-full bg-purple-600 text-white hover:bg-purple-700" 
+                  size="sm"
+                >
+                  Get Started
+                </Button>
+              </div>
+            </nav>
+          </div>
+        )}
+      </header>
+
+      {/* AI Tool Finder Modal */}
+      {isSearchOpen && (
+        <div className="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+          <div className="w-full max-w-6xl bg-black border border-gray-800 rounded-lg p-6 max-h-[90vh] overflow-y-auto">
+            <div className="flex items-center justify-between mb-6">
+              <h2 className="text-2xl font-bold text-white">AI Tool Finder</h2>
+              <Button
+                onClick={toggleSearch}
+                variant="ghost"
+                size="sm"
+                className="text-gray-400 hover:text-white"
+              >
+                <X className="h-4 w-4" />
+              </Button>
+            </div>
+            
+            <MultiStageInput onToolSelect={handleToolSelect} />
+          </div>
+        </div>
+      )}
+    </>
   );
 } 
