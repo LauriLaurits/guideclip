@@ -20,23 +20,40 @@ interface CategoryPageProps {
 
 // Category color configuration
 const CATEGORY_COLORS = {
-  chatbots: { color: "#ff9f43", bgColor: "#ff9f4320" },
-  "image-generators": { color: "#fd79a8", bgColor: "#fd79a820" },
-  productivity: { color: "#0984e3", bgColor: "#0984e320" },
-  "code-assistants": { color: "#6c5ce7", bgColor: "#6c5ce720" },
-  writing: { color: "#00cec9", bgColor: "#00cec920" },
-  "audio-processing": { color: "#fdcb6e", bgColor: "#fdcb6e20" },
+  // AI Categories
+  "ai-chatbots": { color: "#ff9f43", bgColor: "#ff9f4320" },
+  "ai-image-generators": { color: "#fd79a8", bgColor: "#fd79a820" },
+  "ai-code-assistants": { color: "#6c5ce7", bgColor: "#6c5ce720" },
+  "ai-writing": { color: "#00cec9", bgColor: "#00cec920" },
+  
+  // Design & Creative
+  "design-tools": { color: "#a29bfe", bgColor: "#a29bfe20" },
   "video-editing": { color: "#e17055", bgColor: "#e1705520" },
-  "data-analysis": { color: "#00b894", bgColor: "#00b89420" },
-  research: { color: "#5f27cd", bgColor: "#5f27cd20" },
-  automation: { color: "#a29bfe", bgColor: "#a29bfe20" },
-  translation: { color: "#74b9ff", bgColor: "#74b9ff20" },
-  finance: { color: "#55a3ff", bgColor: "#55a3ff20" },
-  healthcare: { color: "#fd79a8", bgColor: "#fd79a820" },
-  education: { color: "#00b894", bgColor: "#00b89420" },
-  marketing: { color: "#ff7675", bgColor: "#ff767520" },
-  security: { color: "#636e72", bgColor: "#636e7220" },
-  gaming: { color: "#e84393", bgColor: "#e8439320" }
+  "photo-editing": { color: "#fdcb6e", bgColor: "#fdcb6e20" },
+  
+  // Business & Finance
+  "payment-processing": { color: "#00b894", bgColor: "#00b89420" },
+  "accounting-finance": { color: "#55a3ff", bgColor: "#55a3ff20" },
+  "spreadsheets": { color: "#74b9ff", bgColor: "#74b9ff20" },
+  
+  // Development & Tech
+  "development-tools": { color: "#636e72", bgColor: "#636e7220" },
+  "databases": { color: "#5f27cd", bgColor: "#5f27cd20" },
+  "cloud-platforms": { color: "#0984e3", bgColor: "#0984e320" },
+  
+  // Productivity & Organization
+  "productivity-tools": { color: "#0984e3", bgColor: "#0984e320" },
+  "project-management": { color: "#e84393", bgColor: "#e8439320" },
+  "communication": { color: "#ff7675", bgColor: "#ff767520" },
+  
+  // Marketing & Analytics
+  "marketing-tools": { color: "#ff7675", bgColor: "#ff767520" },
+  "analytics": { color: "#00b894", bgColor: "#00b89420" },
+  "email-marketing": { color: "#fd79a8", bgColor: "#fd79a820" },
+  
+  // E-commerce & Sales
+  "ecommerce": { color: "#e84393", bgColor: "#e8439320" },
+  "crm": { color: "#6c5ce7", bgColor: "#6c5ce720" }
 } as const;
 
 const DEFAULT_COLOR = { color: "#6c5ce7", bgColor: "#6c5ce720" } as const;
@@ -137,7 +154,7 @@ export default function CategoryPage({ params }: CategoryPageProps) {
                     Featured Tools
                   </h2>
                   <p className="text-gray-400 text-lg">
-                    Master these AI tools with our step-by-step video tutorials
+                    Master these tools with our step-by-step video tutorials
                   </p>
                 </div>
                 
@@ -274,7 +291,7 @@ function EnhancedEmptyState({ categoryName, colorSet }: EmptyStateProps) {
       
       <p className="text-gray-400 text-center max-w-lg leading-relaxed mb-8 text-lg">
         We're working hard to bring you the best {categoryName.toLowerCase()} tools. 
-        Check back soon or explore other categories to discover amazing AI tools.
+        Check back soon or explore other categories to discover amazing tools.
       </p>
       
       <div className="flex flex-col sm:flex-row gap-4">

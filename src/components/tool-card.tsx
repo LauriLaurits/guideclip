@@ -3,7 +3,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Tool } from "@/lib/data";
 import { Icon } from "@/components/ui/icon";
 import { Badge } from "@/components/ui/badge";
-import { Clock, Play, ArrowRight } from "lucide-react";
+import { Clock, Play, ArrowRight, DollarSign, Zap, Code, Plug } from "lucide-react";
 
 interface ToolCardProps {
   tool: Tool;
@@ -25,6 +25,36 @@ const getVideoCountText = (count: number): string => {
   return `${count} ${count === 1 ? 'video' : 'videos'}`;
 };
 
+// Get pricing badge color and text
+const getPricingBadge = (tool: Tool) => {
+  const { model, startingPrice, discount } = tool.pricing;
+  
+  switch (model) {
+    case "free":
+      return { text: "Free", color: "bg-green-500/20 text-green-400 border-green-500/30" };
+    case "freemium":
+      return { text: `Free + ${startingPrice}`, color: "bg-blue-500/20 text-blue-400 border-blue-500/30" };
+    case "paid":
+      return { text: `From ${startingPrice}`, color: "bg-orange-500/20 text-orange-400 border-orange-500/30" };
+    case "subscription":
+      return { text: `${startingPrice}/mo`, color: "bg-purple-500/20 text-purple-400 border-purple-500/30" };
+    default:
+      return { text: "Contact", color: "bg-gray-500/20 text-gray-400 border-gray-500/30" };
+  }
+};
+
+// Get feature tags to display
+const getFeatureTags = (tool: Tool) => {
+  const tags = [];
+  
+  if (tool.features.hasFreeTier) tags.push({ text: "free-tier", icon: null });
+  if (tool.features.noCodeRequired) tags.push({ text: "no-code", icon: Code });
+  if (tool.features.hasAPI) tags.push({ text: "api", icon: Plug });
+  if (tool.pricing.discount) tags.push({ text: tool.pricing.discount, icon: Zap });
+  
+  return tags.slice(0, 3); // Show max 3 feature tags
+};
+
 export function ToolCard({ 
   tool, 
   customColor = DEFAULT_COLOR,
@@ -32,6 +62,8 @@ export function ToolCard({
 }: ToolCardProps) {
   const firstVideoDuration = tool.videos[0]?.duration ?? 0;
   const videoCount = tool.videos.length;
+  const pricingBadge = getPricingBadge(tool);
+  const featureTags = getFeatureTags(tool);
   
   return (
     <Link href={`/tool/${tool.id}`} className="group">
@@ -50,7 +82,18 @@ export function ToolCard({
             </div>
           </div>
           
-          {/* Video Count Badge */}
+          {/* Pricing Badge - Top Left */}
+          <div className="absolute top-3 left-3">
+            <Badge 
+              variant="outline" 
+              className={`${pricingBadge.color} text-xs backdrop-blur-sm font-medium`}
+            >
+              <DollarSign className="h-3 w-3 mr-1" />
+              {pricingBadge.text}
+            </Badge>
+          </div>
+          
+          {/* Video Count Badge - Top Right */}
           <div className="absolute top-3 right-3">
             <Badge 
               variant="outline" 
@@ -59,6 +102,19 @@ export function ToolCard({
               {getVideoCountText(videoCount)}
             </Badge>
           </div>
+          
+          {/* Discount Badge - Bottom Right */}
+          {tool.pricing.discount && (
+            <div className="absolute bottom-3 right-3">
+              <Badge 
+                variant="outline" 
+                className="bg-yellow-500/20 text-yellow-400 border-yellow-500/30 text-xs backdrop-blur-sm animate-pulse"
+              >
+                <Zap className="h-3 w-3 mr-1" />
+                {tool.pricing.discount}
+              </Badge>
+            </div>
+          )}
           
           {/* Gradient Overlay */}
           <div className="absolute bottom-0 left-0 right-0 h-1/3 bg-gradient-to-t from-black to-transparent" />
@@ -100,7 +156,22 @@ export function ToolCard({
         </CardHeader>
         
         {/* Card Content */}
-        <CardContent className="pt-0">
+        <CardContent className="pt-0 space-y-3">
+          {/* Feature Tags */}
+          <div className="flex flex-wrap gap-1.5">
+            {featureTags.map((tag, index) => (
+              <Badge 
+                key={index}
+                variant="outline" 
+                className="bg-gray-800/50 border-gray-700 text-gray-300 text-xs"
+              >
+                {tag.icon && <tag.icon className="h-3 w-3 mr-1" />}
+                {tag.text}
+              </Badge>
+            ))}
+          </div>
+          
+          {/* Bottom Row */}
           <div className="flex justify-between items-center">
             <div className="flex items-center text-gray-400 text-sm">
               <Clock className="mr-1.5 h-4 w-4" />

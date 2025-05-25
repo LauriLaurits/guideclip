@@ -23,81 +23,6 @@ interface ToolSuggestion {
 }
 
 // Constants for better maintainability
-const ADDITIONAL_CATEGORIES = [
-  {
-    id: "audio-processing",
-    name: "Audio Processing",
-    description: "AI tools for audio enhancement, transcription, and voice synthesis",
-    icon: "headphones"
-  },
-  {
-    id: "video-editing",
-    name: "Video Editing",
-    description: "AI-powered video editing, enhancement and creation tools",
-    icon: "film"
-  },
-  {
-    id: "data-analysis",
-    name: "Data Analysis",
-    description: "Tools that help analyze and visualize complex data",
-    icon: "bar-chart"
-  },
-  {
-    id: "research",
-    name: "Research Assistants",
-    description: "AI tools that help with literature review and research",
-    icon: "search"
-  },
-  {
-    id: "automation",
-    name: "Automation Tools",
-    description: "AI-powered workflow and task automation solutions",
-    icon: "zap"
-  },
-  {
-    id: "translation",
-    name: "Translation & Language",
-    description: "AI tools for translation and language processing",
-    icon: "languages"
-  },
-  {
-    id: "finance",
-    name: "Finance & Analytics",
-    description: "AI tools for financial analysis and market insights",
-    icon: "trending-up"
-  },
-  {
-    id: "healthcare",
-    name: "Healthcare AI",
-    description: "AI applications for healthcare and medical analysis",
-    icon: "heart-pulse"
-  },
-  {
-    id: "education",
-    name: "Education & Learning",
-    description: "AI-powered educational tools and learning platforms",
-    icon: "graduation-cap"
-  },
-  {
-    id: "marketing",
-    name: "Marketing & SEO",
-    description: "AI tools for marketing automation and SEO optimization",
-    icon: "megaphone"
-  },
-  {
-    id: "security",
-    name: "Security & Privacy",
-    description: "AI-powered security and privacy protection tools",
-    icon: "shield-check"
-  },
-  {
-    id: "gaming",
-    name: "Gaming & Entertainment",
-    description: "AI tools for game development and entertainment",
-    icon: "gamepad-2"
-  }
-] as const;
-
 const ACCENT_COLORS = [
   "orange", "pink", "blue", "purple", "teal", 
   "amber", "emerald", "indigo", "cyan"
@@ -118,96 +43,113 @@ const COLOR_MAP = {
 const WHY_GUIDECLIP_FEATURES = [
   { 
     title: "Quick & Concise", 
-    desc: "Learn essential skills in under 3 minutes", 
-    color: "#ff9f43" 
+    desc: "Learn essential skills in under 3 minutes",
+    color: "#ff9f43"
   },
   { 
     title: "Practical Tutorials", 
-    desc: "Focus on real-world applications", 
-    color: "#fd79a8" 
+    desc: "Focus on real-world applications",
+    color: "#fd79a8"
   },
   { 
-    title: "Latest AI Tools", 
-    desc: "Stay updated with cutting-edge technology", 
-    color: "#0984e3" 
+    title: "All Popular Tools", 
+    desc: "From AI tools to business software and design apps",
+    color: "#0984e3"
   },
   { 
     title: "Step-by-Step Guidance", 
-    desc: "Easy to follow instructions for all levels", 
-    color: "#6c5ce7" 
+    desc: "Easy to follow instructions for all levels",
+    color: "#6c5ce7"
   }
 ] as const;
 
 // Realistic dummy data for popular tools
 const POPULAR_VIDEOS = [
   { 
-    title: "ChatGPT: Complete Beginner's Guide", 
-    duration: "2:15", 
-    views: "12.4k", 
-    color: "#ff9f43",
-    description: "Master ChatGPT basics, prompting techniques, and productivity tips"
-  },
-  { 
-    title: "Cursor AI: Code 10x Faster", 
-    duration: "1:45", 
-    views: "8.7k", 
-    color: "#fd79a8",
-    description: "Learn Cursor's AI-powered coding features and shortcuts"
-  },
-  { 
-    title: "Midjourney: Create Stunning Art", 
-    duration: "2:30", 
-    views: "15.2k", 
-    color: "#0984e3",
-    description: "Generate professional artwork with advanced prompting"
-  },
-  { 
-    title: "Claude: Advanced Reasoning AI", 
-    duration: "1:55", 
-    views: "6.3k", 
-    color: "#00cec9",
-    description: "Leverage Claude for complex analysis and writing tasks"
-  },
-  { 
-    title: "GitHub Copilot: Setup & Tips", 
+    title: "Excel: Master Formulas & Functions", 
     duration: "1:30", 
-    views: "9.8k", 
-    color: "#6c5ce7",
-    description: "Install, configure, and maximize GitHub Copilot"
+    views: "45.2k",
+    color: "#ff9f43",
+    description: "Essential Excel formulas every professional should know"
   },
   { 
-    title: "Notion AI: Supercharge Your Workspace", 
+    title: "Stripe: Setup Payments in 2 Minutes", 
     duration: "2:00", 
-    views: "7.1k", 
+    views: "28.7k",
+    color: "#fd79a8",
+    description: "Complete guide to integrating Stripe payments"
+  },
+  { 
+    title: "Figma: UI Design Fundamentals", 
+    duration: "1:45", 
+    views: "38.1k",
+    color: "#0984e3",
+    description: "Create professional UI designs with Figma basics"
+  },
+  { 
+    title: "ChatGPT: Advanced Prompting Tips", 
+    duration: "2:15", 
+    views: "52.3k",
+    color: "#00cec9",
+    description: "Master ChatGPT with advanced prompting techniques"
+  },
+  { 
+    title: "Notion: Database Setup Guide", 
+    duration: "1:55", 
+    views: "31.8k",
+    color: "#6c5ce7",
+    description: "Build powerful databases in Notion workspace"
+  },
+  { 
+    title: "Google Analytics: Track Everything", 
+    duration: "2:30", 
+    views: "24.6k",
     color: "#fdcb6e",
-    description: "Automate writing, planning, and organization with Notion AI"
+    description: "Set up GA4 and understand your website data"
   }
 ] as const;
 
 // Deterministic stats for categories to avoid hydration mismatch
 const CATEGORY_STATS = {
-  "chatbots": "8 tools • 24 videos",
-  "image-generators": "12 tools • 36 videos", 
-  "productivity": "15 tools • 42 videos",
-  "code-assistants": "6 tools • 18 videos",
-  "writing": "10 tools • 28 videos",
-  "audio-processing": "7 tools • 21 videos",
+  // AI Categories
+  "ai-chatbots": "8 tools • 24 videos",
+  "ai-image-generators": "12 tools • 36 videos", 
+  "ai-code-assistants": "6 tools • 18 videos",
+  "ai-writing": "10 tools • 28 videos",
+  
+  // Design & Creative
+  "design-tools": "15 tools • 42 videos",
   "video-editing": "9 tools • 27 videos",
-  "data-analysis": "11 tools • 33 videos",
-  "research": "5 tools • 15 videos",
-  "automation": "13 tools • 39 videos",
-  "translation": "8 tools • 24 videos",
-  "finance": "6 tools • 18 videos",
-  "healthcare": "4 tools • 12 videos",
-  "education": "9 tools • 27 videos",
-  "marketing": "14 tools • 42 videos",
-  "security": "5 tools • 15 videos",
-  "gaming": "7 tools • 21 videos"
+  "photo-editing": "8 tools • 24 videos",
+  
+  // Business & Finance
+  "payment-processing": "5 tools • 15 videos",
+  "accounting-finance": "7 tools • 21 videos",
+  "spreadsheets": "6 tools • 18 videos",
+  
+  // Development & Tech
+  "development-tools": "12 tools • 36 videos",
+  "databases": "8 tools • 24 videos",
+  "cloud-platforms": "10 tools • 30 videos",
+  
+  // Productivity & Organization
+  "productivity-tools": "14 tools • 42 videos",
+  "project-management": "9 tools • 27 videos",
+  "communication": "7 tools • 21 videos",
+  
+  // Marketing & Analytics
+  "marketing-tools": "11 tools • 33 videos",
+  "analytics": "8 tools • 24 videos",
+  "email-marketing": "6 tools • 18 videos",
+  
+  // E-commerce & Sales
+  "ecommerce": "9 tools • 27 videos",
+  "crm": "7 tools • 21 videos"
 } as const;
 
 export default function Home() {
   const router = useRouter();
-  const allCategories = [...categories, ...ADDITIONAL_CATEGORIES];
+  const allCategories = [...categories];
   const [showAllCategories, setShowAllCategories] = useState(false);
   const displayedCategories = showAllCategories ? allCategories : allCategories.slice(0, 8);
   
@@ -220,29 +162,54 @@ export default function Home() {
     <div className="min-h-screen flex flex-col bg-black text-white">
       <Header />
       
+      {/* FTUX Banner */}
+      <div className="w-full bg-gradient-to-r from-blue-600/10 via-purple-600/10 to-cyan-600/10 border-b border-gray-800">
+        <div className="max-w-7xl mx-auto px-4 py-3 md:px-8 lg:px-16 xl:px-24">
+          <div className="flex items-center justify-between">
+            <div className="flex items-center gap-3">
+              <div className="text-2xl">🛠️</div>
+              <div>
+                <span className="text-white font-medium">Not sure which tool to learn?</span>
+                <span className="text-gray-400 ml-2 hidden sm:inline">Answer 4 quick questions and get personalized recommendations</span>
+              </div>
+            </div>
+            <Button 
+              onClick={() => {
+                // Scroll to Tool Finder section
+                const finderSection = document.querySelector('[data-section="ai-tool-finder"]');
+                finderSection?.scrollIntoView({ behavior: 'smooth' });
+              }}
+              className="bg-gradient-to-r from-blue-600 to-purple-600 text-white border-0 hover:scale-105 transition-all duration-300"
+              size="sm"
+            >
+              Find My Tool →
+            </Button>
+          </div>
+        </div>
+      </div>
+      
       <main className="flex-1">
         {/* Hero Section */}
         <section className="w-full py-16 md:py-24 px-4 md:px-8 lg:px-16 xl:px-24">
           <div className="max-w-7xl mx-auto">
             <div className="grid gap-8 lg:grid-cols-2 lg:gap-12 items-center">
               <div className="flex flex-col justify-center space-y-6">
-                <div className="inline-block bg-gradient-to-r from-blue-600/20 to-cyan-600/20 border border-blue-500/30 px-4 py-2 text-sm rounded-full mb-2 w-fit">
-                  <Sparkles className="inline h-4 w-4 mr-2 text-cyan-400" />
-                  <span className="text-cyan-400">Quick & Easy AI Learning</span>
+                <div className="inline-block bg-blue-600/20 border border-blue-500/30 px-4 py-2 text-sm rounded-full mb-2 w-fit">
+                  <span className="text-blue-400">Quick & Easy Tool Learning</span>
                 </div>
                 <h1 className="text-4xl font-bold tracking-tight sm:text-5xl md:text-6xl">
-                  Master AI Tools <br />
-                  <span className="bg-gradient-to-r from-blue-400 via-cyan-400 to-teal-400 bg-clip-text text-transparent">in 90 Seconds</span>
+                  Master Any Tool <br />
+                  <span className="bg-gradient-to-r from-blue-400 via-purple-400 to-cyan-400 bg-clip-text text-transparent">in 90 Seconds</span>
                 </h1>
                 <p className="text-lg text-gray-400 leading-relaxed">
-                  Concise video tutorials to help you master powerful AI tools and get productive instantly.
+                  Concise video tutorials to help you master popular tools and software - from AI tools like ChatGPT to business essentials like Excel, Stripe, and Figma.
                 </p>
                 <div className="flex flex-col sm:flex-row gap-4 pt-4">
-                  <Button variant="outline" className="border-blue-500/50 text-blue-400 hover:bg-blue-500/10 hover:border-blue-400 hover:text-blue-400 transition-all duration-300">
+                  <Button variant="outline" className="border-blue-500/50 text-blue-400 hover:bg-blue-500/10 hover:border-blue-400 transition-all duration-300">
                     Get Started
                     <ChevronRight className="ml-2 h-4 w-4" />
                   </Button>
-                  <Button variant="outline" className="border-cyan-500/50 text-cyan-400 hover:bg-cyan-500/10 hover:border-cyan-400 hover:text-cyan-400 transition-all duration-300">
+                  <Button variant="outline" className="border-purple-500/50 text-purple-400 hover:bg-purple-500/10 hover:border-purple-400 transition-all duration-300">
                     <Play className="mr-2 h-4 w-4" /> 
                     Start Learning
                   </Button>
@@ -251,19 +218,18 @@ export default function Home() {
               
               <div className="relative mx-auto w-full max-w-[500px]">
                 <div className="aspect-video overflow-hidden rounded-lg bg-gradient-to-br from-gray-900 to-black border border-gray-800 relative">
-                  {/* Gradient overlay for visual interest */}
-                  <div className="absolute inset-0 bg-gradient-to-br from-blue-600/10 via-transparent to-cyan-600/10"></div>
+                  <div className="absolute inset-0 bg-gradient-to-br from-blue-600/10 via-transparent to-purple-600/10"></div>
                   <div className="absolute inset-0 flex items-center justify-center">
-                    <div className="rounded-full bg-gradient-to-r from-blue-600/30 to-cyan-600/30 p-6 backdrop-blur-sm">
-                      <Play className="h-10 w-10 text-cyan-400" />
+                    <div className="rounded-full bg-gradient-to-r from-blue-600/30 to-purple-600/30 p-6 backdrop-blur-sm">
+                      <Play className="h-10 w-10 text-blue-400" />
                     </div>
                   </div>
                   <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black via-black/80 to-transparent p-4">
-                    <p className="text-sm font-medium text-white">Learn ChatGPT in 2 minutes</p>
+                    <p className="text-sm font-medium text-white">Learn Excel in 90 seconds</p>
                     <div className="flex items-center mt-1 text-xs text-gray-400">
-                      <span>2:15</span>
+                      <span>1:30</span>
                       <span className="mx-2">•</span>
-                      <span className="text-cyan-400">12.4k views</span>
+                      <span className="text-blue-400">45.2k views</span>
                     </div>
                   </div>
                 </div>
@@ -272,27 +238,26 @@ export default function Home() {
           </div>
         </section>
 
-        {/* AI Tool Finder Section */}
-        <section className="w-full py-20 bg-black border-y border-gray-800 relative overflow-hidden">
+        {/* Tool Finder Section */}
+        <section data-section="ai-tool-finder" className="w-full py-20 bg-black border-y border-gray-800 relative overflow-hidden">
           {/* Background decoration */}
-          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-blue-900/10 via-transparent to-cyan-900/10"></div>
-          <div className="absolute top-0 left-1/4 w-96 h-96 bg-blue-500/5 rounded-full blur-3xl"></div>
-          <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-cyan-500/5 rounded-full blur-3xl"></div>
+          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-purple-900/10 via-transparent to-blue-900/10"></div>
+          <div className="absolute top-0 left-1/4 w-96 h-96 bg-purple-500/5 rounded-full blur-3xl"></div>
+          <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-blue-500/5 rounded-full blur-3xl"></div>
           
           <div className="max-w-7xl mx-auto px-4 md:px-8 lg:px-16 xl:px-24 relative z-10">
             <div className="text-center mb-12">
-              <div className="inline-flex items-center gap-2 bg-gradient-to-r from-blue-600/20 to-cyan-600/20 border border-blue-500/30 px-6 py-3 rounded-full mb-6">
-                <Sparkles className="h-5 w-5 text-cyan-400" />
-                <span className="text-cyan-400 font-medium">AI-Powered Tool Discovery</span>
+              <div className="inline-flex items-center gap-2 bg-purple-600/20 border border-purple-500/30 px-6 py-3 rounded-full mb-6">
+                <span className="text-purple-400 font-medium">Smart Tool Discovery</span>
               </div>
               
-              <h2 className="text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-white via-blue-200 to-cyan-200 bg-clip-text text-transparent">
-                Find Your Perfect AI Tool
+              <h2 className="text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-white via-purple-200 to-blue-200 bg-clip-text text-transparent">
+                Find Your Perfect Tool
               </h2>
               
               <p className="text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed mb-8">
-                Discover the right AI tools for your needs with our intelligent recommendation system. 
-                Get personalized suggestions with cost estimates and detailed comparisons.
+                Discover the right tools for your needs with our intelligent recommendation system. 
+                Get personalized suggestions for AI tools, business software, design apps, and more.
               </p>
               
               <div className="flex flex-wrap justify-center gap-4 mb-8">
@@ -323,7 +288,7 @@ export default function Home() {
                 Browse by Category
               </h2>
               <p className="max-w-[700px] text-gray-400">
-                Explore our collection of AI tools organized by category
+                Explore our collection of tools organized by category - from AI tools to business software
               </p>
             </div>
             
@@ -372,6 +337,259 @@ export default function Home() {
           </div>
         </section>
 
+        {/* Usage Statistics Section */}
+        <section className="w-full py-16 bg-black border-y border-gray-800">
+          <div className="max-w-7xl mx-auto px-4 md:px-8 lg:px-16 xl:px-24">
+            <div className="text-center mb-12">
+              <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
+                Trusted by Thousands of Learners
+              </h2>
+            </div>
+            
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+              <div className="text-center">
+                <div className="text-3xl md:text-4xl font-bold text-blue-400 mb-2">2.1M+</div>
+                <div className="text-gray-400">Video Views</div>
+              </div>
+              <div className="text-center">
+                <div className="text-3xl md:text-4xl font-bold text-purple-400 mb-2">450K+</div>
+                <div className="text-gray-400">Tutorials Completed</div>
+              </div>
+              <div className="text-center">
+                <div className="text-3xl md:text-4xl font-bold text-cyan-400 mb-2">25+</div>
+                <div className="text-gray-400">Popular Tools</div>
+              </div>
+              <div className="text-center">
+                <div className="text-3xl md:text-4xl font-bold text-emerald-400 mb-2">90s</div>
+                <div className="text-gray-400">Average Tutorial</div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Pricing Section */}
+        <section className="w-full py-20 bg-black">
+          <div className="max-w-7xl mx-auto px-4 md:px-8 lg:px-16 xl:px-24">
+            <div className="text-center mb-16">
+              <div className="inline-flex items-center gap-2 bg-purple-600/15 border border-purple-500/25 px-6 py-3 rounded-full mb-6">
+                <span className="text-purple-300 font-medium">Simple Pricing</span>
+              </div>
+              
+              <h2 className="text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-white via-purple-100 to-blue-100 bg-clip-text text-transparent">
+                Start Learning Today
+              </h2>
+              
+              <p className="text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed">
+                Choose the perfect plan to accelerate your tool mastery journey
+              </p>
+            </div>
+            
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 lg:gap-12">
+              {/* Free Plan */}
+              <div className="relative rounded-2xl border border-gray-800 bg-black/50 backdrop-blur-sm transition-all duration-300 hover:scale-105">
+                <div className="p-8">
+                  <div className="text-center mb-8">
+                    <div className="inline-flex items-center justify-center w-16 h-16 rounded-xl mb-4 border border-emerald-500/25 bg-emerald-500/15">
+                      <Sparkles className="h-8 w-8 text-emerald-300" />
+                    </div>
+                    
+                    <h3 className="text-2xl font-bold text-white mb-2">Free</h3>
+                    <p className="text-gray-400 mb-4">Perfect for getting started</p>
+                    
+                    <div className="mb-6">
+                      <span className="text-4xl font-bold text-white">$0</span>
+                      <span className="text-gray-400 ml-2">/forever</span>
+                    </div>
+                    
+                    <Button
+                      className="w-full bg-emerald-600/80 hover:bg-emerald-600 text-white border-2 border-emerald-600/50 hover:border-emerald-600 transition-all duration-300"
+                      size="lg"
+                    >
+                      Get Started Free
+                    </Button>
+                  </div>
+                  
+                  <ul className="space-y-3">
+                    <li className="flex items-center text-gray-300">
+                      <div className="w-5 h-5 rounded-full bg-emerald-500/15 flex items-center justify-center mr-3">
+                        <div className="w-2 h-2 rounded-full bg-emerald-400" />
+                      </div>
+                      Access to 8 popular tools
+                    </li>
+                    <li className="flex items-center text-gray-300">
+                      <div className="w-5 h-5 rounded-full bg-emerald-500/15 flex items-center justify-center mr-3">
+                        <div className="w-2 h-2 rounded-full bg-emerald-400" />
+                      </div>
+                      90-second tutorials
+                    </li>
+                    <li className="flex items-center text-gray-300">
+                      <div className="w-5 h-5 rounded-full bg-emerald-500/15 flex items-center justify-center mr-3">
+                        <div className="w-2 h-2 rounded-full bg-emerald-400" />
+                      </div>
+                      Community support
+                    </li>
+                    <li className="flex items-center text-gray-300">
+                      <div className="w-5 h-5 rounded-full bg-emerald-500/15 flex items-center justify-center mr-3">
+                        <div className="w-2 h-2 rounded-full bg-emerald-400" />
+                      </div>
+                      Mobile & desktop access
+                    </li>
+                  </ul>
+                </div>
+              </div>
+
+              {/* Pro Plan */}
+              <div className="relative rounded-2xl border border-purple-500/40 bg-gradient-to-b from-purple-900/15 to-blue-900/15 backdrop-blur-sm transition-all duration-300 hover:scale-105" style={{ boxShadow: '0 0 30px #6c5ce715' }}>
+                <div className="absolute -top-4 left-1/2 transform -translate-x-1/2">
+                  <div className="px-4 py-1 bg-gradient-to-r from-purple-600/80 to-blue-600/80 text-white border-0 rounded-full text-sm font-medium">
+                    <span className="mr-1">👑</span>
+                    Most Popular
+                  </div>
+                </div>
+                
+                <div className="p-8">
+                  <div className="text-center mb-8">
+                    <div className="inline-flex items-center justify-center w-16 h-16 rounded-xl mb-4 border border-purple-500/25 bg-purple-500/15">
+                      <ChevronRight className="h-8 w-8 text-purple-300" />
+                    </div>
+                    
+                    <h3 className="text-2xl font-bold text-white mb-2">Pro</h3>
+                    <p className="text-gray-400 mb-4">Everything you need to master tools</p>
+                    
+                    <div className="mb-6">
+                      <span className="text-4xl font-bold text-white">$9.99</span>
+                      <span className="text-gray-400 ml-2">/month</span>
+                    </div>
+                    
+                    <Button
+                      className="w-full bg-gradient-to-r from-purple-600/80 to-blue-600/80 hover:from-purple-600 hover:to-blue-600 text-white border-transparent transition-all duration-300"
+                      size="lg"
+                    >
+                      Start Pro Trial
+                    </Button>
+                  </div>
+                  
+                  <ul className="space-y-3">
+                    <li className="flex items-center text-gray-300">
+                      <div className="w-5 h-5 rounded-full bg-purple-500/15 flex items-center justify-center mr-3">
+                        <div className="w-2 h-2 rounded-full bg-purple-400" />
+                      </div>
+                      Access to ALL 25+ tools
+                    </li>
+                    <li className="flex items-center text-gray-300">
+                      <div className="w-5 h-5 rounded-full bg-purple-500/15 flex items-center justify-center mr-3">
+                        <div className="w-2 h-2 rounded-full bg-purple-400" />
+                      </div>
+                      Complete tutorial library
+                    </li>
+                    <li className="flex items-center text-gray-300">
+                      <div className="w-5 h-5 rounded-full bg-purple-500/15 flex items-center justify-center mr-3">
+                        <div className="w-2 h-2 rounded-full bg-purple-400" />
+                      </div>
+                      Advanced tool finder
+                    </li>
+                    <li className="flex items-center text-gray-300">
+                      <div className="w-5 h-5 rounded-full bg-purple-500/15 flex items-center justify-center mr-3">
+                        <div className="w-2 h-2 rounded-full bg-purple-400" />
+                      </div>
+                      Offline downloads
+                    </li>
+                    <li className="flex items-center text-gray-300">
+                      <div className="w-5 h-5 rounded-full bg-purple-500/15 flex items-center justify-center mr-3">
+                        <div className="w-2 h-2 rounded-full bg-purple-400" />
+                      </div>
+                      Priority support
+                    </li>
+                    <li className="flex items-center text-gray-300">
+                      <div className="w-5 h-5 rounded-full bg-purple-500/15 flex items-center justify-center mr-3">
+                        <div className="w-2 h-2 rounded-full bg-purple-400" />
+                      </div>
+                      Ad-free experience
+                    </li>
+                  </ul>
+                </div>
+              </div>
+
+              {/* Business Plan */}
+              <div className="relative rounded-2xl border border-gray-800 bg-black/50 backdrop-blur-sm transition-all duration-300 hover:scale-105">
+                <div className="p-8">
+                  <div className="text-center mb-8">
+                    <div className="inline-flex items-center justify-center w-16 h-16 rounded-xl mb-4 border border-pink-500/25 bg-pink-500/15">
+                      <Play className="h-8 w-8 text-pink-300" />
+                    </div>
+                    
+                    <h3 className="text-2xl font-bold text-white mb-2">Business</h3>
+                    <p className="text-gray-400 mb-4">For teams and organizations</p>
+                    
+                    <div className="mb-6">
+                      <span className="text-4xl font-bold text-white">$29.99</span>
+                      <span className="text-gray-400 ml-2">/month</span>
+                    </div>
+                    
+                    <Button
+                      className="w-full bg-pink-600/80 hover:bg-pink-600 text-white border-2 border-pink-600/50 hover:border-pink-600 transition-all duration-300"
+                      size="lg"
+                    >
+                      Contact Sales
+                    </Button>
+                  </div>
+                  
+                  <ul className="space-y-3">
+                    <li className="flex items-center text-gray-300">
+                      <div className="w-5 h-5 rounded-full bg-pink-500/15 flex items-center justify-center mr-3">
+                        <div className="w-2 h-2 rounded-full bg-pink-400" />
+                      </div>
+                      Everything in Pro
+                    </li>
+                    <li className="flex items-center text-gray-300">
+                      <div className="w-5 h-5 rounded-full bg-pink-500/15 flex items-center justify-center mr-3">
+                        <div className="w-2 h-2 rounded-full bg-pink-400" />
+                      </div>
+                      Team management
+                    </li>
+                    <li className="flex items-center text-gray-300">
+                      <div className="w-5 h-5 rounded-full bg-pink-500/15 flex items-center justify-center mr-3">
+                        <div className="w-2 h-2 rounded-full bg-pink-400" />
+                      </div>
+                      Up to 10 team members
+                    </li>
+                    <li className="flex items-center text-gray-300">
+                      <div className="w-5 h-5 rounded-full bg-pink-500/15 flex items-center justify-center mr-3">
+                        <div className="w-2 h-2 rounded-full bg-pink-400" />
+                      </div>
+                      Advanced analytics
+                    </li>
+                    <li className="flex items-center text-gray-300">
+                      <div className="w-5 h-5 rounded-full bg-pink-500/15 flex items-center justify-center mr-3">
+                        <div className="w-2 h-2 rounded-full bg-pink-400" />
+                      </div>
+                      Priority phone support
+                    </li>
+                    <li className="flex items-center text-gray-300">
+                      <div className="w-5 h-5 rounded-full bg-pink-500/15 flex items-center justify-center mr-3">
+                        <div className="w-2 h-2 rounded-full bg-pink-400" />
+                      </div>
+                      Custom integrations
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+            
+            <div className="text-center mt-12">
+              <p className="text-gray-400 mb-4">
+                All plans include a 30-day money-back guarantee
+              </p>
+              <Link href="/pricing">
+                <Button variant="outline" className="border-gray-700 text-gray-300 hover:bg-gray-800">
+                  View Detailed Pricing
+                  <ChevronRight className="ml-2 h-4 w-4" />
+                </Button>
+              </Link>
+            </div>
+          </div>
+        </section>
+
         {/* Features & Popular Section */}
         <section className="w-full py-16 border-t border-gray-900 px-4 md:px-8 lg:px-16 xl:px-24">
           <div className="max-w-7xl mx-auto">
@@ -406,7 +624,18 @@ export default function Home() {
                 <div className="space-y-4">
                   {POPULAR_VIDEOS.slice(0, 4).map((item, index) => (
                     <Link href="#" key={index} className="block group">
-                      <div className="flex items-center rounded-lg border border-gray-800 p-4 hover:bg-gray-900 transition-colors hover:border-gray-600">
+                      <div 
+                        className="flex items-center rounded-lg border border-gray-800 p-4 hover:bg-black transition-all duration-300"
+                        style={{
+                          '--hover-border-color': item.color
+                        } as React.CSSProperties}
+                        onMouseEnter={(e) => {
+                          e.currentTarget.style.borderColor = item.color;
+                        }}
+                        onMouseLeave={(e) => {
+                          e.currentTarget.style.borderColor = '#374151'; // border-gray-800
+                        }}
+                      >
                         <div 
                           className="mr-4 flex h-12 w-12 shrink-0 items-center justify-center rounded-full" 
                           style={{ backgroundColor: `${item.color}20` }}
