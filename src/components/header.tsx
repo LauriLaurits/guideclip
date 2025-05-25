@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import Link from "next/link";
 import { Search, Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { AuthButton } from "@/components/auth-button";
 import { MultiStageInput } from "@/components/multi-stage-input";
 import { useRouter } from "next/navigation";
 
@@ -23,9 +24,9 @@ interface ToolSuggestion {
 }
 
 const NAVIGATION_LINKS = [
-  { href: "/", label: "Home", hoverColor: "hover:text-purple-400" },
-  { href: "/categories", label: "Categories", hoverColor: "hover:text-purple-400" },
+  { href: "/categories", label: "Browse Tools", hoverColor: "hover:text-purple-400" },
   { href: "/popular", label: "Popular", hoverColor: "hover:text-purple-400" },
+  { href: "/pricing", label: "Pricing", hoverColor: "hover:text-purple-400" },
   { href: "/about", label: "About", hoverColor: "hover:text-purple-400" },
 ] as const;
 
@@ -103,6 +104,23 @@ export function Header({ showSearch = false }: HeaderProps) {
               <Search className="h-4 w-4 mr-2" />
               AI Tool Finder
             </Button>
+            
+            <AuthButton 
+              isAuthenticated={true}
+              user={{
+                name: "John Doe",
+                email: "john@example.com",
+                plan: "pro"
+              }}
+              onSignIn={() => {
+                // TODO: Implement Google sign in
+                console.log("Sign in clicked");
+              }}
+              onSignOut={() => {
+                // TODO: Implement sign out
+                console.log("Sign out clicked");
+              }}
+            />
           </div>
 
           {/* Mobile Menu Button */}
