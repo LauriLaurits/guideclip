@@ -7,15 +7,15 @@ import { Clock, Play } from "lucide-react";
 
 interface ToolCardProps {
   tool: Tool;
-  borderClass?: string;
-  borderColor?: "orange" | "pink" | "blue" | "red" | "purple";
+  borderColor?: "orange" | "pink" | "blue" | "red" | "purple" | "teal" | "amber" | "emerald" | "indigo" | "cyan";
+  customColor?: string;
   iconClass?: string;
   iconBgClass?: string;
 }
 
 export function ToolCard({ 
   tool, 
-  borderClass = "hover:border-primary",
+  customColor = "#6c5ce7",
   borderColor = "purple",
   iconClass = "text-primary",
   iconBgClass = "bg-primary/10"
@@ -26,16 +26,13 @@ export function ToolCard({
     return `${minutes}:${remainingSeconds.toString().padStart(2, '0')}`;
   };
   
-  // Extract the color name from the classes for hover effects
-  const hoverClass = iconClass.replace("text-", "hover:text-");
-  
   return (
     <Link href={`/tool/${tool.id}`}>
-      <Card className={`h-full bg-black card-with-border-hover ${borderColor}-border glow-effect`}>
+      <Card className="h-full bg-black border border-gray-800 hover:border-gray-600 transition-all duration-300">
         <div className="aspect-video relative bg-black">
           <div className="absolute inset-0 flex items-center justify-center">
-            <div className={`rounded-full ${iconBgClass.replace("/10", "/20")} p-3`}>
-              <Play className={`h-6 w-6 ${iconClass}`} />
+            <div className="rounded-full p-3" style={{ backgroundColor: `${customColor}20` }}>
+              <Play className="h-6 w-6" style={{ color: customColor }} />
             </div>
           </div>
           
@@ -50,10 +47,10 @@ export function ToolCard({
         
         <CardHeader className="pb-2">
           <div className="flex items-center justify-between">
-            <CardTitle className={`text-white transition-colors duration-200 ${hoverClass}`}>{tool.name}</CardTitle>
+            <CardTitle className="text-white hover:text-[#8be9fd] transition-colors duration-200">{tool.name}</CardTitle>
             {tool.icon && (
-              <div className={`rounded-md ${iconBgClass} p-2`}>
-                <Icon name={tool.icon} className={`h-5 w-5 ${iconClass}`} />
+              <div className="rounded-md p-2" style={{ backgroundColor: `${customColor}20` }}>
+                <Icon name={tool.icon} className="h-5 w-5" style={{ color: customColor }} />
               </div>
             )}
           </div>

@@ -7,33 +7,35 @@ import { getToolsByCategory } from "@/lib/data";
 
 interface CategoryCardProps {
   category: Category;
-  borderClass?: string;
-  borderColor?: "orange" | "pink" | "blue" | "red" | "purple";
+  borderColor?: "orange" | "pink" | "blue" | "red" | "purple" | "teal" | "amber" | "emerald" | "indigo" | "cyan";
+  customColor?: string;
+  stats?: string;
   iconClass?: string;
   iconBgClass?: string;
 }
 
 export function CategoryCard({ 
   category, 
-  borderClass = "hover:border-primary", 
   borderColor = "purple",
-  iconClass = "text-primary", 
-  iconBgClass = "bg-primary/10" 
+  customColor = "#6c5ce7",
+  stats,
+  iconClass, 
+  iconBgClass
 }: CategoryCardProps) {
   const toolCount = getToolsByCategory(category.id).length;
   
-  // Extract the color name from the classes for hover effects
-  const hoverClass = iconClass.replace("text-", "hover:text-");
-  
   return (
     <Link href={`/category/${category.id}`}>
-      <Card className={`h-full bg-black card-with-border-hover ${borderColor}-border`}>
+      <Card 
+        className="h-full bg-black border border-gray-800 transition-all duration-300 hover:border-gray-400"
+        style={{ borderColor: "#333" }}
+      >
         <CardHeader className="pb-2">
           <div className="flex items-center justify-between">
-            <CardTitle className={`text-white transition-colors duration-200 ${hoverClass}`}>{category.name}</CardTitle>
+            <CardTitle className="text-white transition-colors duration-200 hover:text-[#8be9fd]">{category.name}</CardTitle>
             {category.icon && (
-              <div className={`rounded-md ${iconBgClass} p-2`}>
-                <Icon name={category.icon} className={`h-5 w-5 ${iconClass}`} />
+              <div className="rounded-md p-2" style={{ backgroundColor: `${customColor}20` }}>
+                <Icon name={category.icon} className="h-5 w-5" style={{ color: customColor }} />
               </div>
             )}
           </div>
@@ -42,9 +44,9 @@ export function CategoryCard({
         <CardContent>
           <div className="flex justify-between items-center">
             <Badge variant="outline" className="bg-black border-gray-800 text-gray-400">
-              {toolCount} {toolCount === 1 ? 'tool' : 'tools'}
+              {stats || `${toolCount} ${toolCount === 1 ? 'tool' : 'tools'}`}
             </Badge>
-            <span className="text-xs text-gray-400">View Tools →</span>
+            <span className="text-xs text-gray-400 hover:text-[#8be9fd] transition-colors">View Tools →</span>
           </div>
         </CardContent>
       </Card>
