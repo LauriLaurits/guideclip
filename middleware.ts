@@ -10,8 +10,15 @@ const ALLOWED_PATHS = [
 ];
 
 export function middleware(request: NextRequest) {
+  // Debug: Log environment variables
+  console.log('Environment variables in middleware:');
+  console.log('NEXT_PUBLIC_MAINTENANCE_MODE:', process.env.NEXT_PUBLIC_MAINTENANCE_MODE);
+  console.log('All env vars:', Object.keys(process.env).filter(key => key.includes('MAINTENANCE')));
+  
   // Check environment variable for maintenance mode at runtime
-  const MAINTENANCE_MODE = process.env.MAINTENANCE_MODE === 'true';
+  const MAINTENANCE_MODE = process.env.NEXT_PUBLIC_MAINTENANCE_MODE === 'true';
+  
+  console.log('MAINTENANCE_MODE resolved to:', MAINTENANCE_MODE);
   
   // Skip maintenance mode for allowed paths
   if (ALLOWED_PATHS.some(path => request.nextUrl.pathname.startsWith(path))) {
@@ -20,6 +27,7 @@ export function middleware(request: NextRequest) {
 
   // If maintenance mode is enabled and user is not on maintenance page
   if (MAINTENANCE_MODE && request.nextUrl.pathname !== '/maintenance') {
+    console.log('Redirecting to maintenance page');
     return NextResponse.redirect(new URL('/maintenance', request.url));
   }
 
