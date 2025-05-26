@@ -4,7 +4,7 @@ import Link from "next/link";
 import { Header } from "@/components/header";
 import { Footer } from "@/components/footer";
 import { Button } from "@/components/ui/button";
-import { Home, Search, ArrowLeft, Sparkles } from "lucide-react";
+import { Home, Search, Sparkles } from "lucide-react";
 
 export default function NotFound() {
   return (
@@ -35,11 +35,11 @@ export default function NotFound() {
               </div>
               
               <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
-                Oops! This page doesn't exist
+                Oops! This page doesn&apos;t exist
               </h2>
               
               <p className="text-xl text-gray-300 leading-relaxed max-w-lg mx-auto">
-                The page you're looking for might have been moved, deleted, or you entered the wrong URL.
+                The page you&apos;re looking for might have been moved, deleted, or you entered the wrong URL.
               </p>
             </div>
             

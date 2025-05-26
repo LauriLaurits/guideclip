@@ -1,5 +1,6 @@
 import { Video } from "@/lib/data";
-import { PlayCircle, Pause, Clock } from "lucide-react";
+import Image from "next/image";
+import { PlayCircle, Pause } from "lucide-react";
 
 interface VideoCardProps {
   video: Video;
@@ -34,9 +35,11 @@ export function VideoCard({
           <div className="flex items-center gap-4 p-3">
             {/* Thumbnail with overlay */}
             <div className="relative w-20 h-20 overflow-hidden rounded-lg flex-shrink-0">
-              <img 
+              <Image 
                 src={`https://img.youtube.com/vi/${video.youtubeId}/mqdefault.jpg`} 
                 alt={video.title}
+                width={80}
+                height={80}
                 className={`w-full h-full object-cover ${isPlaying ? 'scale-110' : 'hover:scale-110'} transition-transform duration-500`}
               />
               

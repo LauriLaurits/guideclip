@@ -349,7 +349,6 @@ export default function Home() {
                   <CategoryCard 
                     key={category.id} 
                     category={category} 
-                    borderColor={currentColor}
                     customColor={COLOR_MAP[currentColor]}
                     stats={stats}
                   />

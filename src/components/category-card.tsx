@@ -8,7 +8,6 @@ import { ArrowRight } from "lucide-react";
 
 interface CategoryCardProps {
   category: Category;
-  borderColor?: "orange" | "pink" | "blue" | "red" | "purple" | "teal" | "amber" | "emerald" | "indigo" | "cyan";
   customColor?: string;
   stats?: string;
 }
@@ -22,7 +21,6 @@ const getToolCountText = (count: number): string => {
 
 export function CategoryCard({ 
   category, 
-  borderColor = "purple",
   customColor = DEFAULT_COLOR,
   stats
 }: CategoryCardProps) {

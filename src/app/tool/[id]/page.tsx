@@ -285,7 +285,7 @@ export default function ToolPage({ params }: Props) {
                     </div>
                     
                     <div className="space-y-4">
-                      {tool.videos.map((video, index) => (
+                      {tool.videos.map((video) => (
                         <div key={video.id} className="group">
                           <VideoCard 
                             video={video} 

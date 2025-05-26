@@ -6,7 +6,6 @@ import { Footer } from "@/components/footer";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Card } from "@/components/ui/card";
-import { ToolCard } from "@/components/tool-card";
 import { 
   Star, 
   TrendingUp, 
@@ -14,12 +13,10 @@ import {
   Clock, 
   Video,
   Award,
-  Filter,
   Grid,
   List,
   Eye,
-  Play,
-  Download
+  Play
 } from "lucide-react";
 
 // Popular tools with mock statistics
@@ -216,7 +213,7 @@ export default function PopularPage() {
               
               <p className="text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed">
                 Discover the most popular AI tools based on views, completions, and community engagement. 
-                See what's trending and join thousands of learners mastering these tools.
+                See what&apos;s trending and join thousands of learners mastering these tools.
               </p>
             </div>
           </div>
@@ -263,7 +260,7 @@ export default function PopularPage() {
                       key={option.key}
                       variant="outline"
                       size="sm"
-                      onClick={() => setSortBy(option.key as any)}
+                      onClick={() => setSortBy(option.key as "rank" | "views" | "growth")}
                       className={sortBy === option.key ? "border-purple-500 text-purple-400 hover:bg-gray-900" : "border-gray-700 text-gray-300 hover:bg-gray-800"}
                     >
                       {option.label}

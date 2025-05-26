@@ -120,6 +120,43 @@ docker run -p 3000:3000 guideclip
 2. **Environment Variable:** Set `MAINTENANCE_MODE=true` in your deployment environment
 3. **Redeploy** your application
 
+### Live Control on Vercel (No Code Changes Required)
+
+#### Method 1: Vercel Dashboard
+1. Go to [vercel.com/dashboard](https://vercel.com/dashboard)
+2. Select your project → **Settings** → **Environment Variables**
+3. Add/Update: `MAINTENANCE_MODE` = `true` or `false`
+4. Go to **Deployments** → Click **⋯** → **Redeploy**
+
+#### Method 2: Vercel CLI (Fastest)
+```bash
+# Enable maintenance mode
+npm run maintenance:on:live
+
+# Disable maintenance mode
+npm run maintenance:off:live
+```
+
+#### Method 3: Vercel API (Advanced)
+Set up environment variables:
+```bash
+export VERCEL_TOKEN="your_token_here"
+export VERCEL_PROJECT_ID="your_project_id"
+```
+
+Then use:
+```bash
+# Enable maintenance mode
+npm run maintenance:on:api
+
+# Disable maintenance mode
+npm run maintenance:off:api
+```
+
+**Get your tokens:**
+- **VERCEL_TOKEN**: [vercel.com/account/tokens](https://vercel.com/account/tokens)
+- **VERCEL_PROJECT_ID**: Found in your project settings URL
+
 ### Maintenance Mode Features
 
 - ✅ Beautiful animated maintenance page

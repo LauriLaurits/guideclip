@@ -222,21 +222,14 @@ export default function TagPage({ params }: TagPageProps) {
             {sortedTools.length > 0 ? (
               <>
                 <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-                  {sortedTools.map((tool, index) => {
-                    const colors = ["orange", "pink", "blue", "purple", "teal"] as const;
-                    const colorIndex = index % colors.length;
-                    const currentColor = colors[colorIndex];
-                    
-                    return (
-                      <div key={tool.id} className="group">
-                        <ToolCard 
-                          tool={tool} 
-                          borderColor={currentColor}
-                          customColor={tagInfo?.color}
-                        />
-                      </div>
-                    );
-                  })}
+                  {sortedTools.map((tool) => (
+                    <div key={tool.id} className="group">
+                      <ToolCard 
+                        tool={tool} 
+                        customColor={tagInfo?.color}
+                      />
+                    </div>
+                  ))}
                 </div>
                 
                 {/* Results Summary */}

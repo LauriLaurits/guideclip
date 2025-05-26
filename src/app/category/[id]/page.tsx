@@ -58,8 +58,6 @@ const CATEGORY_COLORS = {
 
 const DEFAULT_COLOR = { color: "#6c5ce7", bgColor: "#6c5ce720" } as const;
 
-const TOOL_BORDER_COLORS = ["orange", "pink", "blue", "purple", "teal"] as const;
-
 export default function CategoryPage({ params }: CategoryPageProps) {
   // Use React.use() to unwrap the params Promise
   const { id } = use(params);
@@ -159,20 +157,14 @@ export default function CategoryPage({ params }: CategoryPageProps) {
                 </div>
                 
                 <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-                  {tools.map((tool, index) => {
-                    const colorIndex = index % TOOL_BORDER_COLORS.length;
-                    const currentColor = TOOL_BORDER_COLORS[colorIndex];
-                    
-                    return (
-                      <div key={tool.id} className="group">
-                        <ToolCard 
-                          tool={tool} 
-                          borderColor={currentColor}
-                          customColor={colorSet.color}
-                        />
-                      </div>
-                    );
-                  })}
+                  {tools.map((tool) => (
+                    <div key={tool.id} className="group">
+                      <ToolCard 
+                        tool={tool} 
+                        customColor={colorSet.color}
+                      />
+                    </div>
+                  ))}
                 </div>
                 
                 {/* Call to Action Section */}
@@ -227,44 +219,10 @@ export default function CategoryPage({ params }: CategoryPageProps) {
   );
 }
 
-// Empty state component for better organization
+// Empty state props interface
 interface EmptyStateProps {
   categoryName: string;
   colorSet: { color: string; bgColor: string };
-}
-
-function EmptyState({ categoryName, colorSet }: EmptyStateProps) {
-  return (
-    <div className="flex flex-col items-center justify-center py-16 bg-black rounded-lg border border-gray-800">
-      <div 
-        className="rounded-lg p-4 mb-6" 
-        style={{ backgroundColor: colorSet.bgColor }}
-      >
-        <Icon 
-          name="info" 
-          className="h-12 w-12" 
-          style={{ color: colorSet.color }} 
-        />
-      </div>
-      
-      <h3 className="text-2xl font-medium mb-3 text-white">
-        No tools found
-      </h3>
-      
-      <p className="text-gray-400 text-center max-w-md leading-relaxed mb-6">
-        We don't have any tools in the {categoryName} category yet. 
-        Check back soon or explore other categories to discover amazing AI tools.
-      </p>
-      
-      <Link href="/">
-        <Button 
-          className="bg-purple-600 hover:bg-purple-700 text-white transition-colors"
-        >
-          Explore Categories
-        </Button>
-      </Link>
-    </div>
-  );
 }
 
 // Enhanced empty state component
@@ -290,7 +248,7 @@ function EnhancedEmptyState({ categoryName, colorSet }: EmptyStateProps) {
       </h3>
       
       <p className="text-gray-400 text-center max-w-lg leading-relaxed mb-8 text-lg">
-        We're working hard to bring you the best {categoryName.toLowerCase()} tools. 
+        We&apos;re working hard to bring you the best {categoryName.toLowerCase()} tools. 
         Check back soon or explore other categories to discover amazing tools.
       </p>
       

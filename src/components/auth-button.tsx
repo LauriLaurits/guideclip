@@ -2,6 +2,7 @@
 
 import React from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { LogIn, User, LogOut, Crown } from "lucide-react";
 
@@ -37,9 +38,11 @@ export function AuthButton({
         {/* User Info - Clickable to go to account */}
         <Link href="/account" className="hidden sm:flex items-center gap-3 hover:opacity-80 transition-opacity cursor-pointer">
           {user.image ? (
-            <img 
+            <Image 
               src={user.image} 
               alt={user.name || "User"} 
+              width={32}
+              height={32}
               className="w-8 h-8 rounded-full border border-gray-700"
             />
           ) : (

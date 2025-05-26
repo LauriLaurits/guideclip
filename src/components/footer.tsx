@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Facebook, Instagram, Linkedin, Mail, Send, Twitter, Youtube } from "lucide-react";
+import { Facebook, Instagram, Linkedin, Send, Twitter, Youtube } from "lucide-react";
 
 const SOCIAL_ICONS = [Twitter, Facebook, Instagram, Youtube, Linkedin] as const;
 

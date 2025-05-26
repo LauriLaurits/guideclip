@@ -86,11 +86,11 @@ const PRICING_TIERS = [
 const FAQ_ITEMS = [
   {
     question: "Can I cancel my subscription anytime?",
-    answer: "Yes, you can cancel your subscription at any time. You'll continue to have access to Pro features until the end of your billing period."
+    answer: "Yes, you can cancel your subscription at any time. You&apos;ll continue to have access to Pro features until the end of your billing period."
   },
   {
     question: "Do you offer refunds?",
-    answer: "We offer a 30-day money-back guarantee. If you're not satisfied with GuideClip Pro, contact us within 30 days for a full refund."
+    answer: "We offer a 30-day money-back guarantee. If you&apos;re not satisfied with GuideClip Pro, contact us within 30 days for a full refund."
   },
   {
     question: "How often do you add new tools?",
@@ -206,7 +206,7 @@ export default function PricingPage() {
                       
                       {/* Features */}
                       <div className="space-y-4">
-                        <h4 className="font-semibold text-white">What's included:</h4>
+                        <h4 className="font-semibold text-white">What&apos;s included:</h4>
                         <ul className="space-y-3">
                           {tier.features.map((feature, index) => (
                             <li key={index} className="flex items-start gap-3">
@@ -235,7 +235,7 @@ export default function PricingPage() {
                 Compare Plans
               </h2>
               <p className="text-xl text-gray-400">
-                See what's included in each plan
+                See what&apos;s included in each plan
               </p>
             </div>
             

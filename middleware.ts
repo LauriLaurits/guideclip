@@ -1,8 +1,8 @@
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
 
-// Set this to true to enable maintenance mode
-const MAINTENANCE_MODE = false;
+// Check environment variable for maintenance mode
+const MAINTENANCE_MODE = process.env.MAINTENANCE_MODE === 'true';
 
 // Paths that should be accessible during maintenance
 const ALLOWED_PATHS = [

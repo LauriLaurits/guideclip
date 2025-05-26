@@ -14,7 +14,6 @@ import {
   Heart, 
   Lightbulb,
   Award,
-  Globe,
   Clock,
   TrendingUp,
   Mail,
@@ -149,7 +148,7 @@ export default function AboutPage() {
               </h1>
               
               <p className="text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed">
-                We're on a mission to make AI tools accessible to everyone through 
+                We&apos;re on a mission to make AI tools accessible to everyone through 
                 bite-sized, practical tutorials that get you productive in 90 seconds.
               </p>
             </div>
@@ -170,7 +169,7 @@ export default function AboutPage() {
                   the power of AI tools, regardless of their technical background.
                 </p>
                 <p className="text-lg text-gray-300 leading-relaxed mb-8">
-                  That's why we created GuideClip - to break down AI tools into digestible, 
+                  That&apos;s why we created GuideClip - to break down AI tools into digestible, 
                   actionable tutorials that get you results fast. No fluff, no theory, 
                   just practical skills you can use immediately.
                 </p>
@@ -289,12 +288,12 @@ export default function AboutPage() {
                 tutorials filled with unnecessary theory.
               </p>
               <p>
-                "I just wanted to know how to write better email campaigns," she recalls. 
-                "But every tutorial started with the history of AI and took forever to get 
-                to the practical stuff."
+                &ldquo;I just wanted to know how to write better email campaigns,&rdquo; she recalls. 
+                &ldquo;But every tutorial started with the history of AI and took forever to get 
+                to the practical stuff.&rdquo;
               </p>
               <p>
-                That's when the idea hit: What if we could teach AI tools in 90 seconds? 
+                That&apos;s when the idea hit: What if we could teach AI tools in 90 seconds? 
                 Just the essential steps, no fluff, straight to results.
               </p>
               <p>

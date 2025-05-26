@@ -30,7 +30,7 @@ const ALL_TAGS = [
   { name: "Social", count: 2, color: "#fd79a8", trending: false },
   { name: "Writing", count: 5, color: "#00cec9", trending: false },
   { name: "Image", count: 4, color: "#ff9f43", trending: false }
-] as const;
+];
 
 export default function TagsPage() {
   const [searchTerm, setSearchTerm] = useState("");
@@ -295,7 +295,7 @@ export default function TagsPage() {
                 style={{ backgroundColor: '#6c5ce705' }}
               >
                 <h3 className="text-2xl font-bold text-white mb-4">
-                  Can't find what you're looking for?
+                  Can&apos;t find what you&apos;re looking for?
                 </h3>
                 <p className="text-gray-400 mb-6 max-w-2xl mx-auto">
                   Browse our categories or use our AI tool finder to get personalized recommendations.

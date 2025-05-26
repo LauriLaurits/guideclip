@@ -7,7 +7,6 @@ import { Clock, Play, ArrowRight, DollarSign, Zap, Code, Plug } from "lucide-rea
 
 interface ToolCardProps {
   tool: Tool;
-  borderColor?: "orange" | "pink" | "blue" | "red" | "purple" | "teal" | "amber" | "emerald" | "indigo" | "cyan";
   customColor?: string;
 }
 
@@ -27,7 +26,7 @@ const getVideoCountText = (count: number): string => {
 
 // Get pricing badge color and text
 const getPricingBadge = (tool: Tool) => {
-  const { model, startingPrice, discount } = tool.pricing;
+  const { model, startingPrice } = tool.pricing;
   
   switch (model) {
     case "free":
@@ -57,8 +56,7 @@ const getFeatureTags = (tool: Tool) => {
 
 export function ToolCard({ 
   tool, 
-  customColor = DEFAULT_COLOR,
-  borderColor = "purple"
+  customColor = DEFAULT_COLOR
 }: ToolCardProps) {
   const firstVideoDuration = tool.videos[0]?.duration ?? 0;
   const videoCount = tool.videos.length;

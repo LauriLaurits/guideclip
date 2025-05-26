@@ -78,11 +78,11 @@ export default function MaintenancePage() {
 
           {/* Main message */}
           <h1 className="text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-white via-purple-200 to-blue-200 bg-clip-text text-transparent">
-            We're Making Things Better
+            We&apos;re Making Things Better
           </h1>
 
           <p className="text-xl text-gray-300 leading-relaxed mb-8 max-w-lg mx-auto">
-            GuideClip is currently undergoing scheduled maintenance to improve your learning experience. We'll be back soon!
+            GuideClip is currently undergoing scheduled maintenance to improve your learning experience. We&apos;ll be back soon!
           </p>
 
           {/* Countdown timer */}
@@ -118,7 +118,7 @@ export default function MaintenancePage() {
           <div className="rounded-2xl border border-gray-800 bg-black/50 backdrop-blur-sm p-8 mb-8">
             <div className="flex items-center justify-center gap-2 mb-4">
               <Sparkles className="h-5 w-5 text-purple-400" />
-              <h3 className="text-xl font-semibold text-white">Get Notified When We're Back</h3>
+              <h3 className="text-xl font-semibold text-white">Get Notified When We&apos;re Back</h3>
             </div>
             
             {!isSubscribed ? (
@@ -144,7 +144,7 @@ export default function MaintenancePage() {
               <div className="text-center">
                 <div className="inline-flex items-center gap-2 bg-emerald-500/20 border border-emerald-500/30 px-4 py-2 rounded-full">
                   <div className="w-2 h-2 bg-emerald-400 rounded-full"></div>
-                  <span className="text-emerald-400 text-sm font-medium">Thanks! We'll notify you when we're back online.</span>
+                  <span className="text-emerald-400 text-sm font-medium">Thanks! We&apos;ll notify you when we&apos;re back online.</span>
                 </div>
               </div>
             )}
@@ -152,7 +152,7 @@ export default function MaintenancePage() {
 
           {/* What we're working on */}
           <div className="text-left max-w-md mx-auto mb-8">
-            <h4 className="text-lg font-semibold text-white mb-4 text-center">What we're improving:</h4>
+            <h4 className="text-lg font-semibold text-white mb-4 text-center">What we&apos;re improving:</h4>
             <ul className="space-y-3">
               <li className="flex items-center text-gray-300">
                 <div className="w-2 h-2 bg-blue-400 rounded-full mr-3"></div>
@@ -202,7 +202,7 @@ export default function MaintenancePage() {
 
       {/* Footer */}
       <footer className="text-center py-6 text-gray-400 text-sm relative z-10">
-        <p>&copy; {new Date().getFullYear()} GuideClip. We'll be back soon!</p>
+        <p>&copy; {new Date().getFullYear()} GuideClip. We&apos;ll be back soon!</p>
       </footer>
     </div>
   );

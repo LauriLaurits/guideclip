@@ -1,12 +1,11 @@
 "use client";
 
 import React, { useState, useCallback, useMemo } from "react";
-import { Search, Sparkles, DollarSign, Clock, ArrowRight, X, ChevronRight, Check, Database, Globe, CreditCard, Server, Code, Palette, FileText, MessageSquare, BarChart, ShoppingCart, Zap, Megaphone, GraduationCap, Cloud, User, Newspaper, Users, Gamepad2 } from "lucide-react";
+import { Sparkles, DollarSign, Clock, ArrowRight, X, ChevronRight, Check, Globe, Code, Palette, FileText, MessageSquare, BarChart, ShoppingCart, Zap, Megaphone, GraduationCap, Cloud, User, Newspaper, Users, Gamepad2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
 import { Card } from "@/components/ui/card";
-import { tools, categories } from "@/lib/data";
+import { tools } from "@/lib/data";
 
 interface ToolSuggestion {
   id: string;
@@ -123,18 +122,21 @@ export function MultiStageInput({ onToolSelect, className = "" }: MultiStageInpu
   const displayedProjectTypes = showAllProjectTypes ? PROJECT_TYPES : PROJECT_TYPES.slice(0, 8);
 
   // Mock cost data - in real app this would come from API
-  const toolCosts: Record<string, { cost: ToolSuggestion["estimatedCost"]; range?: string }> = {
-    chatgpt: { cost: "freemium", range: "$0-20/month" },
-    claude: { cost: "freemium", range: "$0-20/month" },
-    cursor: { cost: "freemium", range: "$0-20/month" },
-    midjourney: { cost: "paid", range: "$10-60/month" },
-    dalle: { cost: "freemium", range: "$0-15/month" },
-    "github-copilot": { cost: "paid", range: "$10/month" },
-    "notion-ai": { cost: "freemium", range: "$0-10/month" },
-    perplexity: { cost: "freemium", range: "$0-20/month" },
-    jasper: { cost: "paid", range: "$39-125/month" },
-    runway: { cost: "paid", range: "$12-76/month" },
-  };
+  const toolCosts = useMemo(() => ({
+    chatgpt: { cost: "freemium" as const, range: "$0-20/month" },
+    claude: { cost: "freemium" as const, range: "$0-20/month" },
+    cursor: { cost: "freemium" as const, range: "$0-20/month" },
+    midjourney: { cost: "paid" as const, range: "$10-60/month" },
+    dalle: { cost: "freemium" as const, range: "$0-15/month" },
+    "github-copilot": { cost: "paid" as const, range: "$10/month" },
+    "notion-ai": { cost: "freemium" as const, range: "$0-10/month" },
+    perplexity: { cost: "freemium" as const, range: "$0-20/month" },
+    jasper: { cost: "paid" as const, range: "$39-125/month" },
+    runway: { cost: "paid" as const, range: "$12-76/month" },
+    // Add some free tools
+    canva: { cost: "free" as const, range: "Free" },
+    figma: { cost: "freemium" as const, range: "$0-15/month" },
+  }), []);
 
   const suggestions = useMemo(() => {
     if (!requirements.projectType) return [];
@@ -202,9 +204,9 @@ export function MultiStageInput({ onToolSelect, className = "" }: MultiStageInpu
         { category: "Content", priority: 3, tools: ["chatgpt"] }
       ],
       blog: [
-        { category: "Writing", priority: 1, tools: ["chatgpt", "claude", "jasper"] },
-        { category: "Development", priority: 2, tools: ["cursor"] },
-        { category: "Design", priority: 3, tools: ["midjourney"] }
+        { category: "Content Creation", priority: 1, tools: ["chatgpt", "claude", "jasper"] },
+        { category: "Design", priority: 2, tools: ["midjourney", "dalle"] },
+        { category: "Development", priority: 3, tools: ["cursor"] }
       ],
       social: [
         { category: "Development", priority: 1, tools: ["cursor", "github-copilot"] },
@@ -213,7 +215,7 @@ export function MultiStageInput({ onToolSelect, className = "" }: MultiStageInpu
       ],
       gaming: [
         { category: "Development", priority: 1, tools: ["cursor", "github-copilot"] },
-        { category: "Art & Design", priority: 2, tools: ["midjourney", "dalle"] },
+        { category: "Design", priority: 2, tools: ["midjourney", "dalle"] },
         { category: "Content", priority: 3, tools: ["chatgpt"] }
       ],
       other: [
@@ -223,63 +225,51 @@ export function MultiStageInput({ onToolSelect, className = "" }: MultiStageInpu
       ]
     };
 
-    const projectNeeds = projectToolNeeds[requirements.projectType as keyof typeof projectToolNeeds] || projectToolNeeds.other;
+    const projectNeeds = projectToolNeeds[requirements.projectType as keyof typeof projectToolNeeds] || [];
     const diverseTools: ToolSuggestion[] = [];
 
-    // Get the best tool from each category
-    projectNeeds.forEach(need => {
-      const availableTools = need.tools
-        .map(toolId => tools.find(t => t.id === toolId))
-        .filter(Boolean);
+    projectNeeds.forEach((need) => {
+      need.tools.forEach((toolId) => {
+        const selectedTool = tools.find(t => t.id === toolId);
+        if (selectedTool && !diverseTools.find(dt => dt.id === selectedTool.id)) {
+          const costInfo = toolCosts[toolId as keyof typeof toolCosts] || { cost: "freemium" as const };
+          
+          // Calculate match score based on priority and requirements
+          let matchScore = 100 - (need.priority * 10);
+          
+          // Boost score for budget match
+          if (requirements.budget === "free" && costInfo.cost === "free") {
+            matchScore += 20;
+          } else if (requirements.budget === "low" && costInfo.cost !== "paid") {
+            matchScore += 10;
+          }
+          
+          // Boost score for feature matches
+          const featureMatches = requirements.features.filter(feature => 
+            selectedTool.tags.some(tag => 
+              tag.toLowerCase().includes(feature.toLowerCase()) || 
+              feature.toLowerCase().includes(tag.toLowerCase())
+            )
+          ).length;
+          matchScore += featureMatches * 5;
 
-      if (availableTools.length > 0) {
-        // Pick the first available tool from this category
-        const selectedTool = availableTools[0]!;
-        const costInfo = toolCosts[selectedTool.id] || { cost: "freemium" as const };
-        
-        // Calculate match score based on priority and feature matching
-        let matchScore = (4 - need.priority) * 30; // Higher priority = higher score
-        
-        // Add feature matching bonus
-        requirements.features.forEach(feature => {
-          const featureKeywords = {
-            "User Authentication": ["coding", "backend", "development"],
-            "Database": ["backend", "database", "development"],
-            "Payment Processing": ["backend", "api", "development"],
-            "Blog Posts": ["writing", "content-creation", "blog"],
-            "Social Media Content": ["social-media", "content-creation", "marketing"],
-            "Marketing Copy": ["marketing", "copywriting", "advertising"],
-            "Logo Design": ["design", "branding", "creative"],
-            "UI/UX Design": ["design", "creative", "web-development"],
-            "Customer Support": ["customer-support", "conversation", "automation"],
-            "Data Visualization": ["data-analysis", "visualization"],
-            "SEO Content": ["seo", "content-creation", "marketing"]
-          };
-
-          const keywords = featureKeywords[feature as keyof typeof featureKeywords] || [];
-          keywords.forEach(keyword => {
-            if (selectedTool.tags.includes(keyword)) {
-              matchScore += 10;
-            }
+          diverseTools.push({
+            id: selectedTool.id,
+            name: selectedTool.name,
+            description: selectedTool.description,
+            category: need.category, // Use the need category instead of tool category
+            estimatedCost: costInfo.cost,
+            costRange: costInfo.range,
+            matchScore,
+            tags: selectedTool.tags,
+            matchedTags: selectedTool.tags.slice(0, 3) // Show first 3 tags
           });
-        });
-
-        diverseTools.push({
-          id: selectedTool.id,
-          name: selectedTool.name,
-          description: selectedTool.description,
-          category: need.category, // Use the need category instead of tool category
-          estimatedCost: costInfo.cost,
-          costRange: costInfo.range,
-          matchScore,
-          tags: selectedTool.tags,
-          matchedTags: selectedTool.tags.slice(0, 3) // Show first 3 tags
-        });
-      }
+        }
+      });
     });
 
     return diverseTools.sort((a, b) => b.matchScore - a.matchScore);
-  }, [requirements]);
+  }, [requirements, toolCosts]);
 
   const handleProjectTypeSelect = (type: string) => {
     setRequirements(prev => ({ ...prev, projectType: type }));
@@ -591,9 +581,9 @@ export function MultiStageInput({ onToolSelect, className = "" }: MultiStageInpu
       {currentStage === "tech" && (
         <div className="space-y-8">
           <div className="text-center space-y-4">
-            <h2 className="text-3xl font-bold text-white">What's your tech stack?</h2>
+            <h2 className="text-3xl font-bold text-white">What&apos;s your tech stack?</h2>
             <p className="text-gray-400 text-lg">
-              Select the technologies you're using or planning to use (optional)
+              Select the technologies you&apos;re using or planning to use (optional)
             </p>
           </div>
           
@@ -671,7 +661,7 @@ export function MultiStageInput({ onToolSelect, className = "" }: MultiStageInpu
           <div className="space-y-8">
             {/* Budget */}
             <div>
-              <h3 className="text-xl font-semibold text-white mb-4">What's your budget for AI tools?</h3>
+              <h3 className="text-xl font-semibold text-white mb-4">What&apos;s your budget for AI tools?</h3>
               <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
                 {BUDGET_RANGES.map((budget) => {
                   const isSelected = requirements.budget === budget.id;
@@ -712,7 +702,7 @@ export function MultiStageInput({ onToolSelect, className = "" }: MultiStageInpu
 
             {/* Experience Level */}
             <div>
-              <h3 className="text-xl font-semibold text-white mb-4">What's your experience with AI tools?</h3>
+              <h3 className="text-xl font-semibold text-white mb-4">What&apos;s your experience with AI tools?</h3>
               <div className="grid gap-4 md:grid-cols-3">
                 {EXPERIENCE_LEVELS.map((level) => {
                   const isSelected = requirements.experience === level.id;
