@@ -211,32 +211,6 @@ export default function Home() {
     <div className="min-h-screen flex flex-col bg-black text-white">
       <Header />
       
-      {/* FTUX Banner */}
-      <div className="w-full bg-gradient-to-r from-blue-600/10 via-purple-600/10 to-cyan-600/10 border-b border-gray-800">
-        <div className="max-w-7xl mx-auto px-4 py-3 md:px-8 lg:px-16 xl:px-24">
-          <div className="flex items-center justify-between">
-            <div className="flex items-center gap-3">
-              <div className="text-2xl">🛠️</div>
-              <div>
-                <span className="text-white font-medium">Not sure which tool to learn?</span>
-                <span className="text-gray-400 ml-2 hidden sm:inline">Answer 4 quick questions and get personalized recommendations</span>
-              </div>
-            </div>
-            <Button 
-              onClick={() => {
-                // Scroll to Tool Finder section
-                const finderSection = document.querySelector('[data-section="ai-tool-finder"]');
-                finderSection?.scrollIntoView({ behavior: 'smooth' });
-              }}
-              className="bg-gradient-to-r from-blue-600 to-purple-600 text-white border-0 hover:scale-105 transition-all duration-300"
-              size="sm"
-            >
-              Find My Tool →
-            </Button>
-          </div>
-        </div>
-      </div>
-      
       <main className="flex-1">
         {/* Hero Section */}
         <section className="w-full py-16 md:py-24 px-4 md:px-8 lg:px-16 xl:px-24">
@@ -282,6 +256,30 @@ export default function Home() {
                     </div>
                   </div>
                 </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Usage Statistics Section */}
+        <section className="w-full py-12 bg-black border-y border-gray-800">
+          <div className="max-w-5xl mx-auto px-4 md:px-8 lg:px-16 xl:px-24">
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+              <div className="text-center">
+                <div className="text-3xl md:text-4xl font-bold text-blue-400 mb-2">2.1M+</div>
+                <div className="text-gray-400">Video Views</div>
+              </div>
+              <div className="text-center">
+                <div className="text-3xl md:text-4xl font-bold text-purple-400 mb-2">450K+</div>
+                <div className="text-gray-400">Tutorials Completed</div>
+              </div>
+              <div className="text-center">
+                <div className="text-3xl md:text-4xl font-bold text-cyan-400 mb-2">25+</div>
+                <div className="text-gray-400">Popular Tools</div>
+              </div>
+              <div className="text-center">
+                <div className="text-3xl md:text-4xl font-bold text-emerald-400 mb-2">90s</div>
+                <div className="text-gray-400">Average Tutorial</div>
               </div>
             </div>
           </div>
@@ -383,36 +381,6 @@ export default function Home() {
                 </Button>
               </div>
             )}
-          </div>
-        </section>
-
-        {/* Usage Statistics Section */}
-        <section className="w-full py-16 bg-black border-y border-gray-800">
-          <div className="max-w-7xl mx-auto px-4 md:px-8 lg:px-16 xl:px-24">
-            <div className="text-center mb-12">
-              <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
-                Trusted by Thousands of Learners
-              </h2>
-            </div>
-            
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
-              <div className="text-center">
-                <div className="text-3xl md:text-4xl font-bold text-blue-400 mb-2">2.1M+</div>
-                <div className="text-gray-400">Video Views</div>
-              </div>
-              <div className="text-center">
-                <div className="text-3xl md:text-4xl font-bold text-purple-400 mb-2">450K+</div>
-                <div className="text-gray-400">Tutorials Completed</div>
-              </div>
-              <div className="text-center">
-                <div className="text-3xl md:text-4xl font-bold text-cyan-400 mb-2">25+</div>
-                <div className="text-gray-400">Popular Tools</div>
-              </div>
-              <div className="text-center">
-                <div className="text-3xl md:text-4xl font-bold text-emerald-400 mb-2">90s</div>
-                <div className="text-gray-400">Average Tutorial</div>
-              </div>
-            </div>
           </div>
         </section>
 

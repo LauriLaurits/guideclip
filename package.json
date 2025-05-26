@@ -6,7 +6,16 @@
     "dev": "next dev --turbopack",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "export": "next build && next export",
+    "analyze": "ANALYZE=true npm run build",
+    "type-check": "tsc --noEmit",
+    "maintenance:on": "node scripts/maintenance.js on",
+    "maintenance:off": "node scripts/maintenance.js off",
+    "deploy:vercel": "vercel --prod",
+    "deploy:netlify": "npm run build && netlify deploy --prod --dir=.next",
+    "health-check": "curl -f http://localhost:3000/api/health || exit 1",
+    "preview": "npm run build && npm run start"
   },
   "dependencies": {
     "@auth/prisma-adapter": "^2.9.1",
