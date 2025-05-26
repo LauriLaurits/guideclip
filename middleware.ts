@@ -1,9 +1,6 @@
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
 
-// Check environment variable for maintenance mode
-const MAINTENANCE_MODE = process.env.MAINTENANCE_MODE === 'true';
-
 // Paths that should be accessible during maintenance
 const ALLOWED_PATHS = [
   '/maintenance',
@@ -13,6 +10,9 @@ const ALLOWED_PATHS = [
 ];
 
 export function middleware(request: NextRequest) {
+  // Check environment variable for maintenance mode at runtime
+  const MAINTENANCE_MODE = process.env.MAINTENANCE_MODE === 'true';
+  
   // Skip maintenance mode for allowed paths
   if (ALLOWED_PATHS.some(path => request.nextUrl.pathname.startsWith(path))) {
     return NextResponse.next();

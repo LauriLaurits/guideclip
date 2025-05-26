@@ -3,7 +3,7 @@
 const fs = require('fs');
 const path = require('path');
 
-const middlewarePath = path.join(__dirname, '..', 'middleware.ts');
+const envPath = path.join(__dirname, '..', '.env.local');
 const action = process.argv[2];
 
 if (!action || !['on', 'off'].includes(action)) {
@@ -12,33 +12,43 @@ if (!action || !['on', 'off'].includes(action)) {
 }
 
 try {
-  let content = fs.readFileSync(middlewarePath, 'utf8');
+  // Create .env.local if it doesn't exist
+  if (!fs.existsSync(envPath)) {
+    fs.writeFileSync(envPath, '# Local environment variables\nMAINTENANCE_MODE=false\n');
+  }
+
+  let content = fs.readFileSync(envPath, 'utf8');
   
   if (action === 'on') {
-    content = content.replace(
-      /const MAINTENANCE_MODE = false;/,
-      'const MAINTENANCE_MODE = true;'
-    );
-    console.log('✅ Maintenance mode ENABLED');
-    console.log('🔧 Users will be redirected to /maintenance');
-    console.log('📝 Don\'t forget to redeploy your application!');
+    // Replace or add MAINTENANCE_MODE=true
+    if (content.includes('MAINTENANCE_MODE=')) {
+      content = content.replace(/MAINTENANCE_MODE=(true|false)/g, 'MAINTENANCE_MODE=true');
+    } else {
+      content += '\nMAINTENANCE_MODE=true\n';
+    }
+    console.log('✅ Maintenance mode ENABLED locally');
+    console.log('🔧 Restart your dev server to see changes');
+    console.log('🌐 For live site, use: npm run maintenance:on:live');
   } else {
-    content = content.replace(
-      /const MAINTENANCE_MODE = true;/,
-      'const MAINTENANCE_MODE = false;'
-    );
-    console.log('✅ Maintenance mode DISABLED');
-    console.log('🚀 Users can access the full application');
-    console.log('📝 Don\'t forget to redeploy your application!');
+    // Replace with MAINTENANCE_MODE=false
+    if (content.includes('MAINTENANCE_MODE=')) {
+      content = content.replace(/MAINTENANCE_MODE=(true|false)/g, 'MAINTENANCE_MODE=false');
+    } else {
+      content += '\nMAINTENANCE_MODE=false\n';
+    }
+    console.log('✅ Maintenance mode DISABLED locally');
+    console.log('🚀 Restart your dev server to see changes');
+    console.log('🌐 For live site, use: npm run maintenance:off:live');
   }
   
-  fs.writeFileSync(middlewarePath, content);
+  fs.writeFileSync(envPath, content);
   
-  console.log('\n📋 Next steps:');
-  console.log('1. Commit your changes: git add . && git commit -m "Toggle maintenance mode"');
-  console.log('2. Deploy: npm run deploy:vercel (or your preferred deployment method)');
+  console.log('\n📋 Next steps for local development:');
+  console.log('1. Stop your dev server (Ctrl+C)');
+  console.log('2. Restart: npm run dev');
+  console.log('3. Visit http://localhost:3000');
   
 } catch (error) {
-  console.error('❌ Error updating middleware.ts:', error.message);
+  console.error('❌ Error updating .env.local:', error.message);
   process.exit(1);
 } 
