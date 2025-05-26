@@ -25,6 +25,7 @@ interface ToolSuggestion {
 
 const NAVIGATION_LINKS = [
   { href: "/categories", label: "Browse Tools", hoverColor: "hover:text-purple-400" },
+  { href: "/tags", label: "Tags", hoverColor: "hover:text-purple-400" },
   { href: "/popular", label: "Popular", hoverColor: "hover:text-purple-400" },
   { href: "/pricing", label: "Pricing", hoverColor: "hover:text-purple-400" },
   { href: "/about", label: "About", hoverColor: "hover:text-purple-400" },
@@ -99,7 +100,7 @@ export function Header({ showSearch = false }: HeaderProps) {
               onClick={toggleSearch}
               variant="outline"
               size="sm"
-              className="border-purple-600 text-purple-400 hover:bg-purple-600 hover:text-white transition-colors"
+              className="border-purple-600 text-purple-400 hover:border-purple-400 hover:text-purple-400 transition-colors"
             >
               <Search className="h-4 w-4 mr-2" />
               AI Tool Finder

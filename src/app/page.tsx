@@ -40,29 +40,6 @@ const COLOR_MAP = {
   cyan: "#00cec9"
 } as const;
 
-const WHY_GUIDECLIP_FEATURES = [
-  { 
-    title: "Quick & Concise", 
-    desc: "Learn essential skills in under 3 minutes",
-    color: "#ff9f43"
-  },
-  { 
-    title: "Practical Tutorials", 
-    desc: "Focus on real-world applications",
-    color: "#fd79a8"
-  },
-  { 
-    title: "All Popular Tools", 
-    desc: "From AI tools to business software and design apps",
-    color: "#0984e3"
-  },
-  { 
-    title: "Step-by-Step Guidance", 
-    desc: "Easy to follow instructions for all levels",
-    color: "#6c5ce7"
-  }
-] as const;
-
 // Realistic dummy data for popular tools
 const POPULAR_VIDEOS = [
   { 
@@ -106,6 +83,78 @@ const POPULAR_VIDEOS = [
     views: "24.6k",
     color: "#fdcb6e",
     description: "Set up GA4 and understand your website data"
+  }
+] as const;
+
+// Realistic dummy data for new AI tools
+const NEW_AI_TOOLS = [
+  { 
+    title: "ChatGPT-4o: Advanced Conversations", 
+    duration: "2:15", 
+    addedDate: "2 days ago",
+    color: "#00b894",
+    description: "Master the latest ChatGPT model with advanced reasoning and multimodal capabilities",
+    tags: ["AI", "Chat", "New"]
+  },
+  { 
+    title: "Claude 3.5 Sonnet: Code & Analysis", 
+    duration: "1:50", 
+    addedDate: "5 days ago",
+    color: "#6c5ce7",
+    description: "Leverage Claude's enhanced coding and analytical capabilities for complex tasks",
+    tags: ["AI", "Code", "Analysis"]
+  },
+  { 
+    title: "Midjourney V6: Image Generation", 
+    duration: "2:30", 
+    addedDate: "1 week ago",
+    color: "#fd79a8",
+    description: "Create stunning AI-generated images with the latest Midjourney features",
+    tags: ["AI", "Image", "Creative"]
+  },
+  { 
+    title: "GitHub Copilot Chat: AI Coding", 
+    duration: "1:40", 
+    addedDate: "1 week ago",
+    color: "#ff9f43",
+    description: "Boost your coding productivity with AI-powered code suggestions and chat",
+    tags: ["AI", "Development", "Code"]
+  }
+] as const;
+
+// Realistic dummy data for new tools
+const NEW_TOOLS = [
+  { 
+    title: "Perplexity: Research Made Easy", 
+    duration: "1:55", 
+    addedDate: "1 week ago",
+    color: "#fd79a8",
+    description: "AI-powered search engine that provides accurate, real-time answers with source citations for comprehensive research",
+    tags: ["AI", "Research", "Search"]
+  },
+  { 
+    title: "RunwayML: Video Generation", 
+    duration: "2:25", 
+    addedDate: "2 weeks ago",
+    color: "#ff9f43",
+    description: "Create stunning AI-generated videos from text prompts and transform your creative workflow with advanced video tools",
+    tags: ["AI", "Video", "Creative"]
+  },
+  { 
+    title: "Framer: No-Code Website Builder", 
+    duration: "2:10", 
+    addedDate: "2 weeks ago",
+    color: "#00cec9",
+    description: "Build responsive, interactive websites without coding using Framer's powerful design and animation capabilities",
+    tags: ["Design", "No-Code", "Web"]
+  },
+  { 
+    title: "Linear: Project Management", 
+    duration: "1:35", 
+    addedDate: "3 weeks ago",
+    color: "#a29bfe",
+    description: "Streamline your team's workflow with Linear's fast, intuitive project management and issue tracking system",
+    tags: ["Productivity", "Management", "Team"]
   }
 ] as const;
 
@@ -205,11 +254,11 @@ export default function Home() {
                   Concise video tutorials to help you master popular tools and software - from AI tools like ChatGPT to business essentials like Excel, Stripe, and Figma.
                 </p>
                 <div className="flex flex-col sm:flex-row gap-4 pt-4">
-                  <Button variant="outline" className="border-blue-500/50 text-blue-400 hover:bg-blue-500/10 hover:border-blue-400 transition-all duration-300">
+                  <Button variant="outline" className="border-blue-500/50 text-blue-400 hover:bg-blue-500/10 hover:border-blue-400 hover:text-blue-400 transition-all duration-300">
                     Get Started
                     <ChevronRight className="ml-2 h-4 w-4" />
                   </Button>
-                  <Button variant="outline" className="border-purple-500/50 text-purple-400 hover:bg-purple-500/10 hover:border-purple-400 transition-all duration-300">
+                  <Button variant="outline" className="border-purple-500/50 text-purple-400 hover:bg-purple-500/10 hover:border-purple-400 hover:text-purple-400 transition-all duration-300">
                     <Play className="mr-2 h-4 w-4" /> 
                     Start Learning
                   </Button>
@@ -247,8 +296,8 @@ export default function Home() {
           
           <div className="max-w-7xl mx-auto px-4 md:px-8 lg:px-16 xl:px-24 relative z-10">
             <div className="text-center mb-12">
-              <div className="inline-flex items-center gap-2 bg-purple-600/20 border border-purple-500/30 px-6 py-3 rounded-full mb-6">
-                <span className="text-purple-400 font-medium">Smart Tool Discovery</span>
+              <div className="inline-flex items-center gap-2 bg-purple-600/20 border border-purple-500/30 px-4 py-2 rounded-full mb-6">
+                <span className="text-purple-400 text-sm font-medium">Smart Tool Discovery</span>
               </div>
               
               <h2 className="text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-white via-purple-200 to-blue-200 bg-clip-text text-transparent">
@@ -260,18 +309,18 @@ export default function Home() {
                 Get personalized suggestions for AI tools, business software, design apps, and more.
               </p>
               
-              <div className="flex flex-wrap justify-center gap-4 mb-8">
-                <div className="flex items-center gap-2 bg-emerald-500/20 border border-emerald-500/30 px-4 py-2 rounded-full">
-                  <div className="w-2 h-2 bg-emerald-400 rounded-full"></div>
-                  <span className="text-emerald-400 text-sm font-medium">Free Tools Available</span>
+              <div className="flex flex-wrap justify-center gap-3 mb-8">
+                <div className="flex items-center gap-2 bg-emerald-500/20 border border-emerald-500/30 px-3 py-1.5 rounded-full">
+                  <div className="w-1.5 h-1.5 bg-emerald-400 rounded-full"></div>
+                  <span className="text-emerald-400 text-xs font-medium">Free Tools Available</span>
                 </div>
-                <div className="flex items-center gap-2 bg-amber-500/20 border border-amber-500/30 px-4 py-2 rounded-full">
-                  <div className="w-2 h-2 bg-amber-400 rounded-full"></div>
-                  <span className="text-amber-400 text-sm font-medium">Cost Transparency</span>
+                <div className="flex items-center gap-2 bg-amber-500/20 border border-amber-500/30 px-3 py-1.5 rounded-full">
+                  <div className="w-1.5 h-1.5 bg-amber-400 rounded-full"></div>
+                  <span className="text-amber-400 text-xs font-medium">Cost Transparency</span>
                 </div>
-                <div className="flex items-center gap-2 bg-blue-500/20 border border-blue-500/30 px-4 py-2 rounded-full">
-                  <div className="w-2 h-2 bg-blue-400 rounded-full"></div>
-                  <span className="text-blue-400 text-sm font-medium">Smart Matching</span>
+                <div className="flex items-center gap-2 bg-blue-500/20 border border-blue-500/30 px-3 py-1.5 rounded-full">
+                  <div className="w-1.5 h-1.5 bg-blue-400 rounded-full"></div>
+                  <span className="text-blue-400 text-xs font-medium">Smart Matching</span>
                 </div>
               </div>
             </div>
@@ -371,8 +420,8 @@ export default function Home() {
         <section className="w-full py-20 bg-black">
           <div className="max-w-7xl mx-auto px-4 md:px-8 lg:px-16 xl:px-24">
             <div className="text-center mb-16">
-              <div className="inline-flex items-center gap-2 bg-purple-600/15 border border-purple-500/25 px-6 py-3 rounded-full mb-6">
-                <span className="text-purple-300 font-medium">Simple Pricing</span>
+              <div className="inline-flex items-center gap-2 bg-purple-600/15 border border-purple-500/25 px-4 py-2 rounded-full mb-6">
+                <span className="text-purple-300 text-sm font-medium">Simple Pricing</span>
               </div>
               
               <h2 className="text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-white via-purple-100 to-blue-100 bg-clip-text text-transparent">
@@ -402,7 +451,8 @@ export default function Home() {
                     </div>
                     
                     <Button
-                      className="w-full bg-emerald-600/80 hover:bg-emerald-600 text-white border-2 border-emerald-600/50 hover:border-emerald-600 transition-all duration-300"
+                      variant="outline"
+                      className="w-full border-emerald-500/50 text-emerald-400 hover:bg-emerald-500/10 hover:border-emerald-400 hover:text-emerald-400 transition-all duration-300"
                       size="lg"
                     >
                       Get Started Free
@@ -442,7 +492,6 @@ export default function Home() {
               <div className="relative rounded-2xl border border-purple-500/40 bg-gradient-to-b from-purple-900/15 to-blue-900/15 backdrop-blur-sm transition-all duration-300 hover:scale-105" style={{ boxShadow: '0 0 30px #6c5ce715' }}>
                 <div className="absolute -top-4 left-1/2 transform -translate-x-1/2">
                   <div className="px-4 py-1 bg-gradient-to-r from-purple-600/80 to-blue-600/80 text-white border-0 rounded-full text-sm font-medium">
-                    <span className="mr-1">👑</span>
                     Most Popular
                   </div>
                 </div>
@@ -462,7 +511,8 @@ export default function Home() {
                     </div>
                     
                     <Button
-                      className="w-full bg-gradient-to-r from-purple-600/80 to-blue-600/80 hover:from-purple-600 hover:to-blue-600 text-white border-transparent transition-all duration-300"
+                      variant="outline"
+                      className="w-full border-purple-500/50 text-purple-400 hover:bg-purple-500/10 hover:border-purple-400 hover:text-purple-400 transition-all duration-300"
                       size="lg"
                     >
                       Start Pro Trial
@@ -527,7 +577,8 @@ export default function Home() {
                     </div>
                     
                     <Button
-                      className="w-full bg-pink-600/80 hover:bg-pink-600 text-white border-2 border-pink-600/50 hover:border-pink-600 transition-all duration-300"
+                      variant="outline"
+                      className="w-full border-pink-500/50 text-pink-400 hover:bg-pink-500/10 hover:border-pink-400 hover:text-pink-400 transition-all duration-300"
                       size="lg"
                     >
                       Contact Sales
@@ -590,42 +641,35 @@ export default function Home() {
           </div>
         </section>
 
-        {/* Features & Popular Section */}
-        <section className="w-full py-16 border-t border-gray-900 px-4 md:px-8 lg:px-16 xl:px-24">
+        {/* Tools & Features Section */}
+        <section className="w-full py-20 border-t border-gray-900 px-4 md:px-8 lg:px-16 xl:px-24">
           <div className="max-w-7xl mx-auto">
-            <div className="grid gap-8 lg:grid-cols-2 lg:gap-12 items-start">
-              {/* Why GuideClip */}
-              <div className="rounded-lg bg-black border border-gray-800 p-6">
-                <h3 className="text-2xl font-bold mb-6">Why GuideClip?</h3>
-                <ul className="space-y-4">
-                  {WHY_GUIDECLIP_FEATURES.map((item, index) => (
-                    <li key={index} className="flex">
+            {/* Section Header */}
+            <div className="text-center mb-16">
+              <h2 className="text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-white via-purple-200 to-blue-200 bg-clip-text text-transparent">
+                Discover & Learn
+              </h2>
+              <p className="text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed">
+                Stay updated with the latest tools and master the most popular ones with our curated tutorials
+              </p>
+            </div>
+
+            <div className="grid gap-8 lg:grid-cols-3">
+              {/* New AI Tools */}
+              <div className="flex flex-col h-full">
+                <div className="flex items-center justify-between mb-6">
+                  <h3 className="text-2xl font-bold text-white">New AI Tools</h3>
+                  <div className="flex items-center gap-2 bg-purple-500/20 border border-purple-500/30 px-3 py-1.5 rounded-full">
+                    <div className="w-1.5 h-1.5 bg-purple-400 rounded-full"></div>
+                    <span className="text-purple-400 text-xs font-medium">Featured</span>
+                  </div>
+                </div>
+                
+                <div className="space-y-4 flex-1">
+                  {NEW_AI_TOOLS.map((item, index) => (
+                    <div key={index} className="group cursor-pointer">
                       <div 
-                        className="mr-3 flex h-6 w-6 items-center justify-center rounded-full" 
-                        style={{ backgroundColor: `${item.color}20` }}
-                      >
-                        <div 
-                          className="h-3 w-3 rounded-full" 
-                          style={{ backgroundColor: item.color }} 
-                        />
-                      </div>
-                      <div>
-                        <p className="font-medium text-white">{item.title}</p>
-                        <p className="text-sm text-gray-400">{item.desc}</p>
-                      </div>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-              
-              {/* Popular Videos */}
-              <div className="space-y-6">
-                <h3 className="text-2xl font-bold">Popular This Week</h3>
-                <div className="space-y-4">
-                  {POPULAR_VIDEOS.slice(0, 4).map((item, index) => (
-                    <Link href="#" key={index} className="block group">
-                      <div 
-                        className="flex items-center rounded-lg border border-gray-800 p-4 hover:bg-black transition-all duration-300"
+                        className="rounded-xl border border-gray-800 p-4 hover:bg-gray-900/50 transition-all duration-300"
                         style={{
                           '--hover-border-color': item.color
                         } as React.CSSProperties}
@@ -633,42 +677,207 @@ export default function Home() {
                           e.currentTarget.style.borderColor = item.color;
                         }}
                         onMouseLeave={(e) => {
-                          e.currentTarget.style.borderColor = '#374151'; // border-gray-800
+                          e.currentTarget.style.borderColor = '#374151';
+                        }}
+                        onClick={() => {
+                          // Navigate to tool page - you can implement this later
+                          console.log(`Navigate to tool: ${item.title}`);
+                        }}
+                      >
+                        <div className="flex items-start justify-between mb-3">
+                          <div 
+                            className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg" 
+                            style={{ backgroundColor: `${item.color}20` }}
+                          >
+                            <Play className="h-5 w-5" style={{ color: item.color }} />
+                          </div>
+                          <span className="text-xs text-gray-500">{item.addedDate}</span>
+                        </div>
+                        
+                        <h4 className="font-semibold text-white group-hover:text-gray-300 transition-colors mb-2">
+                          {item.title}
+                        </h4>
+                        <p className="text-sm text-gray-500 mb-3 line-clamp-2">
+                          {item.description}
+                        </p>
+                        
+                        <div className="flex items-center justify-between">
+                          <div className="flex flex-wrap gap-1">
+                            {item.tags.slice(0, 2).map((tag, tagIndex) => (
+                              <Link 
+                                href={`/tags/${tag.toLowerCase()}`} 
+                                key={tagIndex}
+                                className="inline-flex items-center px-2 py-1 rounded-md text-xs font-medium bg-gray-800/50 text-gray-400 hover:bg-gray-700/50 hover:text-gray-300 transition-colors"
+                                onClick={(e) => e.stopPropagation()}
+                              >
+                                {tag}
+                              </Link>
+                            ))}
+                          </div>
+                          <span className="text-sm text-gray-400">{item.duration}</span>
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+                
+                <div className="text-center pt-6 mt-auto">
+                  <Link href="/categories">
+                    <Button 
+                      variant="outline" 
+                      className="border-purple-500/50 text-purple-400 hover:bg-purple-500/10 hover:border-purple-400 hover:text-purple-400 transition-all duration-300"
+                    >
+                      Browse AI Tools
+                      <ChevronRight className="ml-2 h-4 w-4" />
+                    </Button>
+                  </Link>
+                </div>
+              </div>
+
+              {/* New Tools */}
+              <div className="flex flex-col h-full">
+                <div className="flex items-center justify-between mb-6">
+                  <h3 className="text-2xl font-bold text-white">New Tools</h3>
+                  <div className="flex items-center gap-2 bg-emerald-500/20 border border-emerald-500/30 px-3 py-1.5 rounded-full">
+                    <div className="w-1.5 h-1.5 bg-emerald-400 rounded-full"></div>
+                    <span className="text-emerald-400 text-xs font-medium">Fresh</span>
+                  </div>
+                </div>
+                
+                <div className="space-y-4 flex-1">
+                  {NEW_TOOLS.map((item, index) => (
+                    <div key={index} className="group cursor-pointer">
+                      <div 
+                        className="rounded-xl border border-gray-800 p-4 hover:bg-gray-900/50 transition-all duration-300"
+                        style={{
+                          '--hover-border-color': item.color
+                        } as React.CSSProperties}
+                        onMouseEnter={(e) => {
+                          e.currentTarget.style.borderColor = item.color;
+                        }}
+                        onMouseLeave={(e) => {
+                          e.currentTarget.style.borderColor = '#374151';
+                        }}
+                        onClick={() => {
+                          // Navigate to tool page - you can implement this later
+                          console.log(`Navigate to tool: ${item.title}`);
+                        }}
+                      >
+                        <div className="flex items-start justify-between mb-3">
+                          <div 
+                            className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg" 
+                            style={{ backgroundColor: `${item.color}20` }}
+                          >
+                            <Play className="h-5 w-5" style={{ color: item.color }} />
+                          </div>
+                          <span className="text-xs text-gray-500">{item.addedDate}</span>
+                        </div>
+                        
+                        <h4 className="font-semibold text-white group-hover:text-gray-300 transition-colors mb-2">
+                          {item.title}
+                        </h4>
+                        <p className="text-sm text-gray-500 mb-3 line-clamp-2">
+                          {item.description}
+                        </p>
+                        
+                        <div className="flex items-center justify-between">
+                          <div className="flex flex-wrap gap-1">
+                            {item.tags.slice(0, 2).map((tag, tagIndex) => (
+                              <Link 
+                                href={`/tags/${tag.toLowerCase()}`} 
+                                key={tagIndex}
+                                className="inline-flex items-center px-2 py-1 rounded-md text-xs font-medium bg-gray-800/50 text-gray-400 hover:bg-gray-700/50 hover:text-gray-300 transition-colors"
+                                onClick={(e) => e.stopPropagation()}
+                              >
+                                {tag}
+                              </Link>
+                            ))}
+                          </div>
+                          <span className="text-sm text-gray-400">{item.duration}</span>
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+                
+                <div className="text-center pt-6 mt-auto">
+                  <Link href="/tools/new">
+                    <Button 
+                      variant="outline" 
+                      className="border-emerald-500/50 text-emerald-400 hover:bg-emerald-500/10 hover:border-emerald-400 hover:text-emerald-400 transition-all duration-300"
+                    >
+                      View All New Tools
+                      <ChevronRight className="ml-2 h-4 w-4" />
+                    </Button>
+                  </Link>
+                </div>
+              </div>
+
+              {/* Popular This Week */}
+              <div className="flex flex-col h-full">
+                <div className="flex items-center justify-between mb-6">
+                  <h3 className="text-2xl font-bold text-white">Popular This Week</h3>
+                  <div className="flex items-center gap-2 bg-blue-500/20 border border-blue-500/30 px-3 py-1.5 rounded-full">
+                    <div className="w-1.5 h-1.5 bg-blue-400 rounded-full"></div>
+                    <span className="text-blue-400 text-xs font-medium">Trending</span>
+                  </div>
+                </div>
+                
+                <div className="space-y-4 flex-1">
+                  {POPULAR_VIDEOS.map((item, index) => (
+                    <div key={index} className="group cursor-pointer">
+                      <div 
+                        className="flex items-center rounded-xl border border-gray-800 p-4 hover:bg-gray-900/50 transition-all duration-300"
+                        style={{
+                          '--hover-border-color': item.color
+                        } as React.CSSProperties}
+                        onMouseEnter={(e) => {
+                          e.currentTarget.style.borderColor = item.color;
+                        }}
+                        onMouseLeave={(e) => {
+                          e.currentTarget.style.borderColor = '#374151';
+                        }}
+                        onClick={() => {
+                          // Navigate to tool page - you can implement this later
+                          console.log(`Navigate to tool: ${item.title}`);
                         }}
                       >
                         <div 
-                          className="mr-4 flex h-12 w-12 shrink-0 items-center justify-center rounded-full" 
+                          className="mr-4 flex h-12 w-12 shrink-0 items-center justify-center rounded-lg" 
                           style={{ backgroundColor: `${item.color}20` }}
                         >
                           <Play className="h-6 w-6" style={{ color: item.color }} />
                         </div>
                         <div className="flex-1 min-w-0">
-                          <h4 className="text-lg font-medium text-white group-hover:text-gray-300 transition-colors">
+                          <h4 className="font-semibold text-white group-hover:text-gray-300 transition-colors mb-1">
                             {item.title}
                           </h4>
-                          <p className="text-sm text-gray-500 mb-1 line-clamp-1">
+                          <p className="text-sm text-gray-500 mb-2 line-clamp-1">
                             {item.description}
                           </p>
-                          <div className="flex items-center text-sm text-gray-400">
-                            <span>{item.duration}</span>
-                            <span className="mx-2">•</span>
-                            <span>{item.views} views</span>
+                          <div className="flex items-center justify-between">
+                            <div className="flex items-center text-sm text-gray-400">
+                              <span>{item.duration}</span>
+                              <span className="mx-2">•</span>
+                              <span>{item.views} views</span>
+                            </div>
                           </div>
                         </div>
                       </div>
-                    </Link>
+                    </div>
                   ))}
                 </div>
                 
-                {/* Show All Popular Videos Button */}
-                <div className="text-center pt-4">
-                  <Button 
-                    variant="outline" 
-                    className="border-gray-700 text-gray-300 hover:bg-gray-800"
-                  >
-                    View All Popular Videos
-                    <ChevronRight className="ml-2 h-4 w-4" />
-                  </Button>
+                <div className="text-center pt-6 mt-auto">
+                  <Link href="/popular">
+                    <Button 
+                      variant="outline" 
+                      className="border-blue-500/50 text-blue-400 hover:bg-blue-500/10 hover:border-blue-400 hover:text-blue-400 transition-all duration-300"
+                    >
+                      View All Popular
+                      <ChevronRight className="ml-2 h-4 w-4" />
+                    </Button>
+                  </Link>
                 </div>
               </div>
             </div>

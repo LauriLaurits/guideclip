@@ -149,15 +149,9 @@ export function Footer() {
                 }}
               />
               <Button 
+                variant="outline"
                 size="icon" 
-                className="text-white transition-colors"
-                style={{ backgroundColor: SECTION_COLORS.newsletter }}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.backgroundColor = `${SECTION_COLORS.newsletter}dd`;
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.backgroundColor = SECTION_COLORS.newsletter;
-                }}
+                className="border-teal-500/50 text-teal-400 hover:bg-teal-500/10 hover:border-teal-400 hover:text-teal-400 transition-all duration-300"
               >
                 <Send className="h-4 w-4" />
               </Button>

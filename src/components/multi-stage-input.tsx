@@ -431,7 +431,7 @@ export function MultiStageInput({ onToolSelect, className = "" }: MultiStageInpu
                         style={{ color: type.color }}
                       />
                     </div>
-                    <h3 className="text-sm font-semibold text-white group-hover:text-gray-300 transition-colors">
+                    <h3 className="text-sm font-semibold group-hover:text-gray-300 transition-colors" style={{ color: type.color }}>
                       {type.label}
                     </h3>
                   </div>
