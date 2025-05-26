@@ -8,8 +8,10 @@ import { Header } from "@/components/header";
 import { Footer } from "@/components/footer";
 import { VideoCard } from "@/components/video-card";
 import { YouTubePlayer } from "@/components/youtube-player";
+import { TutorialSteps } from "@/components/tutorial-steps";
+import { tutorialData } from "@/lib/tutorial-data";
 import { Button } from "@/components/ui/button";
-import { ArrowLeft, Clock, List, Video, Play, ExternalLink, BookOpen, Star } from "lucide-react";
+import { ArrowLeft, Clock, List, Video, Play, ExternalLink, BookOpen, Star, FileText } from "lucide-react";
 import { getToolById, getCategoryById } from "@/lib/data";
 import { Icon } from "@/components/ui/icon";
 import { Badge } from "@/components/ui/badge";
@@ -22,23 +24,16 @@ type Props = {
 
 // Tool color configuration based on category
 const TOOL_COLORS = {
-  chatbots: { color: "#ff9f43", bgColor: "#ff9f4320" },
-  "image-generators": { color: "#fd79a8", bgColor: "#fd79a820" },
-  productivity: { color: "#0984e3", bgColor: "#0984e320" },
-  "code-assistants": { color: "#6c5ce7", bgColor: "#6c5ce720" },
-  writing: { color: "#00cec9", bgColor: "#00cec920" },
-  "audio-processing": { color: "#fdcb6e", bgColor: "#fdcb6e20" },
+  "ai-chatbots": { color: "#ff9f43", bgColor: "#ff9f4320" },
+  "ai-image-generators": { color: "#fd79a8", bgColor: "#fd79a820" },
+  "design-tools": { color: "#0984e3", bgColor: "#0984e320" },
+  "ai-code-assistants": { color: "#6c5ce7", bgColor: "#6c5ce720" },
+  "ai-writing": { color: "#00cec9", bgColor: "#00cec920" },
+  "spreadsheets": { color: "#00b894", bgColor: "#00b89420" },
   "video-editing": { color: "#e17055", bgColor: "#e1705520" },
-  "data-analysis": { color: "#00b894", bgColor: "#00b89420" },
-  research: { color: "#5f27cd", bgColor: "#5f27cd20" },
-  automation: { color: "#a29bfe", bgColor: "#a29bfe20" },
-  translation: { color: "#74b9ff", bgColor: "#74b9ff20" },
-  finance: { color: "#55a3ff", bgColor: "#55a3ff20" },
-  healthcare: { color: "#fd79a8", bgColor: "#fd79a820" },
-  education: { color: "#00b894", bgColor: "#00b89420" },
-  marketing: { color: "#ff7675", bgColor: "#ff767520" },
-  security: { color: "#636e72", bgColor: "#636e7220" },
-  gaming: { color: "#e84393", bgColor: "#e8439320" }
+  "productivity-tools": { color: "#a29bfe", bgColor: "#a29bfe20" },
+  "payment-processing": { color: "#55a3ff", bgColor: "#55a3ff20" },
+  "marketing-tools": { color: "#ff7675", bgColor: "#ff767520" }
 } as const;
 
 const DEFAULT_COLOR = { color: "#6c5ce7", bgColor: "#6c5ce720" } as const;
@@ -54,10 +49,22 @@ export default function ToolPage({ params }: Props) {
   
   const category = getCategoryById(tool.category);
   const [activeVideo, setActiveVideo] = useState(tool.videos[0]?.id || "");
+  const [activeTab, setActiveTab] = useState<"videos" | "steps">("steps");
+  const [completedSteps, setCompletedSteps] = useState<string[]>([]);
   const colorSet = TOOL_COLORS[tool.category as keyof typeof TOOL_COLORS] || DEFAULT_COLOR;
+  
+  // Get tutorial steps for this tool
+  const tutorialSteps = tutorialData[id as keyof typeof tutorialData];
   
   const handlePlayVideo = (videoId: string) => {
     setActiveVideo(videoId);
+    setActiveTab("videos");
+  };
+  
+  const handleStepComplete = (stepId: string) => {
+    if (!completedSteps.includes(stepId)) {
+      setCompletedSteps([...completedSteps, stepId]);
+    }
   };
   
   const currentVideo = tool.videos.find(video => video.id === activeVideo);
@@ -69,6 +76,7 @@ export default function ToolPage({ params }: Props) {
   };
   
   const totalDuration = tool.videos.reduce((acc, video) => acc + video.duration, 0);
+  const totalStepsDuration = tutorialSteps?.reduce((acc, step) => acc + step.duration, 0) || 0;
   
   return (
     <div className="flex min-h-screen flex-col bg-black">
@@ -159,12 +167,21 @@ export default function ToolPage({ params }: Props) {
                 <div className="flex flex-wrap gap-4">
                   <div className="flex items-center gap-2 text-gray-400">
                     <Video className="h-5 w-5" style={{ color: colorSet.color }} />
-                    <span>{tool.videos.length} {tool.videos.length === 1 ? 'tutorial' : 'tutorials'}</span>
+                    <span>{tool.videos.length} video{tool.videos.length === 1 ? '' : 's'}</span>
                   </div>
+                  {tutorialSteps && (
+                    <>
+                      <div className="h-1 w-1 rounded-full bg-gray-600 self-center" />
+                      <div className="flex items-center gap-2 text-gray-400">
+                        <FileText className="h-5 w-5" style={{ color: colorSet.color }} />
+                        <span>{tutorialSteps.length} detailed steps</span>
+                      </div>
+                    </>
+                  )}
                   <div className="h-1 w-1 rounded-full bg-gray-600 self-center" />
                   <div className="flex items-center gap-2 text-gray-400">
                     <Clock className="h-5 w-5" style={{ color: colorSet.color }} />
-                    <span>{formatDuration(totalDuration)} total content</span>
+                    <span>{formatDuration(totalDuration + totalStepsDuration)} total content</span>
                   </div>
                   <div className="h-1 w-1 rounded-full bg-gray-600 self-center" />
                   <div className="flex items-center gap-2 text-gray-400">
@@ -183,27 +200,116 @@ export default function ToolPage({ params }: Props) {
                     borderColor: colorSet.color
                   }}
                   size="lg"
-                  onClick={() => currentVideo && handlePlayVideo(currentVideo.id)}
+                  onClick={() => setActiveTab("steps")}
                 >
-                  <Play className="mr-2 h-5 w-5" />
-                  Start Learning
+                  <BookOpen className="mr-2 h-5 w-5" />
+                  Start Step-by-Step
                 </Button>
                 <Button 
                   variant="outline" 
                   size="lg"
                   className="border-gray-700 text-gray-300 hover:bg-gray-800 hover:border-gray-600 transition-all duration-300"
+                  onClick={() => currentVideo && handlePlayVideo(currentVideo.id)}
                 >
-                  <ExternalLink className="mr-2 h-5 w-5" />
-                  Visit Official Site
+                  <Play className="mr-2 h-5 w-5" />
+                  Watch Videos
                 </Button>
               </div>
             </div>
           </div>
         </div>
 
-        {/* Main Content Area */}
-        <div className="bg-black min-h-screen">
-          <div className="max-w-7xl mx-auto px-4 py-12 md:px-8 lg:px-16 xl:px-24">         
+        {/* Content Tabs */}
+        <div className="max-w-7xl mx-auto px-4 py-8 md:px-8 lg:px-16 xl:px-24">
+          <div className="flex items-center gap-4 mb-8">
+            <Button
+              variant={activeTab === "steps" ? "default" : "outline"}
+              onClick={() => setActiveTab("steps")}
+              className={`transition-all duration-300 ${
+                activeTab === "steps" 
+                  ? "text-white" 
+                  : "border-gray-700 text-gray-300 hover:bg-gray-800"
+              }`}
+              style={{ 
+                backgroundColor: activeTab === "steps" ? colorSet.color : "transparent",
+                borderColor: activeTab === "steps" ? colorSet.color : undefined
+              }}
+              disabled={!tutorialSteps}
+            >
+              <FileText className="mr-2 h-4 w-4" />
+              Step-by-Step Guide
+              {tutorialSteps && (
+                <Badge 
+                  variant="outline" 
+                  className="ml-2 border-current text-current"
+                >
+                  {tutorialSteps.length} steps
+                </Badge>
+              )}
+            </Button>
+            
+            <Button
+              variant={activeTab === "videos" ? "default" : "outline"}
+              onClick={() => setActiveTab("videos")}
+              className={`transition-all duration-300 ${
+                activeTab === "videos" 
+                  ? "text-white" 
+                  : "border-gray-700 text-gray-300 hover:bg-gray-800"
+              }`}
+              style={{ 
+                backgroundColor: activeTab === "videos" ? colorSet.color : "transparent",
+                borderColor: activeTab === "videos" ? colorSet.color : undefined
+              }}
+            >
+              <Video className="mr-2 h-4 w-4" />
+              Video Tutorials
+              <Badge 
+                variant="outline" 
+                className="ml-2 border-current text-current"
+              >
+                {tool.videos.length} video{tool.videos.length === 1 ? '' : 's'}
+              </Badge>
+            </Button>
+          </div>
+
+          {/* Tab Content */}
+          {activeTab === "steps" && tutorialSteps ? (
+            <TutorialSteps 
+              steps={tutorialSteps}
+              toolName={tool.name}
+              accentColor={colorSet.color}
+              onStepComplete={handleStepComplete}
+              completedSteps={completedSteps}
+            />
+          ) : activeTab === "steps" && !tutorialSteps ? (
+            <div 
+              className="rounded-xl p-12 border border-gray-800 backdrop-blur-sm text-center"
+              style={{ backgroundColor: `${colorSet.color}05` }}
+            >
+              <div 
+                className="rounded-full p-6 mx-auto mb-6 w-fit"
+                style={{ backgroundColor: colorSet.bgColor }}
+              >
+                <BookOpen className="h-12 w-12" style={{ color: colorSet.color }} />
+              </div>
+              <h3 className="text-2xl font-bold text-white mb-4">
+                Step-by-Step Guide Coming Soon
+              </h3>
+              <p className="text-gray-400 mb-6 max-w-2xl mx-auto">
+                We're working on creating detailed step-by-step tutorials for {tool.name}. 
+                In the meantime, check out our video tutorials to get started!
+              </p>
+              <Button 
+                onClick={() => setActiveTab("videos")}
+                style={{ backgroundColor: colorSet.color }}
+                className="text-white hover:opacity-90"
+              >
+                <Video className="mr-2 h-4 w-4" />
+                Watch Video Tutorials
+              </Button>
+            </div>
+          ) : (
+            // Video Content (existing implementation)
             <div className="grid grid-cols-1 gap-12 lg:grid-cols-3 lg:gap-16">
               {/* Video Player Section */}
               <div className="lg:col-span-2">
@@ -222,30 +328,16 @@ export default function ToolPage({ params }: Props) {
                       <h2 className="text-3xl font-bold text-white mb-4">{currentVideo.title}</h2>
                       <p className="text-gray-300 text-lg leading-relaxed mb-6">{currentVideo.description}</p>
                       
-                      <div className="flex flex-wrap items-center gap-4">
-                        <Badge 
-                          variant="outline" 
-                          className="px-4 py-2 text-sm border-gray-700 bg-black/50 backdrop-blur-sm"
-                        >
-                          <Clock className="mr-2 h-4 w-4" />
-                          Duration: {formatDuration(currentVideo.duration)}
-                        </Badge>
-                        <Button 
-                          variant="ghost" 
-                          size="sm" 
-                          className="hover:bg-gray-800/50 text-gray-300 hover:text-white transition-all duration-300"
-                        >
-                          <List className="mr-2 h-4 w-4" />
-                          View Transcript
-                        </Button>
-                        <Button 
-                          variant="ghost" 
-                          size="sm" 
-                          className="hover:bg-gray-800/50 text-gray-300 hover:text-white transition-all duration-300"
-                        >
-                          <BookOpen className="mr-2 h-4 w-4" />
-                          Resources
-                        </Button>
+                      <div className="flex items-center gap-4 text-gray-400">
+                        <div className="flex items-center gap-2">
+                          <Clock className="h-5 w-5" style={{ color: colorSet.color }} />
+                          <span>{formatDuration(currentVideo.duration)}</span>
+                        </div>
+                        <div className="h-1 w-1 rounded-full bg-gray-600" />
+                        <div className="flex items-center gap-2">
+                          <BookOpen className="h-5 w-5" style={{ color: colorSet.color }} />
+                          <span>Tutorial {tool.videos.findIndex(v => v.id === currentVideo.id) + 1} of {tool.videos.length}</span>
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -268,19 +360,19 @@ export default function ToolPage({ params }: Props) {
               </div>
               
               {/* Tutorials Sidebar */}
-              <div>
+              <div className="lg:col-span-1">
                 <div className="sticky top-20">
                   <div 
                     className="rounded-xl p-6 border border-gray-800 backdrop-blur-sm mb-6"
                     style={{ backgroundColor: `${colorSet.color}05` }}
                   >
                     <div className="flex items-center justify-between mb-6">
-                      <h2 className="text-2xl font-bold text-white">Tutorial Playlist</h2>
+                      <h2 className="text-2xl font-bold text-white">Video Playlist</h2>
                       <Badge 
                         variant="outline" 
                         className="border-gray-700 bg-black/50 backdrop-blur-sm"
                       >
-                        {tool.videos.length} {tool.videos.length === 1 ? 'video' : 'videos'}
+                        {tool.videos.length} video{tool.videos.length === 1 ? '' : 's'}
                       </Badge>
                     </div>
                     
@@ -326,21 +418,25 @@ export default function ToolPage({ params }: Props) {
                 </div>
               </div>
             </div>
-            
-            {/* Call to Action Section */}
-            <div className="mt-20">
-              <div 
-                className="rounded-2xl p-8 border border-gray-800 backdrop-blur-sm text-center"
-                style={{ backgroundColor: `${colorSet.color}05` }}
-              >
-                <h3 className="text-3xl font-bold text-white mb-4">
-                  Ready to master {tool.name}?
-                </h3>
-                <p className="text-gray-400 mb-8 max-w-2xl mx-auto text-lg">
-                  Follow along with our step-by-step tutorials and become proficient in just minutes. 
-                  Start with the first video and work your way through the complete guide.
-                </p>
-                <div className="flex flex-col sm:flex-row gap-4 justify-center">
+          )}
+          
+          {/* Call to Action Section */}
+          <div className="mt-16">
+            <div 
+              className="rounded-2xl p-8 border border-gray-800 backdrop-blur-sm text-center"
+              style={{ backgroundColor: `${colorSet.color}05` }}
+            >
+              <h3 className="text-3xl font-bold text-white mb-4">
+                Ready to master {tool.name}?
+              </h3>
+              <p className="text-gray-400 mb-8 max-w-2xl mx-auto text-lg">
+                {tutorialSteps 
+                  ? "Follow our detailed step-by-step guide or watch video tutorials to become proficient in just minutes."
+                  : "Follow along with our video tutorials and become proficient in just minutes."
+                }
+              </p>
+              <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                {tutorialSteps && (
                   <Button 
                     className="text-white border-2 transition-all duration-300 hover:scale-105"
                     style={{ 
@@ -348,23 +444,21 @@ export default function ToolPage({ params }: Props) {
                       borderColor: colorSet.color
                     }}
                     size="lg"
-                    onClick={() => tool.videos[0] && handlePlayVideo(tool.videos[0].id)}
+                    onClick={() => setActiveTab("steps")}
                   >
-                    <Play className="mr-2 h-5 w-5" />
-                    Start from Beginning
+                    <BookOpen className="mr-2 h-5 w-5" />
+                    Start Step-by-Step Guide
                   </Button>
-                  {category && (
-                    <Link href={`/category/${category.id}`}>
-                      <Button 
-                        variant="outline" 
-                        size="lg"
-                        className="border-gray-700 text-gray-300 hover:bg-gray-800 hover:border-gray-600 transition-all duration-300"
-                      >
-                        Explore More {category.name}
-                      </Button>
-                    </Link>
-                  )}
-                </div>
+                )}
+                <Button 
+                  variant="outline" 
+                  size="lg"
+                  className="border-gray-700 text-gray-300 hover:bg-gray-800 hover:border-gray-600 transition-all duration-300"
+                  onClick={() => tool.videos[0] && handlePlayVideo(tool.videos[0].id)}
+                >
+                  <Play className="mr-2 h-5 w-5" />
+                  {tutorialSteps ? "Watch Videos Instead" : "Start from Beginning"}
+                </Button>
               </div>
             </div>
           </div>

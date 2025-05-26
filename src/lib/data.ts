@@ -1304,6 +1304,56 @@ export const tools: Tool[] = [
       platforms: ["Web"]
     },
     toolType: "service"
+  },
+  
+  // Design Tools
+  {
+    id: "canva",
+    name: "Canva",
+    description: "Easy-to-use graphic design platform for creating social media posts, presentations, and marketing materials",
+    category: "design-tools",
+    icon: "palette",
+    tags: ["design", "graphics", "social-media", "templates", "branding", "marketing", "presentations", "logos", "posters", "easy-to-use", "drag-and-drop", "collaboration"],
+    videos: [
+      {
+        id: "canva-basics",
+        title: "Canva Basics: Create Your First Design",
+        description: "Learn the fundamentals of Canva and create your first social media post",
+        youtubeId: "dQw4w9WgXcQ",
+        duration: 120
+      },
+      {
+        id: "canva-advanced",
+        title: "Advanced Canva Techniques",
+        description: "Master advanced features like brand kits, animations, and team collaboration",
+        youtubeId: "dQw4w9WgXcQ",
+        duration: 180
+      },
+      {
+        id: "canva-branding",
+        title: "Brand Consistency in Canva",
+        description: "Create and maintain consistent branding across all your designs",
+        youtubeId: "dQw4w9WgXcQ",
+        duration: 150
+      }
+    ],
+    pricing: {
+      model: "freemium",
+      startingPrice: "$0",
+      freeFeatures: ["250,000+ templates", "100+ design types", "5GB cloud storage", "Real-time collaboration"],
+      paidFeatures: ["Premium templates", "Brand kit", "Background remover", "Resize designs", "100GB storage"],
+      affiliateUrl: "https://canva.com",
+      couponCode: "CANVA30",
+      discount: "30 days free trial"
+    },
+    features: {
+      hasFreeTier: true,
+      noCodeRequired: true,
+      hasAPI: true,
+      hasIntegrations: true,
+      platforms: ["Web", "Mobile", "Desktop"]
+    },
+    toolType: "platform"
   }
 ];
 
