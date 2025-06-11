@@ -14,31 +14,31 @@ if (!action || !['on', 'off'].includes(action)) {
 try {
   // Create .env.local if it doesn't exist
   if (!fs.existsSync(envPath)) {
-    fs.writeFileSync(envPath, '# Local environment variables\nNEXT_PUBLIC_MAINTENANCE_MODE=false\n');
+    fs.writeFileSync(envPath, '# Local environment variables\nMAINTENANCE_MODE=false\n');
   }
 
   let content = fs.readFileSync(envPath, 'utf8');
   
   if (action === 'on') {
-    // Replace or add NEXT_PUBLIC_MAINTENANCE_MODE=true
-    if (content.includes('NEXT_PUBLIC_MAINTENANCE_MODE=')) {
-      content = content.replace(/NEXT_PUBLIC_MAINTENANCE_MODE=(true|false)/g, 'NEXT_PUBLIC_MAINTENANCE_MODE=true');
+    // Replace or add MAINTENANCE_MODE=true
+    if (content.includes('MAINTENANCE_MODE=')) {
+      content = content.replace(/MAINTENANCE_MODE=(true|false)/g, 'MAINTENANCE_MODE=true');
     } else {
-      content += '\nNEXT_PUBLIC_MAINTENANCE_MODE=true\n';
+      content += '\nMAINTENANCE_MODE=true\n';
     }
     console.log('✅ Maintenance mode ENABLED locally');
     console.log('🔧 Restart your dev server to see changes');
-    console.log('🌐 For live site, use: npm run maintenance:on:live');
+    console.log('🌐 For live site, set MAINTENANCE_MODE=true in your hosting platform');
   } else {
-    // Replace with NEXT_PUBLIC_MAINTENANCE_MODE=false
-    if (content.includes('NEXT_PUBLIC_MAINTENANCE_MODE=')) {
-      content = content.replace(/NEXT_PUBLIC_MAINTENANCE_MODE=(true|false)/g, 'NEXT_PUBLIC_MAINTENANCE_MODE=false');
+    // Replace with MAINTENANCE_MODE=false
+    if (content.includes('MAINTENANCE_MODE=')) {
+      content = content.replace(/MAINTENANCE_MODE=(true|false)/g, 'MAINTENANCE_MODE=false');
     } else {
-      content += '\nNEXT_PUBLIC_MAINTENANCE_MODE=false\n';
+      content += '\nMAINTENANCE_MODE=false\n';
     }
     console.log('✅ Maintenance mode DISABLED locally');
     console.log('🚀 Restart your dev server to see changes');
-    console.log('🌐 For live site, use: npm run maintenance:off:live');
+    console.log('🌐 For live site, set MAINTENANCE_MODE=false in your hosting platform');
   }
   
   fs.writeFileSync(envPath, content);

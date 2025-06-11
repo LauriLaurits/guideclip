@@ -207,9 +207,12 @@ export function TutorialSteps({
                   <Image
                     src={currentStepData.image}
                     alt={currentStepData.imageAlt || `Step ${currentStep + 1} visual guide`}
-                    width={800}
-                    height={450}
+                    width={1200}
+                    height={675}
+                    quality={100}
                     className="w-full h-auto"
+                    priority
+                    unoptimized={true}
                   />
                 ) : (
                   <TutorialPlaceholder
@@ -219,6 +222,8 @@ export function TutorialSteps({
                     accentColor={accentColor}
                     width={800}
                     height={450}
+                    toolName={toolName}
+                    targetElement={currentStepData.targetElement}
                   />
                 )}
               </div>

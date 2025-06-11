@@ -11,10 +11,11 @@ import { YouTubePlayer } from "@/components/youtube-player";
 import { TutorialSteps } from "@/components/tutorial-steps";
 import { tutorialData } from "@/lib/tutorial-data";
 import { Button } from "@/components/ui/button";
-import { ArrowLeft, Clock, List, Video, Play, ExternalLink, BookOpen, Star, FileText } from "lucide-react";
+import { ArrowLeft, Clock, List, Video, Play, ExternalLink, BookOpen, Star, FileText, CreditCard, DollarSign, Zap, Crown, Gift } from "lucide-react";
 import { getToolById, getCategoryById } from "@/lib/data";
 import { Icon } from "@/components/ui/icon";
 import { Badge } from "@/components/ui/badge";
+import { Card } from "@/components/ui/card";
 
 type Props = {
   params: Promise<{
@@ -419,6 +420,331 @@ export default function ToolPage({ params }: Props) {
               </div>
             </div>
           )}
+          
+          {/* Courses & Resources Section */}
+          <div className="mt-16">
+            <div className="mb-8">
+              <h2 className="text-3xl font-bold text-white mb-4">
+                Courses & Resources
+              </h2>
+              <p className="text-gray-400 text-lg">
+                Master {tool.name} with these curated courses and resources
+              </p>
+            </div>
+            
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12">
+              {/* Pricing & Access Card */}
+              <Card className="bg-black border-gray-800 p-6">
+                <div className="flex items-center gap-4 mb-6">
+                  <div 
+                    className="p-3 rounded-lg"
+                    style={{ backgroundColor: colorSet.bgColor }}
+                  >
+                    <DollarSign className="h-6 w-6" style={{ color: colorSet.color }} />
+                  </div>
+                  <div>
+                    <h3 className="text-xl font-bold text-white">
+                      {tool.name} Pricing
+                    </h3>
+                    <p className="text-gray-400 text-sm">
+                      {tool.pricing.model === "free" ? "Completely Free" :
+                       tool.pricing.model === "freemium" ? "Free with Premium Options" :
+                       tool.pricing.model === "paid" ? "Paid Tool" : 
+                       "Subscription Service"}
+                    </p>
+                  </div>
+                </div>
+                
+                <div className="space-y-4">
+                  {tool.pricing.startingPrice && (
+                    <div className="flex justify-between items-center">
+                      <span className="text-gray-400">Starting at</span>
+                      <span className="text-white font-semibold">{tool.pricing.startingPrice}</span>
+                    </div>
+                  )}
+                  
+                  {tool.pricing.freeFeatures && tool.pricing.freeFeatures.length > 0 && (
+                    <div>
+                      <h4 className="text-white font-medium mb-2 flex items-center gap-2">
+                        <Gift className="h-4 w-4 text-green-400" />
+                        Free Features
+                      </h4>
+                      <ul className="space-y-1">
+                        {tool.pricing.freeFeatures.slice(0, 3).map((feature, index) => (
+                          <li key={index} className="text-gray-400 text-sm flex items-center gap-2">
+                            <div className="w-1.5 h-1.5 rounded-full bg-green-400" />
+                            {feature}
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  )}
+                  
+                  {tool.pricing.paidFeatures && tool.pricing.paidFeatures.length > 0 && (
+                    <div>
+                      <h4 className="text-white font-medium mb-2 flex items-center gap-2">
+                        <Crown className="h-4 w-4" style={{ color: colorSet.color }} />
+                        Premium Features
+                      </h4>
+                      <ul className="space-y-1">
+                        {tool.pricing.paidFeatures.slice(0, 3).map((feature, index) => (
+                          <li key={index} className="text-gray-400 text-sm flex items-center gap-2">
+                            <div className="w-1.5 h-1.5 rounded-full" style={{ backgroundColor: colorSet.color }} />
+                            {feature}
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  )}
+                  
+                  {tool.pricing.discount && (
+                    <div 
+                      className="p-3 rounded-lg border text-center"
+                      style={{ 
+                        backgroundColor: `${colorSet.color}10`,
+                        borderColor: `${colorSet.color}30`
+                      }}
+                    >
+                      <Badge 
+                        className="mb-2"
+                        style={{ 
+                          backgroundColor: colorSet.color,
+                          color: "white"
+                        }}
+                      >
+                        Special Offer
+                      </Badge>
+                      <p className="text-white font-medium">{tool.pricing.discount}</p>
+                      {tool.pricing.couponCode && (
+                        <p className="text-gray-400 text-sm mt-1">
+                          Code: <span className="font-mono text-white">{tool.pricing.couponCode}</span>
+                        </p>
+                      )}
+                    </div>
+                  )}
+                </div>
+              </Card>
+              
+              {/* Official Resource Card */}
+              <Card className="bg-black border-gray-800 p-6">
+                <div className="flex items-center gap-4 mb-6">
+                  <div 
+                    className="p-3 rounded-lg"
+                    style={{ backgroundColor: colorSet.bgColor }}
+                  >
+                    <ExternalLink className="h-6 w-6" style={{ color: colorSet.color }} />
+                  </div>
+                  <div>
+                    <h3 className="text-xl font-bold text-white">
+                      Official Platform
+                    </h3>
+                    <p className="text-gray-400 text-sm">
+                      Get started with {tool.name} directly
+                    </p>
+                  </div>
+                </div>
+                
+                <div className="space-y-4">
+                  <p className="text-gray-300 leading-relaxed">
+                    Access the official {tool.name} platform to start using this powerful tool. 
+                    Perfect for beginners and professionals alike.
+                  </p>
+                  
+                  <div className="space-y-3">
+                    <div className="flex items-center gap-2 text-gray-400 text-sm">
+                      <Zap className="h-4 w-4 text-green-400" />
+                      Instant access to all features
+                    </div>
+                    <div className="flex items-center gap-2 text-gray-400 text-sm">
+                      <BookOpen className="h-4 w-4 text-blue-400" />
+                      Official documentation included
+                    </div>
+                    <div className="flex items-center gap-2 text-gray-400 text-sm">
+                      <Star className="h-4 w-4 text-yellow-400" />
+                      Regular updates and improvements
+                    </div>
+                  </div>
+                  
+                  {tool.pricing.affiliateUrl && (
+                    <Button 
+                      asChild
+                      className="w-full text-white border-2 transition-all duration-300 hover:scale-105"
+                      style={{ 
+                        backgroundColor: colorSet.color,
+                        borderColor: colorSet.color
+                      }}
+                      size="lg"
+                    >
+                      <a 
+                        href={tool.pricing.affiliateUrl} 
+                        target="_blank" 
+                        rel="noopener noreferrer"
+                      >
+                        <ExternalLink className="mr-2 h-5 w-5" />
+                        Visit {tool.name}
+                      </a>
+                    </Button>
+                  )}
+                </div>
+              </Card>
+            </div>
+            
+            {/* Recommended Courses Section */}
+            <div className="mb-12">
+              <h3 className="text-2xl font-bold text-white mb-6">
+                Recommended Learning Paths
+              </h3>
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                {/* Course recommendations based on tool type */}
+                {tool.category === "ai-chatbots" && (
+                  <>
+                    <Card className="bg-black border-gray-800 p-6 hover:border-gray-700 transition-colors">
+                      <div className="flex items-center gap-3 mb-4">
+                        <div className="p-2 rounded-lg bg-blue-500/20">
+                          <BookOpen className="h-5 w-5 text-blue-400" />
+                        </div>
+                        <div>
+                          <h4 className="text-white font-semibold">Prompt Engineering Mastery</h4>
+                          <p className="text-gray-400 text-sm">Complete guide to AI prompts</p>
+                        </div>
+                      </div>
+                      <p className="text-gray-300 text-sm mb-4">
+                        Learn advanced prompting techniques to get better results from AI chatbots.
+                      </p>
+                      <Button variant="outline" size="sm" className="border-gray-700 text-gray-300 hover:bg-gray-800">
+                        <ExternalLink className="mr-2 h-4 w-4" />
+                        Explore Course
+                      </Button>
+                    </Card>
+                    
+                    <Card className="bg-black border-gray-800 p-6 hover:border-gray-700 transition-colors">
+                      <div className="flex items-center gap-3 mb-4">
+                        <div className="p-2 rounded-lg bg-purple-500/20">
+                          <Video className="h-5 w-5 text-purple-400" />
+                        </div>
+                        <div>
+                          <h4 className="text-white font-semibold">AI for Business</h4>
+                          <p className="text-gray-400 text-sm">Practical AI applications</p>
+                        </div>
+                      </div>
+                      <p className="text-gray-300 text-sm mb-4">
+                        Implement AI chatbots in your business workflow for maximum productivity.
+                      </p>
+                      <Button variant="outline" size="sm" className="border-gray-700 text-gray-300 hover:bg-gray-800">
+                        <ExternalLink className="mr-2 h-4 w-4" />
+                        Explore Course
+                      </Button>
+                    </Card>
+                  </>
+                )}
+                
+                {tool.category === "ai-image-generators" && (
+                  <>
+                    <Card className="bg-black border-gray-800 p-6 hover:border-gray-700 transition-colors">
+                      <div className="flex items-center gap-3 mb-4">
+                        <div className="p-2 rounded-lg bg-pink-500/20">
+                          <BookOpen className="h-5 w-5 text-pink-400" />
+                        </div>
+                        <div>
+                          <h4 className="text-white font-semibold">AI Art Fundamentals</h4>
+                          <p className="text-gray-400 text-sm">Master AI image generation</p>
+                        </div>
+                      </div>
+                      <p className="text-gray-300 text-sm mb-4">
+                        Learn to create stunning visuals with AI image generation tools.
+                      </p>
+                      <Button variant="outline" size="sm" className="border-gray-700 text-gray-300 hover:bg-gray-800">
+                        <ExternalLink className="mr-2 h-4 w-4" />
+                        Explore Course
+                      </Button>
+                    </Card>
+                    
+                    <Card className="bg-black border-gray-800 p-6 hover:border-gray-700 transition-colors">
+                      <div className="flex items-center gap-3 mb-4">
+                        <div className="p-2 rounded-lg bg-orange-500/20">
+                          <Video className="h-5 w-5 text-orange-400" />
+                        </div>
+                        <div>
+                          <h4 className="text-white font-semibold">Commercial AI Art</h4>
+                          <p className="text-gray-400 text-sm">Monetize your AI creations</p>
+                        </div>
+                      </div>
+                      <p className="text-gray-300 text-sm mb-4">
+                        Turn your AI art skills into a profitable business venture.
+                      </p>
+                      <Button variant="outline" size="sm" className="border-gray-700 text-gray-300 hover:bg-gray-800">
+                        <ExternalLink className="mr-2 h-4 w-4" />
+                        Explore Course
+                      </Button>
+                    </Card>
+                  </>
+                )}
+                
+                {/* Default courses for other categories */}
+                {!["ai-chatbots", "ai-image-generators"].includes(tool.category) && (
+                  <>
+                    <Card className="bg-black border-gray-800 p-6 hover:border-gray-700 transition-colors">
+                      <div className="flex items-center gap-3 mb-4">
+                        <div className="p-2 rounded-lg" style={{ backgroundColor: `${colorSet.color}20` }}>
+                          <BookOpen className="h-5 w-5" style={{ color: colorSet.color }} />
+                        </div>
+                        <div>
+                          <h4 className="text-white font-semibold">{tool.name} Masterclass</h4>
+                          <p className="text-gray-400 text-sm">Complete {tool.name} guide</p>
+                        </div>
+                      </div>
+                      <p className="text-gray-300 text-sm mb-4">
+                        Comprehensive course covering all aspects of {tool.name} from beginner to advanced.
+                      </p>
+                      <Button variant="outline" size="sm" className="border-gray-700 text-gray-300 hover:bg-gray-800">
+                        <ExternalLink className="mr-2 h-4 w-4" />
+                        Explore Course
+                      </Button>
+                    </Card>
+                    
+                    <Card className="bg-black border-gray-800 p-6 hover:border-gray-700 transition-colors">
+                      <div className="flex items-center gap-3 mb-4">
+                        <div className="p-2 rounded-lg bg-green-500/20">
+                          <Video className="h-5 w-5 text-green-400" />
+                        </div>
+                        <div>
+                          <h4 className="text-white font-semibold">Productivity Boost</h4>
+                          <p className="text-gray-400 text-sm">Optimize your workflow</p>
+                        </div>
+                      </div>
+                      <p className="text-gray-300 text-sm mb-4">
+                        Learn advanced techniques to maximize your productivity with {tool.name}.
+                      </p>
+                      <Button variant="outline" size="sm" className="border-gray-700 text-gray-300 hover:bg-gray-800">
+                        <ExternalLink className="mr-2 h-4 w-4" />
+                        Explore Course
+                      </Button>
+                    </Card>
+                  </>
+                )}
+                
+                {/* Universal course for all tools */}
+                <Card className="bg-black border-gray-800 p-6 hover:border-gray-700 transition-colors">
+                  <div className="flex items-center gap-3 mb-4">
+                    <div className="p-2 rounded-lg bg-yellow-500/20">
+                      <Star className="h-5 w-5 text-yellow-400" />
+                    </div>
+                    <div>
+                      <h4 className="text-white font-semibold">Tool Integration</h4>
+                      <p className="text-gray-400 text-sm">Connect with other tools</p>
+                    </div>
+                  </div>
+                  <p className="text-gray-300 text-sm mb-4">
+                    Learn how to integrate {tool.name} with other tools in your workflow.
+                  </p>
+                  <Button variant="outline" size="sm" className="border-gray-700 text-gray-300 hover:bg-gray-800">
+                    <ExternalLink className="mr-2 h-4 w-4" />
+                    Explore Course
+                  </Button>
+                </Card>
+              </div>
+            </div>
+          </div>
           
           {/* Call to Action Section */}
           <div className="mt-16">

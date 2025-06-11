@@ -194,6 +194,8 @@ export const chatgptPromptTutorial: TutorialStep[] = [
     title: "Access ChatGPT",
     description: "Navigate to ChatGPT and start a new conversation",
     instruction: "Go to chat.openai.com and sign in with your account. Click 'New Chat' to start a fresh conversation.",
+    image: "/tutorial-images/chatgpt/step-1-open-chatgpt.png",
+    imageAlt: "ChatGPT interface showing the New Chat button highlighted",
     duration: 20,
     difficulty: "easy",
     actionType: "navigate",
@@ -210,6 +212,8 @@ export const chatgptPromptTutorial: TutorialStep[] = [
     title: "Write a Clear, Specific Prompt",
     description: "Craft a detailed prompt that clearly explains what you want",
     instruction: "Type a specific request in the message box. Be clear about the format, tone, and length you want. For example: 'Write a professional email to a client explaining a project delay, keeping it under 150 words and maintaining a positive tone.'",
+    image: "/tutorial-images/chatgpt/step-2-open-chatgpt.png",
+    imageAlt: "ChatGPT interface showing a detailed prompt being typed in the message box",
     duration: 90,
     difficulty: "medium",
     actionType: "type",
@@ -559,53 +563,58 @@ export const figmaMobileAppTutorial: TutorialStep[] = [
   {
     id: "figma-step-1",
     title: "Create New Figma File",
-    description: "Start a new design project in Figma",
-    instruction: "Go to figma.com, sign in, and click 'New Design File'. This opens the Figma editor with a blank canvas ready for your mobile app design.",
-    duration: 25,
+    description: "Start by creating a new design file in Figma to begin your mobile app interface design",
+    instruction: "Click the 'Create new file' button in your Figma dashboard or team workspace",
+    image: "/tutorial-images/figma/step-1-create-file.png",
+    imageAlt: "Figma dashboard showing the Create new file button highlighted with red arrow",
+    duration: 15,
     difficulty: "easy",
     actionType: "click",
-    targetElement: "New Design File button",
-    expectedResult: "Figma editor opens with an empty canvas and design tools available",
+    targetElement: "Create new file button",
+    expectedResult: "A new blank Figma file opens in the editor",
     tips: [
-      "Figma works in your browser - no download required",
-      "Free accounts can create unlimited personal projects",
-      "Your work saves automatically to the cloud"
+      "You can also use Ctrl+N (Cmd+N on Mac) as a shortcut",
+      "Make sure you're in the right team workspace before creating"
     ]
   },
   {
-    id: "figma-step-2",
-    title: "Set Up Mobile Frame",
-    description: "Create the correct canvas size for mobile app design",
-    instruction: "Press 'F' to open the Frame tool, then click 'iPhone 14 Pro' from the right panel, or manually create a 393x852px frame for a standard mobile size.",
-    duration: 30,
-    difficulty: "easy",
+    id: "figma-step-2", 
+    title: "Add Mobile Frame",
+    description: "Set up the proper canvas size for mobile app design by adding an iPhone frame",
+    instruction: "Press 'F' key or click Frame tool, then select 'iPhone 14' from the preset options on the right panel",
+    image: "/tutorial-images/figma/step-2-add-frame.png",
+    imageAlt: "Figma interface showing Frame tool selected and iPhone 14 preset highlighted in right panel",
+    duration: 20,
+    difficulty: "easy", 
     actionType: "click",
-    targetElement: "Frame tool and device presets",
-    expectedResult: "A mobile-sized frame appears on your canvas, representing your app screen",
+    targetElement: "Frame tool (F) → iPhone 14 preset",
+    expectedResult: "iPhone 14 sized frame appears on canvas (390×844px)",
+    shortcuts: ["Press F key for quick Frame tool access"],
     tips: [
-      "iPhone 14 Pro (393x852px) is a popular mobile design size",
-      "Android phones vary, but 360x800px is a safe standard",
-      "You can always resize frames later if needed"
-    ],
-    shortcuts: ["F (Frame tool)", "A (Select tool)"]
+      "iPhone 14 size is 390×844px - perfect for modern mobile design",
+      "You can also drag to create custom frame sizes"
+    ]
   },
   {
     id: "figma-step-3",
-    title: "Design the Header/Navigation",
-    description: "Create the top navigation bar for your app",
-    instruction: "Use the Rectangle tool (R) to create a header bar at the top. Make it about 60px tall and the full width of your frame. Add a background color and consider adding a title.",
-    duration: 60,
-    difficulty: "easy",
-    actionType: "click",
-    targetElement: "Rectangle tool and color picker",
-    expectedResult: "A styled header bar appears at the top of your mobile frame",
+    title: "Design App Header", 
+    description: "Create the top navigation header with title and menu elements",
+    instruction: "Add a rectangle for header background, then use Text tool (T) to add app title 'MyApp'",
+    image: "/tutorial-images/figma/step-3-design-header.png",
+    imageAlt: "Mobile frame with header rectangle and app title text, showing layers panel on left",
+    duration: 30,
+    difficulty: "medium",
+    actionType: "type",
+    targetElement: "Rectangle tool → Text tool (T)",
+    expectedResult: "Header with background color and 'MyApp' title text",
     tips: [
-      "Headers are typically 44-60px tall on mobile",
-      "Use your brand colors for consistency",
-      "Consider the status bar area on real devices",
-      "Keep header content minimal and focused"
+      "Use height of 60-80px for mobile headers",
+      "Choose contrasting colors for text visibility",
+      "Consider status bar space (add 44px padding top)"
     ],
-    shortcuts: ["R (Rectangle)", "T (Text)", "Shift+Drag (Constrain proportions)"]
+    warnings: [
+      "Don't make header text too small - minimum 16px for mobile"
+    ]
   },
   {
     id: "figma-step-4",
