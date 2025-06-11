@@ -1,6 +1,7 @@
 import { Video } from "@/lib/data";
 import Image from "next/image";
 import { PlayCircle, Pause } from "lucide-react";
+import { Badge } from "@/components/ui/badge";
 
 interface VideoCardProps {
   video: Video;
@@ -20,6 +21,15 @@ export function VideoCard({
     const remainingSeconds = seconds % 60;
     return `${minutes}:${remainingSeconds.toString().padStart(2, '0')}`;
   };
+
+  const getDifficultyColor = (difficulty?: string) => {
+    switch (difficulty) {
+      case "beginner": return "#00b894";
+      case "intermediate": return "#fdcb6e";
+      case "advanced": return "#e17055";
+      default: return "#6c5ce7";
+    }
+  };
   
   return (
     <div 
@@ -32,48 +42,73 @@ export function VideoCard({
         <div className="relative rounded-xl h-full overflow-hidden border transition-all duration-300 bg-black" style={{
           borderColor: isPlaying ? `${accentColor}80` : '#333',
         }}>
-          <div className="flex items-center gap-4 p-3">
-            {/* Thumbnail with overlay */}
-            <div className="relative w-20 h-20 overflow-hidden rounded-lg flex-shrink-0">
-              <Image 
-                src={`https://img.youtube.com/vi/${video.youtubeId}/mqdefault.jpg`} 
-                alt={video.title}
-                width={80}
-                height={80}
-                className={`w-full h-full object-cover ${isPlaying ? 'scale-110' : 'hover:scale-110'} transition-transform duration-500`}
-              />
-              
-              {/* Simple overlay */}
-              <div className="absolute inset-0 bg-black/50 transition-opacity duration-300" style={{
-                opacity: isPlaying ? 0.3 : 0.6
-              }}></div>
-              
-              {/* Duration badge */}
-              <div className="absolute bottom-1 right-1 bg-black/70 px-1.5 py-0.5 rounded text-[10px] font-medium">
-                {formatDuration(video.duration)}
-              </div>
-              
-              {/* Play/pause button */}
-              <div className="absolute inset-0 flex items-center justify-center">
-                {isPlaying ? (
-                  <Pause className="h-8 w-8" style={{ color: accentColor }} />
-                ) : (
-                  <PlayCircle className="h-8 w-8 text-white/80 hover:text-white transition-colors duration-300" />
-                )}
-              </div>
-            </div>
-            
-            {/* Content */}
-            <div className="flex-1 min-w-0">
-              <h4 className="font-medium text-sm mb-1 line-clamp-1 transition-colors duration-300" style={{
+          <div className="p-4">
+            {/* Header with title and difficulty */}
+            <div className="flex items-start justify-between mb-2">
+              <h4 className="font-medium text-sm transition-colors duration-300 flex-1 pr-2" style={{
                 color: isPlaying ? accentColor : 'white'
               }}>
                 {video.title}
               </h4>
-              <p className="text-gray-400 text-xs line-clamp-2">
-                {video.description}
-              </p>
+              <div className="flex items-center gap-2 flex-shrink-0">
+                {video.difficulty && (
+                  <Badge 
+                    variant="outline"
+                    className="text-xs px-2 py-0.5 border"
+                    style={{ 
+                      color: getDifficultyColor(video.difficulty),
+                      borderColor: `${getDifficultyColor(video.difficulty)}50`,
+                      backgroundColor: `${getDifficultyColor(video.difficulty)}10`
+                    }}
+                  >
+                    {video.difficulty}
+                  </Badge>
+                )}
+                <span className="text-xs text-gray-500">
+                  {formatDuration(video.duration)}
+                </span>
+                {/* Play/pause button */}
+                {isPlaying ? (
+                  <Pause className="h-5 w-5" style={{ color: accentColor }} />
+                ) : (
+                  <PlayCircle className="h-5 w-5 text-white/80 hover:text-white transition-colors duration-300" />
+                )}
+              </div>
             </div>
+
+            {/* Description */}
+            <p className="text-gray-400 text-xs line-clamp-2 mb-3">
+              {video.description}
+            </p>
+
+            {/* Tags */}
+            {video.tags && video.tags.length > 0 && (
+              <div className="flex flex-wrap gap-1">
+                {video.tags.slice(0, 3).map((tag, index) => (
+                  <span
+                    key={index}
+                    className="text-xs px-2 py-0.5 rounded-full bg-gray-800 text-gray-300 border border-gray-700"
+                  >
+                    {tag}
+                  </span>
+                ))}
+                {video.tags.length > 3 && (
+                  <span className="text-xs text-gray-500">
+                    +{video.tags.length - 3} more
+                  </span>
+                )}
+              </div>
+            )}
+
+            {/* Chapters indicator */}
+            {video.chapters && video.chapters.length > 0 && (
+              <div className="flex items-center gap-1 mt-2">
+                <div className="w-1 h-1 rounded-full bg-gray-500"></div>
+                <span className="text-xs text-gray-500">
+                  {video.chapters.length} chapters
+                </span>
+              </div>
+            )}
           </div>
         </div>
       </div>

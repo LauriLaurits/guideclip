@@ -8,10 +8,11 @@ import { Header } from "@/components/header";
 import { Footer } from "@/components/footer";
 import { VideoCard } from "@/components/video-card";
 import { YouTubePlayer } from "@/components/youtube-player";
+import { LocalVideoPlayer } from "@/components/local-video-player";
 import { TutorialSteps } from "@/components/tutorial-steps";
 import { tutorialData } from "@/lib/tutorial-data";
 import { Button } from "@/components/ui/button";
-import { ArrowLeft, Clock, List, Video, Play, ExternalLink, BookOpen, Star, FileText, CreditCard, DollarSign, Zap, Crown, Gift } from "lucide-react";
+import { ArrowLeft, Clock, List, Video, Play, ExternalLink, BookOpen, Star, FileText, CreditCard, DollarSign, Zap, Crown, Gift, Keyboard } from "lucide-react";
 import { getToolById, getCategoryById } from "@/lib/data";
 import { Icon } from "@/components/ui/icon";
 import { Badge } from "@/components/ui/badge";
@@ -318,7 +319,22 @@ export default function ToolPage({ params }: Props) {
                   <div className="space-y-8">
                     {/* Video Player */}
                     <div className="rounded-xl overflow-hidden border border-gray-800 bg-black shadow-2xl">
-                      <YouTubePlayer videoId={currentVideo.youtubeId} autoPlay={true} />
+                      {currentVideo.localVideoSrc ? (
+                        <LocalVideoPlayer 
+                          videoSrc={currentVideo.localVideoSrc}
+                          poster={currentVideo.poster}
+                          autoPlay={true}
+                          title={currentVideo.title}
+                          accentColor={colorSet.color}
+                          chapters={currentVideo.chapters}
+                        />
+                      ) : currentVideo.youtubeId ? (
+                        <YouTubePlayer videoId={currentVideo.youtubeId} autoPlay={true} />
+                      ) : (
+                        <div className="aspect-video flex items-center justify-center bg-gray-900 text-gray-400">
+                          Video not available
+                        </div>
+                      )}
                     </div>
                     
                     {/* Video Info */}
@@ -326,10 +342,29 @@ export default function ToolPage({ params }: Props) {
                       className="rounded-xl p-8 border border-gray-800 backdrop-blur-sm"
                       style={{ backgroundColor: `${colorSet.color}05` }}
                     >
-                      <h2 className="text-3xl font-bold text-white mb-4">{currentVideo.title}</h2>
+                      <div className="flex items-start justify-between mb-4">
+                        <h2 className="text-3xl font-bold text-white">{currentVideo.title}</h2>
+                        {currentVideo.difficulty && (
+                          <Badge 
+                            variant="outline"
+                            className="px-3 py-1"
+                            style={{ 
+                              color: currentVideo.difficulty === "beginner" ? "#00b894" :
+                                     currentVideo.difficulty === "intermediate" ? "#fdcb6e" : "#e17055",
+                              borderColor: `${currentVideo.difficulty === "beginner" ? "#00b894" :
+                                             currentVideo.difficulty === "intermediate" ? "#fdcb6e" : "#e17055"}50`,
+                              backgroundColor: `${currentVideo.difficulty === "beginner" ? "#00b894" :
+                                                currentVideo.difficulty === "intermediate" ? "#fdcb6e" : "#e17055"}10`
+                            }}
+                          >
+                            {currentVideo.difficulty}
+                          </Badge>
+                        )}
+                      </div>
+                      
                       <p className="text-gray-300 text-lg leading-relaxed mb-6">{currentVideo.description}</p>
                       
-                      <div className="flex items-center gap-4 text-gray-400">
+                      <div className="flex items-center gap-4 text-gray-400 mb-6">
                         <div className="flex items-center gap-2">
                           <Clock className="h-5 w-5" style={{ color: colorSet.color }} />
                           <span>{formatDuration(currentVideo.duration)}</span>
@@ -339,8 +374,131 @@ export default function ToolPage({ params }: Props) {
                           <BookOpen className="h-5 w-5" style={{ color: colorSet.color }} />
                           <span>Tutorial {tool.videos.findIndex(v => v.id === currentVideo.id) + 1} of {tool.videos.length}</span>
                         </div>
+                        {currentVideo.chapters && currentVideo.chapters.length > 0 && (
+                          <>
+                            <div className="h-1 w-1 rounded-full bg-gray-600" />
+                            <div className="flex items-center gap-2">
+                              <List className="h-5 w-5" style={{ color: colorSet.color }} />
+                              <span>{currentVideo.chapters.length} chapters</span>
+                            </div>
+                          </>
+                        )}
                       </div>
+
+                      {/* Tags */}
+                      {currentVideo.tags && currentVideo.tags.length > 0 && (
+                        <div className="mb-6">
+                          <h4 className="text-sm font-medium text-gray-400 mb-2">Topics covered:</h4>
+                          <div className="flex flex-wrap gap-2">
+                            {currentVideo.tags.map((tag, index) => (
+                              <span
+                                key={index}
+                                className="px-3 py-1 bg-gray-800 text-gray-300 rounded-full text-sm border border-gray-700"
+                              >
+                                {tag}
+                              </span>
+                            ))}
+                          </div>
+                        </div>
+                      )}
+
+                      {/* Video Resources */}
+                      {currentVideo.resources && (
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                          {/* Keyboard Shortcuts */}
+                          {currentVideo.resources.shortcuts.length > 0 && (
+                            <div>
+                              <h4 className="text-white font-semibold mb-3 flex items-center gap-2">
+                                <Keyboard className="h-4 w-4" style={{ color: colorSet.color }} />
+                                Keyboard Shortcuts
+                              </h4>
+                              <div className="space-y-2">
+                                {currentVideo.resources.shortcuts.map((shortcut, index) => (
+                                  <div key={index} className="flex items-center gap-3">
+                                    <kbd className="px-2 py-1 bg-gray-800 border border-gray-700 rounded text-xs text-gray-300 font-mono">
+                                      {shortcut.split(' - ')[0]}
+                                    </kbd>
+                                    <span className="text-gray-400 text-sm">
+                                      {shortcut.split(' - ')[1] || shortcut}
+                                    </span>
+                                  </div>
+                                ))}
+                              </div>
+                            </div>
+                          )}
+
+                          {/* Useful Commands */}
+                          {currentVideo.resources.commands.length > 0 && (
+                            <div>
+                              <h4 className="text-white font-semibold mb-3 flex items-center gap-2">
+                                <FileText className="h-4 w-4" style={{ color: colorSet.color }} />
+                                Commands & Prompts
+                              </h4>
+                              <div className="space-y-2">
+                                {currentVideo.resources.commands.map((command, index) => (
+                                  <div key={index} className="p-2 bg-gray-800 rounded border border-gray-700">
+                                    <code className="text-gray-300 text-sm font-mono">
+                                      {command}
+                                    </code>
+                                  </div>
+                                ))}
+                              </div>
+                            </div>
+                          )}
+
+                          {/* Helpful Links */}
+                          {currentVideo.resources.links.length > 0 && (
+                            <div className="md:col-span-2">
+                              <h4 className="text-white font-semibold mb-3 flex items-center gap-2">
+                                <ExternalLink className="h-4 w-4" style={{ color: colorSet.color }} />
+                                Helpful Resources
+                              </h4>
+                              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                                {currentVideo.resources.links.map((link, index) => (
+                                  <a
+                                    key={index}
+                                    href={link.url}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="p-3 bg-gray-800 rounded border border-gray-700 hover:border-gray-600 transition-colors group"
+                                  >
+                                    <div className="flex items-center gap-2 mb-1">
+                                      <span className="text-white font-medium text-sm group-hover:text-blue-400">
+                                        {link.name}
+                                      </span>
+                                      <ExternalLink className="h-3 w-3 text-gray-400 group-hover:text-blue-400" />
+                                    </div>
+                                    {link.description && (
+                                      <p className="text-gray-400 text-xs">
+                                        {link.description}
+                                      </p>
+                                    )}
+                                  </a>
+                                ))}
+                              </div>
+                            </div>
+                          )}
+                        </div>
+                      )}
                     </div>
+
+                    {/* Video Transcript */}
+                    {currentVideo.transcript && (
+                      <div 
+                        className="rounded-xl p-6 border border-gray-800 backdrop-blur-sm"
+                        style={{ backgroundColor: `${colorSet.color}05` }}
+                      >
+                        <h3 className="text-xl font-bold text-white mb-4 flex items-center gap-2">
+                          <FileText className="h-5 w-5" style={{ color: colorSet.color }} />
+                          Video Transcript
+                        </h3>
+                        <div className="prose prose-invert max-w-none">
+                          <p className="text-gray-300 leading-relaxed text-sm">
+                            {currentVideo.transcript}
+                          </p>
+                        </div>
+                      </div>
+                    )}
                   </div>
                 ) : (
                   <div className="flex aspect-video items-center justify-center rounded-xl border border-gray-800 bg-black">

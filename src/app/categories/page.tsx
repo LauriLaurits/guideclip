@@ -7,52 +7,25 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { CategoryCard } from "@/components/category-card";
 import { Star, Search } from "lucide-react";
+import { categories, getToolsByCategory } from "@/lib/data";
 
-// Import categories from homepage data
-const CATEGORIES = [
-  { id: "chatbots", name: "AI Chatbots", description: "Conversational AI tools for customer service and automation", icon: "message-square", color: "orange" },
-  { id: "image-generators", name: "Image Generators", description: "Create stunning visuals with AI-powered image generation", icon: "image", color: "pink" },
-  { id: "productivity", name: "Productivity Tools", description: "Boost your workflow with intelligent automation", icon: "briefcase", color: "blue" },
-  { id: "code-assistants", name: "Code Assistants", description: "AI-powered coding tools and programming helpers", icon: "code", color: "purple" },
-  { id: "writing", name: "Writing & Content", description: "Create compelling content with AI writing assistants", icon: "pen-tool", color: "teal" },
-  { id: "audio-processing", name: "Audio Processing", description: "Transform and enhance audio with AI technology", icon: "headphones", color: "amber" },
-  { id: "video-editing", name: "Video Editing", description: "Professional video editing powered by artificial intelligence", icon: "video", color: "emerald" },
-  { id: "data-analysis", name: "Data Analysis", description: "Extract insights from data using AI analytics tools", icon: "bar-chart", color: "indigo" },
-  { id: "research", name: "Research Tools", description: "Accelerate research with AI-powered information gathering", icon: "search", color: "cyan" },
-  { id: "automation", name: "Automation", description: "Streamline workflows with intelligent automation platforms", icon: "zap", color: "orange" },
-  { id: "translation", name: "Translation", description: "Break language barriers with AI translation services", icon: "globe", color: "pink" },
-  { id: "finance", name: "Finance", description: "AI-powered financial analysis and management tools", icon: "dollar-sign", color: "blue" },
-  { id: "healthcare", name: "Healthcare", description: "Medical AI tools for diagnosis and patient care", icon: "heart", color: "purple" },
-  { id: "education", name: "Education", description: "Transform learning with AI-powered educational tools", icon: "book-open", color: "teal" },
-  { id: "marketing", name: "Marketing", description: "Supercharge campaigns with AI marketing automation", icon: "megaphone", color: "amber" },
-  { id: "security", name: "Security", description: "Protect systems with AI-driven cybersecurity solutions", icon: "shield", color: "emerald" },
-  { id: "gaming", name: "Gaming", description: "Next-generation gaming experiences powered by AI", icon: "gamepad-2", color: "indigo" }
-];
-
-const CATEGORY_STATS = {
-  chatbots: { tools: 3, videos: 12 },
-  "image-generators": { tools: 4, videos: 18 },
-  productivity: { tools: 5, videos: 22 },
-  "code-assistants": { tools: 3, videos: 15 },
-  writing: { tools: 2, videos: 8 },
-  "audio-processing": { tools: 2, videos: 9 },
-  "video-editing": { tools: 1, videos: 4 },
-  "data-analysis": { tools: 2, videos: 7 },
-  research: { tools: 1, videos: 3 },
-  automation: { tools: 1, videos: 5 },
-  translation: { tools: 1, videos: 4 },
-  finance: { tools: 1, videos: 3 },
-  healthcare: { tools: 1, videos: 2 },
-  education: { tools: 1, videos: 3 },
-  marketing: { tools: 1, videos: 4 },
-  security: { tools: 1, videos: 2 },
-  gaming: { tools: 1, videos: 3 }
-};
+// Color mapping for categories
+const CATEGORY_COLORS = [
+  "orange", "pink", "blue", "purple", "teal", "amber", 
+  "emerald", "indigo", "cyan", "red", "green", "violet",
+  "yellow", "gray", "slate", "zinc", "stone", "neutral"
+] as const;
 
 export default function CategoriesPage() {
   const [searchTerm, setSearchTerm] = useState("");
 
-  const filteredCategories = CATEGORIES.filter(category =>
+  // Add colors to categories
+  const categoriesWithColors = categories.map((category, index) => ({
+    ...category,
+    color: CATEGORY_COLORS[index % CATEGORY_COLORS.length]
+  }));
+
+  const filteredCategories = categoriesWithColors.filter(category =>
     category.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
     category.description.toLowerCase().includes(searchTerm.toLowerCase())
   );
@@ -124,12 +97,13 @@ export default function CategoriesPage() {
               <>
                 <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
                   {filteredCategories.map((category) => {
-                    const stats = CATEGORY_STATS[category.id as keyof typeof CATEGORY_STATS] || { tools: 0, videos: 0 };
+                    const tools = getToolsByCategory(category.id);
+                    const videoCount = tools.reduce((total, tool) => total + tool.videos.length, 0);
                     return (
                       <CategoryCard
                         key={category.id}
                         category={category}
-                        stats={`${stats.tools} tools • ${stats.videos} videos`}
+                        stats={`${tools.length} tools • ${videoCount} videos`}
                       />
                     );
                   })}
@@ -145,12 +119,12 @@ export default function CategoriesPage() {
                       Complete AI Tool Library
                     </h3>
                     <p className="text-gray-400 mb-6 max-w-2xl mx-auto">
-                      Access our entire collection of AI tools across {CATEGORIES.length} categories. 
+                      Access our entire collection of AI tools across {categories.length} categories. 
                       New tools and tutorials added weekly.
                     </p>
                     <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 max-w-2xl mx-auto">
                       <div className="text-center">
-                        <div className="text-3xl font-bold text-white mb-1">{CATEGORIES.length}</div>
+                        <div className="text-3xl font-bold text-white mb-1">{categories.length}</div>
                         <div className="text-sm text-gray-400">Categories</div>
                       </div>
                       <div className="text-center">

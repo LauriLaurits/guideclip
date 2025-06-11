@@ -25,6 +25,7 @@ interface ToolSuggestion {
 
 const NAVIGATION_LINKS = [
   { href: "/categories", label: "Browse Tools", hoverColor: "hover:text-purple-400" },
+  { href: "/bundles", label: "Tool Bundles", hoverColor: "hover:text-purple-400" },
   { href: "/tags", label: "Tags", hoverColor: "hover:text-purple-400" },
   { href: "/popular", label: "Popular", hoverColor: "hover:text-purple-400" },
   { href: "/pricing", label: "Pricing", hoverColor: "hover:text-purple-400" },

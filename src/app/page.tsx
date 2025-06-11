@@ -4,12 +4,13 @@ import { Header } from "@/components/header";
 import { Footer } from "@/components/footer";
 import { CategoryCard } from "@/components/category-card";
 import { MultiStageInput } from "@/components/multi-stage-input";
-import { categories } from "@/lib/data";
+import { categories, getToolsByCategory } from "@/lib/data";
 import { Button } from "@/components/ui/button";
 import { ChevronRight, Play, Sparkles } from "lucide-react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
+import { Badge } from "@/components/ui/badge";
 
 // Import the ToolSuggestion type from the multi-stage-input component
 interface ToolSuggestion {
@@ -159,42 +160,9 @@ const NEW_TOOLS = [
 ] as const;
 
 // Deterministic stats for categories to avoid hydration mismatch
-const CATEGORY_STATS = {
-  // AI Categories
-  "ai-chatbots": "8 tools • 24 videos",
-  "ai-image-generators": "12 tools • 36 videos", 
-  "ai-code-assistants": "6 tools • 18 videos",
-  "ai-writing": "10 tools • 28 videos",
-  
-  // Design & Creative
-  "design-tools": "15 tools • 42 videos",
-  "video-editing": "9 tools • 27 videos",
-  "photo-editing": "8 tools • 24 videos",
-  
-  // Business & Finance
-  "payment-processing": "5 tools • 15 videos",
-  "accounting-finance": "7 tools • 21 videos",
-  "spreadsheets": "6 tools • 18 videos",
-  
-  // Development & Tech
-  "development-tools": "12 tools • 36 videos",
-  "databases": "8 tools • 24 videos",
-  "cloud-platforms": "10 tools • 30 videos",
-  
-  // Productivity & Organization
-  "productivity-tools": "14 tools • 42 videos",
-  "project-management": "9 tools • 27 videos",
-  "communication": "7 tools • 21 videos",
-  
-  // Marketing & Analytics
-  "marketing-tools": "11 tools • 33 videos",
-  "analytics": "8 tools • 24 videos",
-  "email-marketing": "6 tools • 18 videos",
-  
-  // E-commerce & Sales
-  "ecommerce": "9 tools • 27 videos",
-  "crm": "7 tools • 21 videos"
-} as const;
+// const CATEGORY_STATS = {
+//   // Remove all hardcoded stats
+// } as const;
 
 export default function Home() {
   const router = useRouter();
@@ -205,6 +173,13 @@ export default function Home() {
   const handleToolSelect = (tool: ToolSuggestion) => {
     // Navigate to the tool page
     router.push(`/tool/${tool.id}`);
+  };
+
+  // Dynamic category stats calculation (same as categories page)
+  const getCategoryStats = (categoryId: string) => {
+    const tools = getToolsByCategory(categoryId);
+    const videoCount = tools.reduce((total, tool) => total + tool.videos.length, 0);
+    return `${tools.length} tools • ${videoCount} videos`;
   };
   
   return (
@@ -343,7 +318,7 @@ export default function Home() {
               {displayedCategories.map((category, index) => {
                 const colorIndex = index % ACCENT_COLORS.length;
                 const currentColor = ACCENT_COLORS[colorIndex];
-                const stats = CATEGORY_STATS[category.id as keyof typeof CATEGORY_STATS] || "3 tools • 9 videos";
+                const stats = getCategoryStats(category.id); // Use dynamic calculation
                 
                 return (
                   <CategoryCard 
