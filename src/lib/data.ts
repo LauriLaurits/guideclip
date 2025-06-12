@@ -2839,6 +2839,1203 @@ export const tools: Tool[] = [
     },
     toolType: "platform",
     icon: "layout"
+  },
+
+  // AI TOOLS - Adding more AI tools
+  {
+    id: "gemini",
+    name: "Google Gemini",
+    description: "Google's advanced AI assistant with multimodal capabilities for text, images, and code",
+    category: "ai-chatbots",
+    tags: ["ai", "chatbot", "google", "multimodal", "coding", "research"],
+    videos: [
+      {
+        id: "gemini-intro",
+        title: "Getting Started with Google Gemini",
+        description: "Learn how to use Google's powerful AI assistant for various tasks",
+        youtubeId: "dQw4w9WgXcQ",
+        duration: 150
+      }
+    ],
+    pricing: {
+      model: "freemium",
+      startingPrice: "Free",
+      freeFeatures: ["Basic chat", "Text generation", "Limited queries"],
+      paidFeatures: ["Gemini Advanced", "More queries", "Priority access"],
+      affiliateUrl: "https://gemini.google.com"
+    },
+    features: {
+      hasFreeTier: true,
+      noCodeRequired: true,
+      hasAPI: true,
+      hasIntegrations: true,
+      platforms: ["Web", "Mobile"]
+    },
+    toolType: "ai",
+    icon: "sparkles"
+  },
+  {
+    id: "copilot",
+    name: "Microsoft Copilot",
+    description: "Microsoft's AI assistant integrated across Office 365 and Windows",
+    category: "ai-chatbots",
+    tags: ["ai", "microsoft", "office", "productivity", "integration"],
+    videos: [
+      {
+        id: "copilot-office",
+        title: "Microsoft Copilot in Office 365",
+        description: "Boost productivity with AI assistance in Word, Excel, and PowerPoint",
+        youtubeId: "dQw4w9WgXcQ",
+        duration: 180
+      }
+    ],
+    pricing: {
+      model: "subscription",
+      startingPrice: "$30/month",
+      paidFeatures: ["Office integration", "Enterprise features", "Priority support"],
+      affiliateUrl: "https://copilot.microsoft.com"
+    },
+    features: {
+      hasFreeTier: false,
+      noCodeRequired: true,
+      hasAPI: true,
+      hasIntegrations: true,
+      platforms: ["Windows", "Web", "Mobile"]
+    },
+    toolType: "ai",
+    icon: "bot"
+  },
+  {
+    id: "leonardo-ai",
+    name: "Leonardo AI",
+    description: "Advanced AI image generator with fine-tuned models for various art styles",
+    category: "ai-image-generators",
+    tags: ["ai", "image-generation", "art", "design", "models"],
+    videos: [
+      {
+        id: "leonardo-basics",
+        title: "Leonardo AI Image Generation Basics",
+        description: "Create stunning AI art with Leonardo's advanced models",
+        youtubeId: "dQw4w9WgXcQ",
+        duration: 200
+      }
+    ],
+    pricing: {
+      model: "freemium",
+      startingPrice: "Free",
+      freeFeatures: ["150 tokens daily", "Basic models", "Standard quality"],
+      paidFeatures: ["More tokens", "Premium models", "Higher quality", "Commercial use"],
+      affiliateUrl: "https://leonardo.ai"
+    },
+    features: {
+      hasFreeTier: true,
+      noCodeRequired: true,
+      hasAPI: true,
+      hasIntegrations: false,
+      platforms: ["Web"]
+    },
+    toolType: "ai",
+    icon: "image"
+  },
+  {
+    id: "stable-diffusion",
+    name: "Stable Diffusion",
+    description: "Open-source AI image generator that runs locally or in the cloud",
+    category: "ai-image-generators",
+    tags: ["ai", "open-source", "image-generation", "local", "free"],
+    videos: [
+      {
+        id: "stable-diffusion-setup",
+        title: "Setting Up Stable Diffusion Locally",
+        description: "Install and run Stable Diffusion on your own computer",
+        youtubeId: "dQw4w9WgXcQ",
+        duration: 300
+      }
+    ],
+    pricing: {
+      model: "free",
+      startingPrice: "Free",
+      freeFeatures: ["Open source", "Local generation", "Unlimited use", "Commercial license"],
+      affiliateUrl: "https://stability.ai"
+    },
+    features: {
+      hasFreeTier: true,
+      noCodeRequired: false,
+      hasAPI: true,
+      hasIntegrations: true,
+      platforms: ["Windows", "Mac", "Linux", "Web"]
+    },
+    toolType: "ai",
+    icon: "cpu"
+  },
+  {
+    id: "claude-3",
+    name: "Claude 3",
+    description: "Anthropic's most advanced AI assistant with superior reasoning and safety",
+    category: "ai-chatbots",
+    tags: ["ai", "anthropic", "reasoning", "safety", "advanced"],
+    videos: [
+      {
+        id: "claude-3-features",
+        title: "Claude 3 Advanced Features",
+        description: "Explore Claude 3's enhanced reasoning and multimodal capabilities",
+        youtubeId: "dQw4w9WgXcQ",
+        duration: 190
+      }
+    ],
+    pricing: {
+      model: "freemium",
+      startingPrice: "Free",
+      freeFeatures: ["Limited messages", "Claude 3 Haiku access"],
+      paidFeatures: ["More messages", "Claude 3 Opus", "Priority access"],
+      affiliateUrl: "https://claude.ai"
+    },
+    features: {
+      hasFreeTier: true,
+      noCodeRequired: true,
+      hasAPI: true,
+      hasIntegrations: true,
+      platforms: ["Web", "API"]
+    },
+    toolType: "ai",
+    icon: "brain"
+  },
+
+  // DESIGN TOOLS - Adding more design tools
+  {
+    id: "adobe-illustrator",
+    name: "Adobe Illustrator",
+    description: "Industry-standard vector graphics software for logos, icons, and illustrations",
+    category: "design-tools",
+    tags: ["vector", "design", "illustration", "logos", "adobe", "professional"],
+    videos: [
+      {
+        id: "illustrator-basics",
+        title: "Adobe Illustrator Fundamentals",
+        description: "Master the basics of vector design in Illustrator",
+        youtubeId: "dQw4w9WgXcQ",
+        duration: 250
+      }
+    ],
+    pricing: {
+      model: "subscription",
+      startingPrice: "$20.99/month",
+      paidFeatures: ["Full Illustrator access", "Cloud sync", "Premium fonts", "Adobe Stock"],
+      affiliateUrl: "https://adobe.com/illustrator"
+    },
+    features: {
+      hasFreeTier: false,
+      noCodeRequired: true,
+      hasAPI: true,
+      hasIntegrations: true,
+      platforms: ["Windows", "Mac"]
+    },
+    toolType: "software",
+    icon: "pen-tool"
+  },
+  {
+    id: "sketch",
+    name: "Sketch",
+    description: "Mac-only vector design tool popular for UI/UX design and prototyping",
+    category: "design-tools",
+    tags: ["ui-design", "vector", "mac", "prototyping", "interface"],
+    videos: [
+      {
+        id: "sketch-ui-design",
+        title: "UI Design with Sketch",
+        description: "Design modern user interfaces using Sketch's powerful tools",
+        youtubeId: "dQw4w9WgXcQ",
+        duration: 220
+      }
+    ],
+    pricing: {
+      model: "subscription",
+      startingPrice: "$9/month",
+      paidFeatures: ["Full Sketch access", "Cloud collaboration", "Version history"],
+      affiliateUrl: "https://sketch.com"
+    },
+    features: {
+      hasFreeTier: false,
+      noCodeRequired: true,
+      hasAPI: true,
+      hasIntegrations: true,
+      platforms: ["Mac"]
+    },
+    toolType: "software",
+    icon: "square"
+  },
+  {
+    id: "adobe-xd",
+    name: "Adobe XD",
+    description: "UI/UX design and prototyping tool with collaboration features",
+    category: "design-tools",
+    tags: ["ui-design", "prototyping", "adobe", "collaboration", "wireframing"],
+    videos: [
+      {
+        id: "xd-prototyping",
+        title: "Prototyping in Adobe XD",
+        description: "Create interactive prototypes and user flows in XD",
+        youtubeId: "dQw4w9WgXcQ",
+        duration: 200
+      }
+    ],
+    pricing: {
+      model: "free",
+      startingPrice: "Free",
+      freeFeatures: ["Full XD access", "Basic prototyping", "Sharing"],
+      affiliateUrl: "https://adobe.com/xd"
+    },
+    features: {
+      hasFreeTier: true,
+      noCodeRequired: true,
+      hasAPI: true,
+      hasIntegrations: true,
+      platforms: ["Windows", "Mac"]
+    },
+    toolType: "software",
+    icon: "layout"
+  },
+  {
+    id: "invision",
+    name: "InVision",
+    description: "Digital product design platform with prototyping and collaboration tools",
+    category: "design-tools",
+    tags: ["prototyping", "collaboration", "design-system", "feedback"],
+    videos: [
+      {
+        id: "invision-collaboration",
+        title: "Design Collaboration with InVision",
+        description: "Streamline design feedback and collaboration workflows",
+        youtubeId: "dQw4w9WgXcQ",
+        duration: 180
+      }
+    ],
+    pricing: {
+      model: "freemium",
+      startingPrice: "Free",
+      freeFeatures: ["1 prototype", "3 active screens", "Basic collaboration"],
+      paidFeatures: ["Unlimited prototypes", "Advanced features", "Team management"],
+      affiliateUrl: "https://invisionapp.com"
+    },
+    features: {
+      hasFreeTier: true,
+      noCodeRequired: true,
+      hasAPI: true,
+      hasIntegrations: true,
+      platforms: ["Web", "Mac", "Windows"]
+    },
+    toolType: "platform",
+    icon: "eye"
+  },
+
+  // DEVELOPMENT TOOLS - Adding essential dev tools
+  {
+    id: "github",
+    name: "GitHub",
+    description: "World's leading platform for version control and collaborative software development",
+    category: "development-tools",
+    tags: ["git", "version-control", "collaboration", "open-source", "code-hosting"],
+    videos: [
+      {
+        id: "github-basics",
+        title: "GitHub Fundamentals",
+        description: "Learn Git and GitHub basics for version control",
+        youtubeId: "dQw4w9WgXcQ",
+        duration: 300
+      }
+    ],
+    pricing: {
+      model: "freemium",
+      startingPrice: "Free",
+      freeFeatures: ["Unlimited public repos", "Basic private repos", "Issue tracking"],
+      paidFeatures: ["Advanced security", "Team features", "Enterprise tools"],
+      affiliateUrl: "https://github.com"
+    },
+    features: {
+      hasFreeTier: true,
+      noCodeRequired: false,
+      hasAPI: true,
+      hasIntegrations: true,
+      platforms: ["Web", "Desktop", "Mobile"]
+    },
+    toolType: "platform",
+    icon: "git-branch"
+  },
+  {
+    id: "visual-studio-code",
+    name: "Visual Studio Code",
+    description: "Free, powerful source-code editor with rich ecosystem of extensions",
+    category: "development-tools",
+    tags: ["ide", "editor", "microsoft", "extensions", "free", "cross-platform"],
+    videos: [
+      {
+        id: "vscode-setup",
+        title: "VS Code Setup and Extensions",
+        description: "Set up the perfect development environment in VS Code",
+        youtubeId: "dQw4w9WgXcQ",
+        duration: 250
+      }
+    ],
+    pricing: {
+      model: "free",
+      startingPrice: "Free",
+      freeFeatures: ["Full IDE", "Extensions marketplace", "Git integration", "Debugging"],
+      affiliateUrl: "https://code.visualstudio.com"
+    },
+    features: {
+      hasFreeTier: true,
+      noCodeRequired: false,
+      hasAPI: true,
+      hasIntegrations: true,
+      platforms: ["Windows", "Mac", "Linux"]
+    },
+    toolType: "software",
+    icon: "code"
+  },
+  {
+    id: "docker",
+    name: "Docker",
+    description: "Containerization platform for consistent application deployment across environments",
+    category: "development-tools",
+    tags: ["containers", "deployment", "devops", "virtualization"],
+    videos: [
+      {
+        id: "docker-containers",
+        title: "Docker Containers Explained",
+        description: "Learn containerization basics with Docker",
+        youtubeId: "dQw4w9WgXcQ",
+        duration: 280
+      }
+    ],
+    pricing: {
+      model: "freemium",
+      startingPrice: "Free",
+      freeFeatures: ["Docker Desktop", "Personal use", "Basic features"],
+      paidFeatures: ["Business features", "Enterprise support", "Advanced security"],
+      affiliateUrl: "https://docker.com"
+    },
+    features: {
+      hasFreeTier: true,
+      noCodeRequired: false,
+      hasAPI: true,
+      hasIntegrations: true,
+      platforms: ["Windows", "Mac", "Linux"]
+    },
+    toolType: "platform",
+    icon: "package"
+  },
+  {
+    id: "postman",
+    name: "Postman",
+    description: "API development and testing platform for building and testing REST APIs",
+    category: "development-tools",
+    tags: ["api", "testing", "development", "rest", "collaboration"],
+    videos: [
+      {
+        id: "postman-api-testing",
+        title: "API Testing with Postman",
+        description: "Test and debug APIs efficiently using Postman",
+        youtubeId: "dQw4w9WgXcQ",
+        duration: 220
+      }
+    ],
+    pricing: {
+      model: "freemium",
+      startingPrice: "Free",
+      freeFeatures: ["Basic API testing", "Collections", "Limited team features"],
+      paidFeatures: ["Team collaboration", "Advanced testing", "Monitoring"],
+      affiliateUrl: "https://postman.com"
+    },
+    features: {
+      hasFreeTier: true,
+      noCodeRequired: true,
+      hasAPI: true,
+      hasIntegrations: true,
+      platforms: ["Windows", "Mac", "Linux", "Web"]
+    },
+    toolType: "software",
+    icon: "send"
+  },
+
+  // VIDEO EDITING - Adding more video tools
+  {
+    id: "final-cut-pro",
+    name: "Final Cut Pro",
+    description: "Professional video editing software for Mac with advanced features",
+    category: "video-editing",
+    tags: ["video-editing", "mac", "professional", "apple", "4k"],
+    videos: [
+      {
+        id: "final-cut-basics",
+        title: "Final Cut Pro Fundamentals",
+        description: "Master professional video editing on Mac",
+        youtubeId: "dQw4w9WgXcQ",
+        duration: 350
+      }
+    ],
+    pricing: {
+      model: "paid",
+      startingPrice: "$299.99",
+      paidFeatures: ["Professional editing", "4K support", "Advanced effects", "Color grading"],
+      affiliateUrl: "https://apple.com/final-cut-pro"
+    },
+    features: {
+      hasFreeTier: false,
+      noCodeRequired: true,
+      hasAPI: false,
+      hasIntegrations: true,
+      platforms: ["Mac"]
+    },
+    toolType: "software",
+    icon: "video"
+  },
+  {
+    id: "davinci-resolve",
+    name: "DaVinci Resolve",
+    description: "Professional video editing, color correction, and audio post-production suite",
+    category: "video-editing",
+    tags: ["video-editing", "color-grading", "audio", "professional", "free"],
+    videos: [
+      {
+        id: "davinci-color-grading",
+        title: "Color Grading in DaVinci Resolve",
+        description: "Professional color correction and grading techniques",
+        youtubeId: "dQw4w9WgXcQ",
+        duration: 400
+      }
+    ],
+    pricing: {
+      model: "freemium",
+      startingPrice: "Free",
+      freeFeatures: ["Full editing suite", "Color correction", "Audio editing"],
+      paidFeatures: ["Advanced features", "Collaboration tools", "Neural engine"],
+      affiliateUrl: "https://blackmagicdesign.com/products/davinciresolve"
+    },
+    features: {
+      hasFreeTier: true,
+      noCodeRequired: true,
+      hasAPI: false,
+      hasIntegrations: true,
+      platforms: ["Windows", "Mac", "Linux"]
+    },
+    toolType: "software",
+    icon: "film"
+  },
+
+  // PRODUCTIVITY TOOLS - Adding more productivity apps
+  {
+    id: "obsidian",
+    name: "Obsidian",
+    description: "Powerful knowledge base and note-taking app with linking and graph view",
+    category: "productivity-tools",
+    tags: ["notes", "knowledge-base", "linking", "markdown", "personal"],
+    videos: [
+      {
+        id: "obsidian-setup",
+        title: "Building a Knowledge Base with Obsidian",
+        description: "Create connected notes and build your personal knowledge graph",
+        youtubeId: "dQw4w9WgXcQ",
+        duration: 280
+      }
+    ],
+    pricing: {
+      model: "freemium",
+      startingPrice: "Free",
+      freeFeatures: ["Personal use", "Core features", "Plugins"],
+      paidFeatures: ["Commercial use", "Sync", "Publish"],
+      affiliateUrl: "https://obsidian.md"
+    },
+    features: {
+      hasFreeTier: true,
+      noCodeRequired: true,
+      hasAPI: true,
+      hasIntegrations: true,
+      platforms: ["Windows", "Mac", "Linux", "Mobile"]
+    },
+    toolType: "software",
+    icon: "network"
+  },
+  {
+    id: "todoist",
+    name: "Todoist",
+    description: "Powerful task management and productivity app with natural language processing",
+    category: "productivity-tools",
+    tags: ["tasks", "productivity", "organization", "scheduling", "cross-platform"],
+    videos: [
+      {
+        id: "todoist-productivity",
+        title: "Mastering Productivity with Todoist",
+        description: "Organize your life and boost productivity with smart task management",
+        youtubeId: "dQw4w9WgXcQ",
+        duration: 200
+      }
+    ],
+    pricing: {
+      model: "freemium",
+      startingPrice: "Free",
+      freeFeatures: ["Up to 80 projects", "5 people per project", "Basic templates"],
+      paidFeatures: ["300 projects", "25 people per project", "Labels & filters", "Reminders"],
+      affiliateUrl: "https://todoist.com"
+    },
+    features: {
+      hasFreeTier: true,
+      noCodeRequired: true,
+      hasAPI: true,
+      hasIntegrations: true,
+      platforms: ["Web", "Windows", "Mac", "Mobile"]
+    },
+    toolType: "software",
+    icon: "check-square"
+  },
+  {
+    id: "evernote",
+    name: "Evernote",
+    description: "Comprehensive note-taking and organization app for capturing and organizing information",
+    category: "productivity-tools",
+    tags: ["notes", "organization", "capture", "web-clipper", "documents"],
+    videos: [
+      {
+        id: "evernote-organization",
+        title: "Organizing Your Digital Life with Evernote",
+        description: "Capture, organize, and find information across all your devices",
+        youtubeId: "dQw4w9WgXcQ",
+        duration: 240
+      }
+    ],
+    pricing: {
+      model: "freemium",
+      startingPrice: "Free",
+      freeFeatures: ["60MB upload", "2 devices", "Basic features"],
+      paidFeatures: ["10GB upload", "Unlimited devices", "Offline access", "PDF search"],
+      affiliateUrl: "https://evernote.com"
+    },
+    features: {
+      hasFreeTier: true,
+      noCodeRequired: true,
+      hasAPI: true,
+      hasIntegrations: true,
+      platforms: ["Web", "Windows", "Mac", "Mobile"]
+    },
+    toolType: "software",
+    icon: "file-text"
+  },
+
+  // CLOUD PLATFORMS - Adding major cloud providers
+  {
+    id: "aws",
+    name: "Amazon Web Services",
+    description: "Comprehensive cloud computing platform with 200+ services for any workload",
+    category: "cloud-platforms",
+    tags: ["cloud", "aws", "infrastructure", "serverless", "storage"],
+    videos: [
+      {
+        id: "aws-getting-started",
+        title: "AWS Cloud Fundamentals",
+        description: "Get started with Amazon Web Services cloud platform",
+        youtubeId: "dQw4w9WgXcQ",
+        duration: 450
+      }
+    ],
+    pricing: {
+      model: "freemium",
+      startingPrice: "Free tier",
+      freeFeatures: ["12 months free tier", "EC2 micro instances", "S3 storage"],
+      paidFeatures: ["Full service catalog", "Enterprise support", "Advanced features"],
+      affiliateUrl: "https://aws.amazon.com"
+    },
+    features: {
+      hasFreeTier: true,
+      noCodeRequired: false,
+      hasAPI: true,
+      hasIntegrations: true,
+      platforms: ["Web", "CLI", "Mobile"]
+    },
+    toolType: "platform",
+    icon: "cloud"
+  },
+  {
+    id: "vercel",
+    name: "Vercel",
+    description: "Frontend deployment platform optimized for modern web frameworks",
+    category: "cloud-platforms",
+    tags: ["deployment", "frontend", "nextjs", "jamstack", "edge"],
+    videos: [
+      {
+        id: "vercel-deployment",
+        title: "Deploy to Vercel in Minutes",
+        description: "Deploy your web apps instantly with Vercel's platform",
+        youtubeId: "dQw4w9WgXcQ",
+        duration: 180
+      }
+    ],
+    pricing: {
+      model: "freemium",
+      startingPrice: "Free",
+      freeFeatures: ["Unlimited personal projects", "100GB bandwidth", "Serverless functions"],
+      paidFeatures: ["Team features", "More bandwidth", "Advanced analytics"],
+      affiliateUrl: "https://vercel.com"
+    },
+    features: {
+      hasFreeTier: true,
+      noCodeRequired: true,
+      hasAPI: true,
+      hasIntegrations: true,
+      platforms: ["Web", "CLI"]
+    },
+    toolType: "platform",
+    icon: "zap"
+  },
+  {
+    id: "netlify",
+    name: "Netlify",
+    description: "Modern development platform for building fast, scalable web applications",
+    category: "cloud-platforms",
+    tags: ["deployment", "jamstack", "cdn", "forms", "functions"],
+    videos: [
+      {
+        id: "netlify-features",
+        title: "Netlify Platform Overview",
+        description: "Build and deploy modern web apps with Netlify",
+        youtubeId: "dQw4w9WgXcQ",
+        duration: 220
+      }
+    ],
+    pricing: {
+      model: "freemium",
+      startingPrice: "Free",
+      freeFeatures: ["100GB bandwidth", "Deploy previews", "Form handling"],
+      paidFeatures: ["More bandwidth", "Team features", "Advanced security"],
+      affiliateUrl: "https://netlify.com"
+    },
+    features: {
+      hasFreeTier: true,
+      noCodeRequired: true,
+      hasAPI: true,
+      hasIntegrations: true,
+      platforms: ["Web", "CLI"]
+    },
+    toolType: "platform",
+    icon: "globe"
+  },
+
+  // CRM TOOLS - Adding popular CRM solutions
+  {
+    id: "salesforce",
+    name: "Salesforce",
+    description: "World's leading CRM platform for sales, service, and marketing automation",
+    category: "crm",
+    tags: ["crm", "sales", "automation", "enterprise", "cloud"],
+    videos: [
+      {
+        id: "salesforce-basics",
+        title: "Salesforce CRM Fundamentals",
+        description: "Master the basics of Salesforce CRM for sales success",
+        youtubeId: "dQw4w9WgXcQ",
+        duration: 350
+      }
+    ],
+    pricing: {
+      model: "subscription",
+      startingPrice: "$25/user/month",
+      paidFeatures: ["Contact management", "Opportunity tracking", "Reports", "Mobile app"],
+      affiliateUrl: "https://salesforce.com"
+    },
+    features: {
+      hasFreeTier: false,
+      noCodeRequired: true,
+      hasAPI: true,
+      hasIntegrations: true,
+      platforms: ["Web", "Mobile"]
+    },
+    toolType: "platform",
+    icon: "users"
+  },
+  {
+    id: "hubspot-crm",
+    name: "HubSpot CRM",
+    description: "Free CRM with powerful sales, marketing, and service tools",
+    category: "crm",
+    tags: ["crm", "free", "marketing", "sales", "inbound"],
+    videos: [
+      {
+        id: "hubspot-crm-setup",
+        title: "HubSpot CRM Setup and Management",
+        description: "Set up and manage your sales pipeline with HubSpot's free CRM",
+        youtubeId: "dQw4w9WgXcQ",
+        duration: 280
+      }
+    ],
+    pricing: {
+      model: "freemium",
+      startingPrice: "Free",
+      freeFeatures: ["Contact management", "Deal tracking", "Basic reporting", "Email integration"],
+      paidFeatures: ["Advanced automation", "Custom reporting", "Team features"],
+      affiliateUrl: "https://hubspot.com"
+    },
+    features: {
+      hasFreeTier: true,
+      noCodeRequired: true,
+      hasAPI: true,
+      hasIntegrations: true,
+      platforms: ["Web", "Mobile"]
+    },
+    toolType: "platform",
+    icon: "heart"
+  },
+  {
+    id: "pipedrive",
+    name: "Pipedrive",
+    description: "Simple, visual CRM designed to help small teams close more deals",
+    category: "crm",
+    tags: ["crm", "sales", "pipeline", "small-business", "visual"],
+    videos: [
+      {
+        id: "pipedrive-pipeline",
+        title: "Managing Sales Pipeline in Pipedrive",
+        description: "Visualize and manage your sales process with Pipedrive",
+        youtubeId: "dQw4w9WgXcQ",
+        duration: 200
+      }
+    ],
+    pricing: {
+      model: "subscription",
+      startingPrice: "$14.90/user/month",
+      paidFeatures: ["Pipeline management", "Activity reminders", "Email sync", "Mobile app"],
+      affiliateUrl: "https://pipedrive.com"
+    },
+    features: {
+      hasFreeTier: false,
+      noCodeRequired: true,
+      hasAPI: true,
+      hasIntegrations: true,
+      platforms: ["Web", "Mobile"]
+    },
+    toolType: "platform",
+    icon: "trending-up"
+  },
+
+  // SPREADSHEETS - Adding more spreadsheet tools
+  {
+    id: "google-sheets",
+    name: "Google Sheets",
+    description: "Cloud-based spreadsheet with real-time collaboration and powerful functions",
+    category: "spreadsheets",
+    tags: ["spreadsheet", "collaboration", "cloud", "free", "google"],
+    videos: [
+      {
+        id: "google-sheets-formulas",
+        title: "Google Sheets Formulas and Functions",
+        description: "Master essential formulas and functions in Google Sheets",
+        youtubeId: "dQw4w9WgXcQ",
+        duration: 300
+      }
+    ],
+    pricing: {
+      model: "freemium",
+      startingPrice: "Free",
+      freeFeatures: ["15GB storage", "Real-time collaboration", "Basic functions"],
+      paidFeatures: ["More storage", "Advanced features", "Business tools"],
+      affiliateUrl: "https://sheets.google.com"
+    },
+    features: {
+      hasFreeTier: true,
+      noCodeRequired: true,
+      hasAPI: true,
+      hasIntegrations: true,
+      platforms: ["Web", "Mobile"]
+    },
+    toolType: "software",
+    icon: "grid-3x3"
+  },
+  {
+    id: "airtable",
+    name: "Airtable",
+    description: "Database-spreadsheet hybrid with powerful organization and collaboration features",
+    category: "spreadsheets",
+    tags: ["database", "spreadsheet", "collaboration", "organization", "no-code"],
+    videos: [
+      {
+        id: "airtable-databases",
+        title: "Building Databases with Airtable",
+        description: "Create powerful databases using Airtable's flexible interface",
+        youtubeId: "dQw4w9WgXcQ",
+        duration: 260
+      }
+    ],
+    pricing: {
+      model: "freemium",
+      startingPrice: "Free",
+      freeFeatures: ["Unlimited bases", "1,200 records per base", "2GB attachments"],
+      paidFeatures: ["More records", "Advanced features", "Team collaboration"],
+      affiliateUrl: "https://airtable.com"
+    },
+    features: {
+      hasFreeTier: true,
+      noCodeRequired: true,
+      hasAPI: true,
+      hasIntegrations: true,
+      platforms: ["Web", "Mobile"]
+    },
+    toolType: "platform",
+    icon: "database"
+  },
+
+  // EMAIL MARKETING - Adding more email tools
+  {
+    id: "convertkit",
+    name: "ConvertKit",
+    description: "Email marketing platform designed specifically for creators and bloggers",
+    category: "email-marketing",
+    tags: ["email", "creators", "automation", "landing-pages", "blogging"],
+    videos: [
+      {
+        id: "convertkit-automation",
+        title: "Email Automation with ConvertKit",
+        description: "Set up automated email sequences for your audience",
+        youtubeId: "dQw4w9WgXcQ",
+        duration: 240
+      }
+    ],
+    pricing: {
+      model: "freemium",
+      startingPrice: "Free",
+      freeFeatures: ["Up to 1,000 subscribers", "Unlimited sending", "Landing pages"],
+      paidFeatures: ["More subscribers", "Advanced automation", "Integrations"],
+      affiliateUrl: "https://convertkit.com"
+    },
+    features: {
+      hasFreeTier: true,
+      noCodeRequired: true,
+      hasAPI: true,
+      hasIntegrations: true,
+      platforms: ["Web"]
+    },
+    toolType: "platform",
+    icon: "mail"
+  },
+  {
+    id: "mailerlite",
+    name: "MailerLite",
+    description: "Simple email marketing platform with drag-and-drop editor and automation",
+    category: "email-marketing",
+    tags: ["email", "simple", "automation", "affordable", "small-business"],
+    videos: [
+      {
+        id: "mailerlite-campaigns",
+        title: "Creating Email Campaigns in MailerLite",
+        description: "Design and send beautiful email campaigns easily",
+        youtubeId: "dQw4w9WgXcQ",
+        duration: 180
+      }
+    ],
+    pricing: {
+      model: "freemium",
+      startingPrice: "Free",
+      freeFeatures: ["Up to 12,000 emails/month", "1,000 subscribers", "Landing pages"],
+      paidFeatures: ["More subscribers", "Advanced features", "Priority support"],
+      affiliateUrl: "https://mailerlite.com"
+    },
+    features: {
+      hasFreeTier: true,
+      noCodeRequired: true,
+      hasAPI: true,
+      hasIntegrations: true,
+      platforms: ["Web"]
+    },
+    toolType: "platform",
+    icon: "send"
+  },
+
+  // ANALYTICS TOOLS - Adding more analytics platforms
+  {
+    id: "mixpanel",
+    name: "Mixpanel",
+    description: "Advanced product analytics platform for tracking user behavior and engagement",
+    category: "analytics-tools",
+    tags: ["analytics", "user-behavior", "events", "funnels", "cohorts"],
+    videos: [
+      {
+        id: "mixpanel-tracking",
+        title: "User Analytics with Mixpanel",
+        description: "Track user behavior and optimize your product with Mixpanel",
+        youtubeId: "dQw4w9WgXcQ",
+        duration: 280
+      }
+    ],
+    pricing: {
+      model: "freemium",
+      startingPrice: "Free",
+      freeFeatures: ["Up to 20M data points", "90-day data history", "5 reports"],
+      paidFeatures: ["More data points", "Longer history", "Advanced features"],
+      affiliateUrl: "https://mixpanel.com"
+    },
+    features: {
+      hasFreeTier: true,
+      noCodeRequired: false,
+      hasAPI: true,
+      hasIntegrations: true,
+      platforms: ["Web", "Mobile"]
+    },
+    toolType: "platform",
+    icon: "bar-chart"
+  },
+  {
+    id: "hotjar",
+    name: "Hotjar",
+    description: "Website analytics and feedback platform with heatmaps and session recordings",
+    category: "analytics-tools",
+    tags: ["heatmaps", "session-recording", "feedback", "ux", "website"],
+    videos: [
+      {
+        id: "hotjar-heatmaps",
+        title: "Understanding User Behavior with Hotjar",
+        description: "Use heatmaps and recordings to improve your website UX",
+        youtubeId: "dQw4w9WgXcQ",
+        duration: 220
+      }
+    ],
+    pricing: {
+      model: "freemium",
+      startingPrice: "Free",
+      freeFeatures: ["2,000 page views/month", "3 heatmaps", "3 recordings"],
+      paidFeatures: ["More page views", "Unlimited heatmaps", "Advanced features"],
+      affiliateUrl: "https://hotjar.com"
+    },
+    features: {
+      hasFreeTier: true,
+      noCodeRequired: true,
+      hasAPI: true,
+      hasIntegrations: true,
+      platforms: ["Web"]
+    },
+    toolType: "platform",
+    icon: "activity"
+  },
+
+  // ACCOUNTING & FINANCE - Adding financial tools
+  {
+    id: "quickbooks",
+    name: "QuickBooks",
+    description: "Comprehensive accounting software for small to medium businesses",
+    category: "accounting-finance",
+    tags: ["accounting", "invoicing", "expenses", "payroll", "taxes"],
+    videos: [
+      {
+        id: "quickbooks-setup",
+        title: "QuickBooks Setup for Small Business",
+        description: "Set up accounting and invoicing for your business",
+        youtubeId: "dQw4w9WgXcQ",
+        duration: 320
+      }
+    ],
+    pricing: {
+      model: "subscription",
+      startingPrice: "$15/month",
+      paidFeatures: ["Income/expense tracking", "Invoicing", "Reports", "Tax preparation"],
+      affiliateUrl: "https://quickbooks.intuit.com"
+    },
+    features: {
+      hasFreeTier: false,
+      noCodeRequired: true,
+      hasAPI: true,
+      hasIntegrations: true,
+      platforms: ["Web", "Desktop", "Mobile"]
+    },
+    toolType: "software",
+    icon: "calculator"
+  },
+  {
+    id: "xero",
+    name: "Xero",
+    description: "Cloud-based accounting software designed for small businesses",
+    category: "accounting-finance",
+    tags: ["accounting", "cloud", "invoicing", "bank-sync", "reporting"],
+    videos: [
+      {
+        id: "xero-basics",
+        title: "Xero Accounting Fundamentals",
+        description: "Master cloud accounting with Xero's platform",
+        youtubeId: "dQw4w9WgXcQ",
+        duration: 280
+      }
+    ],
+    pricing: {
+      model: "subscription",
+      startingPrice: "$13/month",
+      paidFeatures: ["Bank reconciliation", "Invoicing", "Expense claims", "Financial reporting"],
+      affiliateUrl: "https://xero.com"
+    },
+    features: {
+      hasFreeTier: false,
+      noCodeRequired: true,
+      hasAPI: true,
+      hasIntegrations: true,
+      platforms: ["Web", "Mobile"]
+    },
+    toolType: "software",
+    icon: "pie-chart"
+  },
+  {
+    id: "wave-accounting",
+    name: "Wave Accounting",
+    description: "Free accounting software for small businesses with invoicing and payments",
+    category: "accounting-finance",
+    tags: ["accounting", "free", "invoicing", "payments", "small-business"],
+    videos: [
+      {
+        id: "wave-free-accounting",
+        title: "Free Accounting with Wave",
+        description: "Manage your business finances for free with Wave",
+        youtubeId: "dQw4w9WgXcQ",
+        duration: 200
+      }
+    ],
+    pricing: {
+      model: "freemium",
+      startingPrice: "Free",
+      freeFeatures: ["Unlimited invoicing", "Accounting", "Receipt scanning"],
+      paidFeatures: ["Payment processing", "Payroll", "Advanced features"],
+      affiliateUrl: "https://waveapps.com"
+    },
+    features: {
+      hasFreeTier: true,
+      noCodeRequired: true,
+      hasAPI: true,
+      hasIntegrations: true,
+      platforms: ["Web", "Mobile"]
+    },
+    toolType: "software",
+    icon: "credit-card"
+  },
+
+  // PHOTO EDITING - Adding more photo editing tools
+  {
+    id: "lightroom",
+    name: "Adobe Lightroom",
+    description: "Professional photo editing and organization software for photographers",
+    category: "photo-editing",
+    tags: ["photo-editing", "raw", "organization", "presets", "professional"],
+    videos: [
+      {
+        id: "lightroom-basics",
+        title: "Adobe Lightroom Photo Editing",
+        description: "Edit and organize photos like a pro with Lightroom",
+        youtubeId: "dQw4w9WgXcQ",
+        duration: 350
+      }
+    ],
+    pricing: {
+      model: "subscription",
+      startingPrice: "$9.99/month",
+      paidFeatures: ["RAW editing", "Cloud sync", "Mobile apps", "Preset sync"],
+      affiliateUrl: "https://adobe.com/lightroom"
+    },
+    features: {
+      hasFreeTier: false,
+      noCodeRequired: true,
+      hasAPI: false,
+      hasIntegrations: true,
+      platforms: ["Windows", "Mac", "Mobile"]
+    },
+    toolType: "software",
+    icon: "sun"
+  },
+  {
+    id: "gimp",
+    name: "GIMP",
+    description: "Free and open-source raster graphics editor for photo retouching and editing",
+    category: "photo-editing",
+    tags: ["photo-editing", "free", "open-source", "retouching", "graphics"],
+    videos: [
+      {
+        id: "gimp-photo-editing",
+        title: "Photo Editing with GIMP",
+        description: "Professional photo editing for free using GIMP",
+        youtubeId: "dQw4w9WgXcQ",
+        duration: 300
+      }
+    ],
+    pricing: {
+      model: "free",
+      startingPrice: "Free",
+      freeFeatures: ["Full photo editing", "Layers", "Filters", "Customizable interface"],
+      affiliateUrl: "https://gimp.org"
+    },
+    features: {
+      hasFreeTier: true,
+      noCodeRequired: true,
+      hasAPI: true,
+      hasIntegrations: true,
+      platforms: ["Windows", "Mac", "Linux"]
+    },
+    toolType: "software",
+    icon: "image"
+  },
+
+  // NO-CODE DEVELOPMENT - Adding more no-code tools
+  {
+    id: "zapier",
+    name: "Zapier",
+    description: "Automation platform that connects your favorite apps and services",
+    category: "no-code-development",
+    tags: ["automation", "integration", "workflow", "no-code", "productivity"],
+    videos: [
+      {
+        id: "zapier-automation",
+        title: "Workflow Automation with Zapier",
+        description: "Automate repetitive tasks by connecting your apps",
+        youtubeId: "dQw4w9WgXcQ",
+        duration: 250
+      }
+    ],
+    pricing: {
+      model: "freemium",
+      startingPrice: "Free",
+      freeFeatures: ["100 tasks/month", "5 Zaps", "Basic triggers"],
+      paidFeatures: ["More tasks", "Premium apps", "Multi-step Zaps"],
+      affiliateUrl: "https://zapier.com"
+    },
+    features: {
+      hasFreeTier: true,
+      noCodeRequired: true,
+      hasAPI: true,
+      hasIntegrations: true,
+      platforms: ["Web"]
+    },
+    toolType: "platform",
+    icon: "zap"
+  },
+  {
+    id: "make",
+    name: "Make (Integromat)",
+    description: "Visual platform for creating, building and automating anything",
+    category: "no-code-development",
+    tags: ["automation", "visual", "integration", "advanced", "scenarios"],
+    videos: [
+      {
+        id: "make-scenarios",
+        title: "Advanced Automation with Make",
+        description: "Build complex automation scenarios visually with Make",
+        youtubeId: "dQw4w9WgXcQ",
+        duration: 300
+      }
+    ],
+    pricing: {
+      model: "freemium",
+      startingPrice: "Free",
+      freeFeatures: ["1,000 operations", "2 active scenarios", "Basic integrations"],
+      paidFeatures: ["More operations", "Advanced features", "Team collaboration"],
+      affiliateUrl: "https://make.com"
+    },
+    features: {
+      hasFreeTier: true,
+      noCodeRequired: true,
+      hasAPI: true,
+      hasIntegrations: true,
+      platforms: ["Web"]
+    },
+    toolType: "platform",
+    icon: "workflow"
   }
 ];
 

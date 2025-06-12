@@ -10,7 +10,7 @@ import { ChevronRight, Play, Sparkles } from "lucide-react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
-import { Badge } from "@/components/ui/badge";
+
 
 // Import the ToolSuggestion type from the multi-stage-input component
 interface ToolSuggestion {

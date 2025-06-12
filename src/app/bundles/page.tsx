@@ -157,12 +157,12 @@ export default function BundlesPage() {
             <div className="text-center">
               <Card className="max-w-2xl mx-auto bg-gradient-to-r from-purple-600 to-blue-600 text-white border-0">
                 <CardContent className="p-8">
-                  <h2 className="text-2xl font-bold mb-4">
-                    Can't Find Your Project Type?
-                  </h2>
-                  <p className="text-purple-100 mb-6">
-                    Tell us what you're building and we'll create a custom tool bundle for your specific needs.
-                  </p>
+                                  <h2 className="text-2xl font-bold mb-4">
+                  Can&apos;t Find Your Project Type?
+                </h2>
+                <p className="text-purple-100 mb-6">
+                  Tell us what you&apos;re building and we&apos;ll create a custom tool bundle for your specific needs.
+                </p>
                   <Button variant="secondary" className="bg-white text-purple-600 hover:bg-gray-100">
                     Request Custom Bundle
                   </Button>

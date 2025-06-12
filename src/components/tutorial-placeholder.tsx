@@ -274,7 +274,7 @@ export function TutorialPlaceholder({
                     </span>
                   </div>
                   <div className="text-sm text-gray-400">
-                    Example: "Write a professional email about..."
+                    Example: &quot;Write a professional email about...&quot;
                   </div>
                 </div>
               ) : (

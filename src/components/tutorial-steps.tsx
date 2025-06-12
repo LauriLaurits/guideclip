@@ -5,10 +5,10 @@ import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { TutorialPlaceholder } from "@/components/tutorial-placeholder";
+import Image from "next/image";
 import { 
   ChevronRight, 
   ChevronLeft, 
-  Play, 
   CheckCircle, 
   Circle, 
   Clock,
@@ -16,12 +16,10 @@ import {
   Lightbulb,
   AlertCircle,
   ExternalLink,
-  Image as ImageIcon,
   MousePointer,
   Keyboard,
   Eye
 } from "lucide-react";
-import Image from "next/image";
 
 export interface TutorialStep {
   id: string;
@@ -56,7 +54,6 @@ export function TutorialSteps({
   completedSteps = []
 }: TutorialStepsProps) {
   const [currentStep, setCurrentStep] = useState(0);
-  const [expandedStep, setExpandedStep] = useState<string | null>(null);
 
   const currentStepData = steps[currentStep];
   const totalDuration = steps.reduce((acc, step) => acc + step.duration, 0);
@@ -345,7 +342,7 @@ export function TutorialSteps({
                 index === currentStep ? 'ring-2' : ''
               } ${isStepCompleted(step.id) ? 'bg-emerald-500/5 border-emerald-500/30' : ''}`}
               style={{ 
-                ringColor: index === currentStep ? accentColor : 'transparent'
+                boxShadow: index === currentStep ? `0 0 0 2px ${accentColor}` : undefined
               }}
               onClick={() => setCurrentStep(index)}
             >

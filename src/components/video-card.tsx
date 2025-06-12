@@ -1,5 +1,4 @@
 import { Video } from "@/lib/data";
-import Image from "next/image";
 import { PlayCircle, Pause } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 

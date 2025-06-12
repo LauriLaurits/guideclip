@@ -12,7 +12,7 @@ import { LocalVideoPlayer } from "@/components/local-video-player";
 import { TutorialSteps } from "@/components/tutorial-steps";
 import { tutorialData } from "@/lib/tutorial-data";
 import { Button } from "@/components/ui/button";
-import { ArrowLeft, Clock, List, Video, Play, ExternalLink, BookOpen, Star, FileText, CreditCard, DollarSign, Zap, Crown, Gift, Keyboard } from "lucide-react";
+import { ArrowLeft, Clock, List, Video, Play, ExternalLink, BookOpen, Star, FileText, DollarSign, Zap, Crown, Gift, Keyboard } from "lucide-react";
 import { getToolById, getCategoryById } from "@/lib/data";
 import { Icon } from "@/components/ui/icon";
 import { Badge } from "@/components/ui/badge";
@@ -298,7 +298,7 @@ export default function ToolPage({ params }: Props) {
                 Step-by-Step Guide Coming Soon
               </h3>
               <p className="text-gray-400 mb-6 max-w-2xl mx-auto">
-                We're working on creating detailed step-by-step tutorials for {tool.name}. 
+                We&apos;re working on creating detailed step-by-step tutorials for {tool.name}. 
                 In the meantime, check out our video tutorials to get started!
               </p>
               <Button 
